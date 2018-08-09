@@ -130,4 +130,25 @@ class Graph:
 
         return C, m
 
+    def min_degree(self):
+        """
+        Identify nodes with minimum degree.
+
+        # Arguments
+
+        # Returns
+        - `p`: Array of Float
+            Uniform probability distribution over the nodes of minimum degree.
+        """
+
+        # Compute degrees
+        d = np.sum(self.M, 1)  # d[i] is the degree of node i
+        d_min = np.min(d)  # minimum degree
+
+        
+        p = (d == d_min)  # identify nodes with minimum degree
+        p = (p / np.sum(p))  # normalize to get probability distribution
+
+        return p
+
         
