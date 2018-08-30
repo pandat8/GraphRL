@@ -149,6 +149,32 @@ class Graph:
 
         return p
 
+    def onestep_greedy(self):
+        """
+        Identify node(s) whose elimination adds fewer edges.
+
+        # Arguments
+
+        # Returns
+        - `p`: Array of Float
+            Uniform probability distribution over the nodes to be eliminated.
+        """
+        s = np.zeros(self.n, dtype=int)
+        r = np.arange(self.n)
+
+        for i in range(self.n):
+            e = 0  # number of edges to add
+            neighbours = r[self.M[:,i]==1]  # neighbours of node i
+            for (j, k) in itertools.combinations(neighbours, 2):
+                e += (1-self.M[j, k])
+            s[i] = e
+
+        s_min = np.min(s)
+        p = (s == s_min)  # identify nodes with minimum score
+        p = (p / np.sum(p))  # normalize to get probability distribution
+
+        return p
+
     @property
     def degree(self):
         """
