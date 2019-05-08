@@ -1,0 +1,9 @@
+
+ Test result: test_graph_elimination_learn_heuristic
+DataSet: GraphDataset
+average ratio gcn2mindegree 1.0024 
+max ratio gcn2mindegree 1.0370
+min ratio 0.9797
+average ratio gcn2random 0.9063
+max ratio gcn2random 0.9469
+min ratio gcn2random 0.8719
