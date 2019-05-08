@@ -19,6 +19,9 @@ class GraphConvolutionLayer(Module):
 
         # initialize the parameters
         self.weight = nn.Parameter(nn.init.xavier_normal_(torch.Tensor(self.nfeatures_in, self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor), gain=np.sqrt(2.0)), requires_grad=True)
+        self.weight_hat = nn.Parameter(nn.init.xavier_normal_(torch.Tensor(self.nfeatures_in, self.nfeatures_out).type(
+            torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor), gain=np.sqrt(2.0)),
+                                   requires_grad=True)
         #Parameter(torch.Tensor(self.nfeatures_in,self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
         if bias:
             self.bias = nn.Parameter(nn.init.constant_(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor),0.0))
@@ -56,8 +59,9 @@ class GraphConvolutionLayer(Module):
 
 
     def forward(self, features, adj_matrix):
+        features_hat = torch.mm(features, self.weight_hat)  # features * weight
         features = torch.mm(features, self.weight) # features * weight
-        features = torch.mm(adj_matrix, features) # adjacency matrix * features
+        features = torch.mm(adj_matrix, features) +features_hat # adjacency matrix * features
         if self.bias is not None:
             return features+ self.bias
         else:
@@ -82,6 +86,7 @@ class GraphConvolutionLayer_Sparse(Module):
 
         # initialize the parameters
         self.weight = nn.Parameter(nn.init.xavier_normal_(torch.Tensor(self.nfeatures_in, self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor), gain=np.sqrt(2.0)), requires_grad=True)
+
         #Parameter(torch.Tensor(self.nfeatures_in,self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
         if bias:
             self.bias = nn.Parameter(nn.init.constant_(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor),0.0))
@@ -119,6 +124,7 @@ class GraphConvolutionLayer_Sparse(Module):
 
 
     def forward(self, features, adj_matrix):
+
         features = torch.mm(features, self.weight) # features * weight
         features = torch.spmm(adj_matrix, features) # adjacency matrix * features
         if self.bias is not None:
@@ -130,6 +136,75 @@ class GraphConvolutionLayer_Sparse(Module):
         return self.__class__.__name__ \
         +'('+str(self.nfeatures_in) \
         +' -> '+str(self.nfeatures_out)+')'
+
+
+class GraphConvolutionLayer_Sparse_Memory(Module):
+    """
+    Convolution layer for Graph
+    """
+
+    def __init__(self, nfeatures_in, nfeatures_out, init='xavier', bias = True):
+
+        super(GraphConvolutionLayer_Sparse_Memory, self).__init__()
+        self.nfeatures_in = nfeatures_in
+        self.nfeatures_out = nfeatures_out
+
+        # initialize the parameters
+        self.weight = nn.Parameter(nn.init.xavier_normal_(torch.Tensor(self.nfeatures_in, self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor), gain=np.sqrt(2.0)), requires_grad=True)
+        self.weight_hat = nn.Parameter(nn.init.xavier_normal_(torch.Tensor(self.nfeatures_in, self.nfeatures_out).type(
+            torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor), gain=np.sqrt(2.0)),
+                                   requires_grad=True)
+
+        #Parameter(torch.Tensor(self.nfeatures_in,self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
+        if bias:
+            self.bias = nn.Parameter(nn.init.constant_(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor),0.0))
+            #Parameter(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
+        else:
+            self.register_parameter('bias',None)
+
+        if init == 'uniform':
+            print("| Uniform Initialization")
+            self.reset_parameters_uniform()
+        elif init == 'xavier':
+            print("| Xavier Initialization")
+            self.reset_parameters_xavier()
+        elif init == 'kaiming':
+            print("| Kaiming Initialization")
+            self.reset_parameters_kaiming()
+        else:
+            raise NotImplementedError
+
+    def reset_parameters_uniform(self):
+        stdv = 1. / math.sqrt(self.weight.size(1))
+        self.weight.data.uniform_(-stdv, stdv)
+        if self.bias is not None:
+            self.bias.data.uniform_(-stdv, stdv)
+
+    def reset_parameters_xavier(self):
+        nn.init.xavier_normal_(self.weight.data, gain=0.02) # Implement Xavier Uniform
+        if self.bias is not None:
+            nn.init.constant_(self.bias.data, 0.0)
+
+    def reset_parameters_kaiming(self):
+        nn.init.kaiming_normal_(self.weight.data, a=0, mode='fan_in')
+        if self.bias is not None:
+            nn.init.constant_(self.bias.data, 0.0)
+
+
+    def forward(self, features, adj_matrix):
+        features_hat = torch.mm(features, self.weight)  # features * weight
+        features = torch.mm(features, self.weight) # features * weight
+        features = torch.spmm(adj_matrix, features)+features_hat # adjacency matrix * features
+        if self.bias is not None:
+            return features+ self.bias
+        else:
+            return features
+
+    def __repr__(self):
+        return self.__class__.__name__ \
+        +'('+str(self.nfeatures_in) \
+        +' -> '+str(self.nfeatures_out)+')'
+
 
 
 class GraphAttentionConvLayer(Module):

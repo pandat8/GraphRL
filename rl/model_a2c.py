@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
+import time
 
 from utils import utils
 from torch.distributions import Categorical
@@ -90,6 +91,7 @@ class Model_A2C_Sparse(nn.Module):
 
     def __init__(self,
                  actor,
+                 epsilon=0.1,
                  use_critic=True,
                  use_cuda=False,
                  critic=None):
@@ -98,6 +100,7 @@ class Model_A2C_Sparse(nn.Module):
         self.actor = actor
         self.use_critic = use_critic
         self.use_cuda = use_cuda
+        self.epsilon = torch.tensor(epsilon, dtype=torch.float)
         self.actions = []
         self.rewards = []
         self.saved_actions = []
@@ -133,38 +136,56 @@ class Model_A2C_Sparse(nn.Module):
         features = np.ones([inputs.n, 1], dtype=np.float32)  # initialize the feature matrix
         features = torch.FloatTensor(features)
         adj_M = torch.FloatTensor(inputs.M)  # adj matrix of input graph
-        x = torch.nonzero(adj_M)
         adj_M = utils.to_sparse(adj_M) # convert to coo sparse tensor
+
+        random_choice = torch.ones(inputs.n)
+        epsilon = self.epsilon
 
         if self.use_cuda:
             adj_M = adj_M.cuda()
             features = features.cuda()
+            epsilon = epsilon.cuda()
+            random_choice = random_choice.cuda()
 
         probs = self.actor(features, adj_M)  # call actor to get a selection distribution
         probs = probs.view(-1)
 
-        m = Categorical(probs)
-        node_selected = m.sample()
+        # node_selected = torch.argmax(probs)
+        # log_prob = -torch.log(probs[node_selected])# we are doing min, so use - value
+
+        # probs = torch.exp(probs)
+        m = Categorical(logits=probs) #
+
+        # node_selected = m_rand.sample()
+        if torch.bernoulli(epsilon)==1:
+            m_rand = Categorical(random_choice)
+            node_selected = m_rand.sample()
+        else:
+            node_selected = m.sample()
+
         # node_selected = probs.multinomial()  # choose the node given by GCN (add .squeeze(1) for batch training)
         log_prob = m.log_prob(node_selected)
 
         if self.use_critic:  # call critic to compute the value for current state
             critic_current = self.critic(features, adj_M).sum()
+        else:
+            critic_current = 0
 
         r = inputs.eliminate_node(node_selected, reduce=True)  # reduce the graph and return the nb of edges added
 
-        features = np.ones([inputs.n, 1], dtype=np.float32)  # initialize the feature matrix
-        features = torch.FloatTensor(features)
-        adj_M = torch.FloatTensor(inputs.M)  # adj matrix of reduced graph
-        adj_M = utils.to_sparse(adj_M)  # convert to coo sparse tensor
+        # call critic to compute the value for current state
+        if self.use_critic:
+            features = np.ones([inputs.n, 1], dtype=np.float32)  # initialize the feature matrix
+            features = torch.FloatTensor(features)
+            adj_M = torch.FloatTensor(inputs.M)  # adj matrix of reduced graph
+            adj_M = utils.to_sparse(adj_M)  # convert to coo sparse tensor
+            if self.use_cuda:
+                adj_M = adj_M.cuda()
+                features = features.cuda()
 
-        if self.use_cuda:
-            adj_M = adj_M.cuda()
-            features = features.cuda()
-
-        if self.use_critic:  # call critic to compute the value for current state
             critic_next = self.critic(features, adj_M).sum()
-
+        else:
+            critic_next = 0
 
         return node_selected, log_prob, r, critic_current, critic_next, inputs
 
