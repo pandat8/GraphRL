@@ -93,6 +93,8 @@ class Train_SupervisedLearning:
                     n_e_mindegree += q3_mindegree[i]
 
                 n_e_baseline = n_e_mindegree
+                print( '{} '.format(self.heuristic),
+                  'inserted edges{}'.format(n_e_baseline))
                 # samles multi solutions by GCN and pick the lowest cost one
                 samle_gcn = 1
 
@@ -329,8 +331,12 @@ class Train_SupervisedLearning:
                         # baseline1: compute return of min degree
                         # if i % 100 == 0:
                         #     print('iterations {}'.format(i))
-                        node_mind, d_min = x_mind.min_degree(x_mind.M)
-                        rewards_mindegree += x_mind.eliminate_node(node_mind, reduce=True)
+                        if self.heuristic == 'min_degree':
+                            node_chosen, d_min = x_mind.min_degree(x_mind.M)
+                        elif self.heuristic == 'one_step_greedy':
+                            node_chosen, d_min = x_mind.onestep_greedy()
+                        # node_mind, d_min = x_mind.min_degree(x_mind.M)
+                        rewards_mindegree += x_mind.eliminate_node(node_chosen, reduce=True)
 
                         # baseline2: compute return of random
                         # rewards_random += x_rand.eliminate_node(np.random.randint(low=0, high=x_rand.n), reduce=True)
@@ -429,13 +435,13 @@ class Train_SupervisedLearning:
             if self.use_cuda:
                 plt.clf()
                 plt.plot(t_plot, ave_gcn_plot, t_plot, ave_mind_plot)
-                plt.legend(('GNN', 'min-degree'),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+                plt.legend(('GNN', 'one-step'),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
                            loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
-                plt.title('RL-MonteCarlo learning curve with pretrain ERG100 (average number of filled edges)')
+                plt.title('Supervised learning curve with pretrain UFSM (average number of filled edges)')
                 plt.ylabel('number of fill-in')
                 # plt.draw()
                 plt.savefig(
-                    './results/supervised01_learning_curve_g2m_number_gcn_logsoftmax_cuda.png')
+                    './results/supervised01_min_degree_curve_g2m_number_gcn_logsoftmax_UFSM_cuda.png')
                 plt.clf()
             else:
                 plt.clf()
@@ -452,6 +458,10 @@ class Train_SupervisedLearning:
                   'min_ratio {}'.format(_min_ratio_gcn2mind),
                   'max_ratio {}'.format(_max_ratio_gcn2mind),
                   'av_ratio {}'.format(_ave_ratio_gcn2mind))
+            for name, param in self.model.named_parameters():
+                print('parameter name {}'.format(name),
+                    'parameter value {}'.format(param.data))
+
 
         gcn_greedy = np.array(ave_gcn).reshape(-1)
         ave_ratio_gcn2mind = np.array(ave_ratio_gcn2mind).reshape(-1)
@@ -463,10 +473,10 @@ class Train_SupervisedLearning:
             plt.plot(t, ave_ratio_gcn2mind)
             plt.legend(('GNN-RL/mindegree'),
                        loc='upper right')
-            plt.title('RL-MonteCarlo learning curve ratio with pretrain ERG100')
+            plt.title('Supervised learning curve ratio with pretrain UFSM')
             plt.ylabel('fill-in ratio: gnn model/heuristic')
             plt.savefig(
-                './results/supervised01_learning_curve_g2m_ratio_gcn_logsoftmax_cuda.png')
+                './results/supervised01_min_degree_curve_g2m_ratio_gcn_logsoftmax_UFSM_cuda.png')
             plt.clf()
         else:
             plt.clf()

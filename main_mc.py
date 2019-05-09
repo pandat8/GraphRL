@@ -51,10 +51,11 @@ if args.cuda:
    torch.cuda.manual_seed(args.seed)
 
 # load data and pre-process
-train_dataset = GraphDataset(args.nnode, args.ngraph, random_seed=31)
-val_dataset = GraphDataset(args.nnode, args.ngraph, random_seed=33)
+# train_dataset = GraphDataset(args.nnode, args.ngraph, random_seed=31)
+# val_dataset = GraphDataset(args.nnode, args.ngraph, random_seed=33)
 test_dataset = GraphDataset(args.nnode_test, args.ngraph_test)
-# train_dataset = UFSMDataset()
+train_dataset = UFSMDataset(start=18, end=22)
+val_dataset = UFSMDataset(start=22, end=26)
 # test_dataset = SSMCDataset()
 
 # train_loader = DataLoader(train_dataset, batch_size=1, shuffle=True, collate_fn=lambda x: x)
@@ -69,7 +70,7 @@ actor = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
                               ) # alpha=args.alpha
 
 if args.cuda:
-    # actor.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_erg100_cuda.pth'))
+    actor.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_erg100_cuda.pth'))
     actor.cuda()
 # else:
 #     actor.load_state_dict(torch.load('./results/models/gcn_memory_policy_min_degree_pre_erg100.pthh'))

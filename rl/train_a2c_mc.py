@@ -103,7 +103,7 @@ class TrainModel_MC:
                     i = 1
                     depth  = np.min([n-2, 300])
                     rewards_gcn_greedy = np.zeros(1)
-                    while i<depth:
+                    while (i<depth) and (x_rl.n > 2):
 
                         # baseline1: compute return of min degree
                         # if i % 100 == 0:
@@ -244,7 +244,7 @@ class TrainModel_MC:
                     i = 1
                     depth = np.min([n - 2, 300])
                     rewards_gcn_greedy = np.zeros(1)
-                    while i < depth:
+                    while (i < depth) and (x_rl.n > 2):
 
                         # baseline1: compute return of min degree
                         # if i % 100 == 0:
@@ -268,31 +268,31 @@ class TrainModel_MC:
                         else:
                             reward = x_rl.eliminate_node(node_selected, reduce=True)
                     i = 1
-                    while i < depth:
-                        # gcn-greedy
-                        node_selected, d_min = x_test.min_degree(x_test.M)
-                        if not (d_min == 1 or d_min == 0):
-                            i += 1
-
-                            features = np.ones([x_test.n, 1], dtype=np.float32)
-                            M_gcn = torch.FloatTensor(x_test.M)
-                            features = torch.FloatTensor(features)
-                            M_gcn = utils.to_sparse(M_gcn)  # convert to coo sparse tensor
-                            if self.use_cuda:
-                                M_gcn = M_gcn.cuda()
-                                features = features.cuda()
-                            probs = self.model.actor(features, M_gcn)
-                            probs = probs.view(-1)
-
-                            # probs = torch.exp(probs)
-                            m = Categorical(logits=probs) # logits=probs
-                            q_gcn_samples = m.sample()
-                            # q_gcn_samples = np.argmax(np.array(output.detach().cpu().numpy()))
-                            edges_added = x_test.eliminate_node(q_gcn_samples,
-                                                                reduce=True)  # eliminate the node and return the number of edges added
-                            rewards_gcn_greedy += edges_added
-                        else:
-                            reward = x_test.eliminate_node(node_selected, reduce=True)
+                    # while i < depth:
+                    #     # gcn-greedy
+                    #     node_selected, d_min = x_test.min_degree(x_test.M)
+                    #     if not (d_min == 1 or d_min == 0):
+                    #         i += 1
+                    #
+                    #         features = np.ones([x_test.n, 1], dtype=np.float32)
+                    #         M_gcn = torch.FloatTensor(x_test.M)
+                    #         features = torch.FloatTensor(features)
+                    #         M_gcn = utils.to_sparse(M_gcn)  # convert to coo sparse tensor
+                    #         if self.use_cuda:
+                    #             M_gcn = M_gcn.cuda()
+                    #             features = features.cuda()
+                    #         probs = self.model.actor(features, M_gcn)
+                    #         probs = probs.view(-1)
+                    #
+                    #         # probs = torch.exp(probs)
+                    #         m = Categorical(logits=probs) # logits=probs
+                    #         q_gcn_samples = m.sample()
+                    #         # q_gcn_samples = np.argmax(np.array(output.detach().cpu().numpy()))
+                    #         edges_added = x_test.eliminate_node(q_gcn_samples,
+                    #                                             reduce=True)  # eliminate the node and return the number of edges added
+                    #         rewards_gcn_greedy += edges_added
+                    #     else:
+                    #         reward = x_test.eliminate_node(node_selected, reduce=True)
 
                     rewards_gcn_sto = sum(self.model.rewards)
 
@@ -374,13 +374,13 @@ class TrainModel_MC:
 
             if self.use_cuda:
                 plt.clf()
-                plt.plot(t_plot, ave_gcn_plot, t_plot, ave_gcn_sto_plot, t_plot, ave_mind_plot)
-                plt.legend(('GNN-RL', 'GNN-RL-epsilon', 'min-degree'), # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+                plt.plot(t_plot, ave_gcn_sto_plot, t_plot, ave_mind_plot) # t_plot, ave_gcn_plot,
+                plt.legend(('GNN-RL-epsilon', 'min-degree'), # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
                            loc='upper right')                           # 'GNN-initial', 'GNN-RL', 'min-degree'
                 plt.title('RL-MonteCarlo learning curve with pretrain ERG100 (average number of filled edges)')
                 plt.ylabel('number of fill-in')
                 # plt.draw()
-                plt.savefig('./results/acmc01_learning_curve_g2m_number_gcn_wrong-logsoftmax_non_pretrainERG100_cuda_with_epsilon0_1_return_test.png')
+                plt.savefig('./results/acmc01_learning_curve_g2m_number_gcn_logsoftmax_pretrainERG100_UFSM_cuda_with_epsilon0_1_return_test.png')
                 plt.clf()
             else:
                 plt.clf()
@@ -397,6 +397,9 @@ class TrainModel_MC:
                   'min_ratio {}'.format(_min_ratio_gcn2mind),
                   'max_ratio {}'.format(_max_ratio_gcn2mind),
                   'av_ratio {}'.format(_ave_ratio_gcn2mind))
+            for name, param in self.model.named_parameters():
+                print('parameter name {}'.format(name),
+                    'parameter value {}'.format(param.data))
             # print('epoch {:04d}'.format(epoch), 'gcn2rand',
             #       'min_ratio {}'.format(_min_ratio_gcn2rand),
             #       'max_ratio {}'.format(_max_ratio_gcn2rand),
@@ -415,7 +418,7 @@ class TrainModel_MC:
                        loc='upper right')
             plt.title('RL-MonteCarlo learning curve ratio with pretrain ERG100')
             plt.ylabel('fill-in ratio: gnn model/heuristic')
-            plt.savefig('./results/acmc01_learning_curve_g2m_ratio_gcn_logsoftmax_non_pretrainERG100_cuda_with_epsilon0_1_return_test.png')
+            plt.savefig('./results/acmc01_learning_curve_g2m_ratio_gcn_logsoftmax_pretrainERG100_UFSM_cuda_with_epsilon0_1_return_test.png')
             plt.clf()
         else:
             plt.clf()
