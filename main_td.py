@@ -1,5 +1,5 @@
 from torch.utils.data import Dataset, DataLoader
-from data.graphDataset import GraphDataset
+from data.ergDataset import ErgDataset
 from data.SSMCDataset import SSMCDataset
 from data.UFSMDataset import UFSMDataset
 
@@ -49,8 +49,8 @@ if args.cuda:
 
 # load data and pre-process
 
-train_dataset = GraphDataset(args.nnode, args.ngraph)
-val_dataset = GraphDataset(args.nnode, args.ngraph)
+train_dataset = ErgDataset(args.nnode, args.ngraph)
+val_dataset = ErgDataset(args.nnode, args.ngraph)
 # test_dataset = GraphDataset(args.nnode_test, args.ngraph_test)
 # train_dataset = UFSMDataset()
 #test_dataset = SSMCDataset()

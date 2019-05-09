@@ -3,7 +3,7 @@ from torch.utils.data import Dataset
 from data.graph import Graph
 from utils.utils import erdosrenyi
 
-class GraphDataset(Dataset):
+class ErgDataset(Dataset):
 
     def __init__(self, n_nodes, n_graphs, random_seed = 32):
         """
@@ -12,7 +12,7 @@ class GraphDataset(Dataset):
         :param n_nodes:  number of nodes
         :param random_seed:
         """
-        super(GraphDataset, self).__init__()
+        super(ErgDataset, self).__init__()
         torch.manual_seed(random_seed)
 
         self.dataset = []

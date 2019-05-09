@@ -1,5 +1,5 @@
 from torch.utils.data import Dataset, DataLoader
-from data.graphDataset import GraphDataset
+from data.ergDataset import ErgDataset
 from data.SSMCDataset import SSMCDataset
 from data.UFSMDataset import UFSMDataset
 from data.graph import Graph
@@ -51,13 +51,15 @@ if args.cuda:
    torch.cuda.manual_seed(args.seed)
 
 # load data and pre-process
-# train_dataset = GraphDataset(args.nnode, args.ngraph, random_seed=31)
-# val_dataset = GraphDataset(args.nnode, args.ngraph, random_seed=33)
-test_dataset = GraphDataset(args.nnode_test, args.ngraph_test)
-train_dataset = UFSMDataset(start=18, end=22)
-val_dataset = UFSMDataset(start=22, end=26)
-# test_dataset = SSMCDataset()
-
+dataset = UFSMDataset
+if dataset.__name__ == 'UFSMDataset':
+    test_dataset = dataset(start=22, end=26)
+    train_dataset = dataset(start=18, end=22)
+    val_dataset = dataset(start=22, end=26)
+elif dataset.__name__ == 'ErgDataset':
+    train_dataset = dataset(args.nnode, args.ngraph)
+    val_dataset = dataset(args.nnode, args.ngraph)
+    test_dataset = dataset(args.nnode_test, args.ngraph_test)
 # train_loader = DataLoader(train_dataset, batch_size=1, shuffle=True, collate_fn=lambda x: x)
 # val_loader = DataLoader(val_dataset, batch_size=1,  shuffle=True, collate_fn=lambda x: x)
 # test_loader = DataLoader(test_dataset, batch_size=1, shuffle=True, collate_fn=lambda x: x)

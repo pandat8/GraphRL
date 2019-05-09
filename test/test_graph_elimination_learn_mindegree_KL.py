@@ -8,7 +8,7 @@ import time
 
 from torch.autograd import Variable
 from torch.utils.data import Dataset, DataLoader
-from data.graphDataset import GraphDataset
+from data.ergDataset import ErgDataset
 from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GAN
 from data.graph import Graph
 from utils import utils
@@ -273,9 +273,9 @@ def test(model, features, data_loader, is_cuda=args.cuda, validation = True):
 
 
 # load data and pre-process
-train_set = GraphDataset(args.nnode, args.ngraph)
-val_set = GraphDataset(args.nnode, args.ngraph)
-test_set = GraphDataset(args.nnode_test, args.ngraph_test)
+train_set = ErgDataset(args.nnode, args.ngraph)
+val_set = ErgDataset(args.nnode, args.ngraph)
+test_set = ErgDataset(args.nnode_test, args.ngraph_test)
 
 train_loader = DataLoader(train_set, batch_size=1, collate_fn=lambda x: x)
 val_loader = DataLoader(val_set, batch_size=1, collate_fn=lambda x: x)

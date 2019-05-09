@@ -213,3 +213,163 @@ epochs 19 loss -13.656612396240234
 epochs 19 loss -23.201862335205078
 epochs 19 loss -107.07549285888672
 epochs 19 loss -82.03422546386719
+epoch 0019 gcn2mind min_ratio 1.292887029288703 max_ratio 14.053763440860216 av_ratio 5.761191261684491
+parameter name actor.gc1.weight parameter value tensor([[ 0.3189]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.2946], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3296]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
+       [ 2.5675], device='cuda:0')
+epochs 20 loss -39.8082275390625
+epochs 20 loss -82.67121887207031
+epochs 20 loss -24.873226165771484
+epochs 20 loss -130.9685516357422
+epoch 0020 gcn2mind min_ratio 1.269311064718163 max_ratio 13.942105263157895 av_ratio 5.902737295442492
+parameter name actor.gc1.weight parameter value tensor([[ 0.3156]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3053], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3273]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
+       [-2.9621], device='cuda:0')
+epochs 21 loss -28.965478897094727
+epochs 21 loss -92.06697082519531
+epochs 21 loss -70.27622985839844
+epochs 21 loss -14.113292694091797
+epoch 0021 gcn2mind min_ratio 1.2627206645898235 max_ratio 14.565445026178011 av_ratio 5.837389719380341
+parameter name actor.gc1.weight parameter value tensor([[ 0.3174]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3135], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3298]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
+       [ 1.4591], device='cuda:0')
+epochs 22 loss -51.9524040222168
+epochs 22 loss -17.103195190429688
+epochs 22 loss -28.749122619628906
+epochs 22 loss -96.89220428466797
+epoch 0022 gcn2mind min_ratio 1.254341164453524 max_ratio 14.047619047619047 av_ratio 5.966146950899556
+parameter name actor.gc1.weight parameter value tensor([[ 0.3230]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3160], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3353]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [-8.1145], device='cuda:0')
+epochs 23 loss -4.167393207550049
+epochs 23 loss -31.886205673217773
+epochs 23 loss -94.36083984375
+epochs 23 loss -87.55635070800781
+epoch 0023 gcn2mind min_ratio 1.2779234399580492 max_ratio 14.359788359788359 av_ratio 5.94681385434017
+parameter name actor.gc1.weight parameter value tensor([[ 0.3201]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3151], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3323]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.8281], device='cuda:0')
+epochs 24 loss -77.24491882324219
+epochs 24 loss -41.53221893310547
+epochs 24 loss -47.277137756347656
+epochs 24 loss 28.898300170898438
+epoch 0024 gcn2mind min_ratio 1.317008952080042 max_ratio 14.117647058823529 av_ratio 5.689440289848929
+parameter name actor.gc1.weight parameter value tensor([[ 0.3199]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3130], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3319]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [-8.6561], device='cuda:0')
+epochs 25 loss -32.06674575805664
+epochs 25 loss -91.51625061035156
+epochs 25 loss -25.998517990112305
+epochs 25 loss -57.250125885009766
+epoch 0025 gcn2mind min_ratio 1.2597809076682316 max_ratio 13.97883597883598 av_ratio 5.81496144736445
+parameter name actor.gc1.weight parameter value tensor([[ 0.3150]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3133], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3271]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [-9.7899], device='cuda:0')
+epochs 26 loss -60.0615348815918
+epochs 26 loss -42.30636978149414
+epochs 26 loss -103.92691040039062
+epochs 26 loss -25.372272491455078
+epoch 0026 gcn2mind min_ratio 1.300210304942166 max_ratio 14.340425531914894 av_ratio 5.886200715011304
+parameter name actor.gc1.weight parameter value tensor([[ 0.3078]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3157], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3205]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
+       [ 1.5742], device='cuda:0')
+epochs 27 loss -16.7883243560791
+epochs 27 loss -37.91980743408203
+epochs 27 loss -41.900550842285156
+epochs 27 loss -105.37653350830078
+epoch 0027 gcn2mind min_ratio 1.325801366263794 max_ratio 14.22872340425532 av_ratio 5.918730838876845
+parameter name actor.gc1.weight parameter value tensor([[ 0.2956]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3173], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3090]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
+       [-1.4107], device='cuda:0')
+epochs 28 loss -35.17033386230469
+epochs 28 loss -81.2939224243164
+epochs 28 loss -75.7691879272461
+epochs 28 loss -32.402496337890625
+epoch 0028 gcn2mind min_ratio 1.335978835978836 max_ratio 14.573684210526316 av_ratio 5.965462492749676
+parameter name actor.gc1.weight parameter value tensor([[ 0.2787]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3302], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.2944]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [ 4.0660], device='cuda:0')
+epochs 29 loss -46.479461669921875
+epochs 29 loss -54.363914489746094
+epochs 29 loss -34.542335510253906
+epochs 29 loss 51.381404876708984
+epoch 0029 gcn2mind min_ratio 1.3109504132231404 max_ratio 14.572972972972973 av_ratio 6.002455406983922
+parameter name actor.gc1.weight parameter value tensor([[ 0.2724]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3444], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.2901]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [-8.2671], device='cuda:0')
+epochs 30 loss -75.08263397216797
+epochs 30 loss -62.28975296020508
+epochs 30 loss -87.86984252929688
+epochs 30 loss -41.63352584838867
+epoch 0030 gcn2mind min_ratio 1.3118888317035513 max_ratio 13.783068783068783 av_ratio 5.985500950417037
+parameter name actor.gc1.weight parameter value tensor([[ 0.2727]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3678], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.2935]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
+       [-1.5428], device='cuda:0')
+epochs 31 loss -42.362892150878906
+epochs 31 loss -58.331138610839844
+epochs 31 loss -59.157135009765625
+epochs 31 loss -35.935665130615234
+epoch 0031 gcn2mind min_ratio 1.3070907194994785 max_ratio 14.638297872340425 av_ratio 6.062089517889753
+parameter name actor.gc1.weight parameter value tensor([[ 0.2802]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.3866], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3031]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [ 8.1232], device='cuda:0')
+epochs 32 loss -101.46940612792969
+epochs 32 loss -21.178504943847656
+epochs 32 loss -23.469362258911133
+epochs 32 loss -149.63600158691406
+epoch 0032 gcn2mind min_ratio 1.2868979803210772 max_ratio 14.101604278074866 av_ratio 5.828269632395596
+parameter name actor.gc1.weight parameter value tensor([[ 0.3009]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.4022], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3245]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
+       [-1.0004], device='cuda:0')
+epochs 33 loss -51.963294982910156
+epochs 33 loss -17.07221221923828
+epochs 33 loss -119.10498809814453
+epochs 33 loss -30.93883514404297
+epoch 0033 gcn2mind min_ratio 1.2654028436018958 max_ratio 14.189473684210526 av_ratio 5.785847841075681
+parameter name actor.gc1.weight parameter value tensor([[ 0.3240]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.4215], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3487]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
+       [ 1.2841], device='cuda:0')
+epochs 34 loss -76.95671081542969
+epochs 34 loss -6.878586769104004
+epochs 34 loss -30.569440841674805
+epochs 34 loss -80.11991882324219
+epoch 0034 gcn2mind min_ratio 1.2867724867724868 max_ratio 13.801047120418849 av_ratio 5.63670231482742
+parameter name actor.gc1.weight parameter value tensor([[ 0.3391]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.4385], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-0.3652]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [-9.5253], device='cuda:0')
+epochs 35 loss -82.71073913574219
+epochs 35 loss -6.200307369232178
+epochs 35 loss -28.740022659301758
+epochs 35 loss -31.25467300415039

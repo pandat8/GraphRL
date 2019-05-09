@@ -25,3 +25,30 @@ parameter name gc2.weight parameter value tensor(1.00000e-02 *
 parameter name gc2.bias parameter value tensor(1.00000e-04 *
        [-3.1335], device='cuda:0')
 epochs 2 loss 50.63262899763161
+epoch 0002 gcn2mind min_ratio 38.998908296943235 max_ratio 1302.0263157894738 av_ratio 538.309141553313
+parameter name gc1.weight parameter value tensor(1.00000e-14 *
+       [[-1.0136]], device='cuda:0')
+parameter name gc1.bias parameter value tensor(1.00000e-41 *
+       [ 7.1793], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-0.1616]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [-1.5278], device='cuda:0')
+epochs 3 loss 19.801398629673137
+epoch 0003 gcn2mind min_ratio 71.89773950484391 max_ratio 1993.8429319371728 av_ratio 794.54203376196
+parameter name gc1.weight parameter value tensor(1.00000e-02 *
+       [[-6.8169]], device='cuda:0')
+parameter name gc1.bias parameter value tensor(1.00000e-39 *
+       [ 5.1419], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-0.3511]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [-5.3183], device='cuda:0')
+epochs 4 loss 43.18188332132252
+epoch 0004 gcn2mind min_ratio 54.17002237136465 max_ratio 1601.1855670103093 av_ratio 583.8105277789952
+parameter name gc1.weight parameter value tensor(1.00000e-05 *
+       [[-2.0460]], device='cuda:0')
+parameter name gc1.bias parameter value tensor(1.00000e-37 *
+       [-4.3820], device='cuda:0')
+parameter name gc2.weight parameter value tensor(1.00000e-02 *
+       [[-8.1658]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [-1.5816], device='cuda:0')
