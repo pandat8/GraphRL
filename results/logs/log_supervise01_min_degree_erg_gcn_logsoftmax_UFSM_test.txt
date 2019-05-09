@@ -1,0 +1,27 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Training started
+/SCRATCH/liudefen/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 28.727977817877253
+epoch 0000 gcn2mind min_ratio 33.21018418201517 max_ratio 1662.279569892473 av_ratio 850.6853276145624
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[-1.9528]], device='cuda:0')
+parameter name gc1.bias parameter value tensor(1.00000e-41 *
+       [-1.5545], device='cuda:0')
+parameter name gc2.weight parameter value tensor(1.00000e-41 *
+       [[ 1.0054]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [-5.5878], device='cuda:0')
+epochs 1 loss 42.554047912025645
+epoch 0001 gcn2mind min_ratio 543.6321243523316 max_ratio 724.1666666666666 av_ratio 624.8931207908037
+parameter name gc1.weight parameter value tensor(1.00000e-16 *
+       [[-1.5888]], device='cuda:0')
+parameter name gc1.bias parameter value tensor(1.00000e-41 *
+       [ 6.3857], device='cuda:0')
+parameter name gc2.weight parameter value tensor(1.00000e-02 *
+       [[-1.8389]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [-3.1335], device='cuda:0')
+epochs 2 loss 50.63262899763161

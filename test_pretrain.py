@@ -20,7 +20,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disable Cuda')
 parser.add_argument('--novalidation', action= 'store_true', default=True, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
-parser.add_argument('--epochs', type=int, default=50, help='Training epochs')
+parser.add_argument('--epochs', type=int, default=15, help='Training epochs')
 parser.add_argument('--lr', type=float, default= 0.01, help='Learning rate')
 parser.add_argument('--wd', type=float, default=5e-4, help='Weight decay')
 parser.add_argument('--dhidden', type=int, default=1, help='Dimension of hidden features')
@@ -354,9 +354,12 @@ def plot_dis(output, labels):
 
 
 #  load data and pre-process
-train_dataset = GraphDataset(args.nnode, args.ngraph)
+# train_dataset = GraphDataset(args.nnode, args.ngraph)
 test_dataset = GraphDataset(args.nnode_test, args.ngraph_test)
-val_dataset = GraphDataset(args.nnode, args.ngraph)
+# val_dataset = GraphDataset(args.nnode, args.ngraph)
+
+train_dataset = UFSMDataset(start=18, end=22)
+val_dataset = UFSMDataset(start=22, end=26)
 
 
 # build the GCN model
@@ -399,7 +402,7 @@ print('Model and Opt time: {:.4f}'.format(t_model_opt))
 
 
 if args.cuda:
-    torch.save(model.state_dict(), './results/models/gcn_policy_min_degree_pre_erg100_cuda.pth')
+    torch.save(model.state_dict(), './results/models/gcn_policy_min_degree_pre_UFSM_cuda.pth')
 else:
     torch.save(model.state_dict(), './results/models/gcn_policy_min_degree_pre_erg100.pth')
 
@@ -412,7 +415,7 @@ model_test = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
                               ) # alpha=args.alpha
 
 if args.cuda:
-    model_test.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_erg100_cuda.pth'))
+    model_test.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_UFSM_cuda.pth'))
     model_test.cuda()
 else:
     model_test.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_erg100.pth'))
@@ -435,7 +438,7 @@ time_end = time.time()
 print('test finished')
 print('Test time: {:.4f}'.format(time_end-time_start))
 if args.cuda:
-    text_file = open("test/results/pretrain_min_degree_gcn_ERG100_cuda.txt", "w")
+    text_file = open("test/results/pretrain_one_step_gcn_UFSM_cuda.txt", "w")
 else:
     text_file = open("test/results/pretrain_min_degree_gcn_memory_ERG100.txt", "w")
 text_file.write('\n Test result: test_graph_elimination_learn_heuristic\n')
@@ -448,27 +451,27 @@ text_file.write('max ratio gcn2random {:.4f}\n'.format(max_ratio_g2r))
 text_file.write('min ratio gcn2random {:.4f}\n'.format(min_ratio_g2r))
 text_file.close()
 
-if args.cuda:
-    plt.switch_backend('agg')
-    plt.hist(ratio, bins=32)
-    plt.title('histogram: gcn2'+heuristic+' ratio of Erdos-Renyi graph')
-    plt.savefig('./test/results/histogram_gnn2mindegree_gcn_logsoftmax_erg100_cuda.png')
-    plt.clf()
-    #
-    plt.hist(ratio_g2r, bins=32)
-    plt.title('gcn2random ratio Erdos-Renyi graph')
-    plt.savefig('./test/results/histogram_gnn2random_gcn_logsoftmax_mindegree_erg100_cuda.png')
-    plt.clf()
-else:
-    plt.hist(ratio, bins= 32)
-    plt.title('histogram: gcn2mindegree ratio CrossEntropy of Erdos-Renyi graph')
-    plt.savefig('./test/results/histogram_gnn2mindegree_gcn_memory_erg100.png')
-    plt.clf()
-    #
-    plt.hist(ratio_g2r, bins= 32)
-    plt.title('gcn2random_ratio_CrossEntropy Erdos-Renyi graph')
-    plt.savefig('./test/results/histogram_gnn2random_gcn_memory_erg100.png')
-    plt.clf()
+# if args.cuda:
+#     plt.switch_backend('agg')
+#     plt.hist(ratio, bins=32)
+#     plt.title('histogram: gcn2'+heuristic+' ratio of Erdos-Renyi graph')
+#     plt.savefig('./test/results/histogram_gnn2onestep_gcn_logsoftmax_erg100_cuda.png')
+#     plt.clf()
+#     #
+#     plt.hist(ratio_g2r, bins=32)
+#     plt.title('gcn2random ratio Erdos-Renyi graph')
+#     plt.savefig('./test/results/histogram_gnn2random_gcn_logsoftmax_onestep_erg100_cuda.png')
+#     plt.clf()
+# else:
+#     plt.hist(ratio, bins= 32)
+#     plt.title('histogram: gcn2mindegree ratio CrossEntropy of Erdos-Renyi graph')
+#     plt.savefig('./test/results/histogram_gnn2mindegree_gcn_memory_erg100.png')
+#     plt.clf()
+#     #
+#     plt.hist(ratio_g2r, bins= 32)
+#     plt.title('gcn2random_ratio_CrossEntropy Erdos-Renyi graph')
+#     plt.savefig('./test/results/histogram_gnn2random_gcn_memory_erg100.png')
+#     plt.clf()
 #
 # plt.show()
 
