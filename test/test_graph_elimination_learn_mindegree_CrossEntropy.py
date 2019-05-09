@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import time
 
 from torch.utils.data import Dataset, DataLoader
-from data.graphDataset import GraphDataset
+from data.ergDataset import ErgDataset
 from data.SSMCDataset import SSMCDataset
 from data.UFSMDataset import UFSMDataset
 from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode,GAN
@@ -348,9 +348,9 @@ def test(model, features, data_loader, is_cuda=args.cuda, validation = True):
 
 
 # load data and pre-process
-train_set = GraphDataset(args.nnode, args.ngraph)
-val_set = GraphDataset(args.nnode, args.ngraph)
-test_set = GraphDataset(args.nnode_test, args.ngraph_test)
+train_set = ErgDataset(args.nnode, args.ngraph)
+val_set = ErgDataset(args.nnode, args.ngraph)
+test_set = ErgDataset(args.nnode_test, args.ngraph_test)
 
 # train_set = UFSMDataset(start=22, end=25)
 # val_set = GraphDataset(args.nnode, args.ngraph)

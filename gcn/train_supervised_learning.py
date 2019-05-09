@@ -435,13 +435,13 @@ class Train_SupervisedLearning:
             if self.use_cuda:
                 plt.clf()
                 plt.plot(t_plot, ave_gcn_plot, t_plot, ave_mind_plot)
-                plt.legend(('GNN', 'one-step'),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+                plt.legend(('GNN', self.heuristic),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
                            loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
-                plt.title('Supervised learning curve with pretrain UFSM (average number of filled edges)')
+                plt.title('Supervised learning curve with pretrain '+self.train_dataset.__class__.__name__+' (average number of filled edges)')
                 plt.ylabel('number of fill-in')
                 # plt.draw()
                 plt.savefig(
-                    './results/supervised01_min_degree_curve_g2m_number_gcn_logsoftmax_UFSM_cuda.png')
+                    './results/supervised'+str(lr)+'_'+self.heuristic+'_curve_g2m_number_gcn_logsoftmax_'+self.train_dataset.__class__.__name__+'_cuda.png')
                 plt.clf()
             else:
                 plt.clf()
@@ -454,7 +454,7 @@ class Train_SupervisedLearning:
                 plt.savefig('./results/acmc001_learning_curve_g2m_number_gcn_non_pretrainERG100_with_epsilon05.png')
                 plt.clf()
 
-            print('epoch {:04d}'.format(epoch), 'gcn2mind',
+            print('epoch {:04d}'.format(epoch), 'gcn2'+self.heuristic,
                   'min_ratio {}'.format(_min_ratio_gcn2mind),
                   'max_ratio {}'.format(_max_ratio_gcn2mind),
                   'av_ratio {}'.format(_ave_ratio_gcn2mind))
@@ -471,12 +471,12 @@ class Train_SupervisedLearning:
         if self.use_cuda:
             plt.clf()
             plt.plot(t, ave_ratio_gcn2mind)
-            plt.legend(('GNN-RL/mindegree'),
+            plt.legend(('GNN-RL/'+self.heuristic),
                        loc='upper right')
-            plt.title('Supervised learning curve ratio with pretrain UFSM')
+            plt.title('Supervised learning curve ratio with pretrain '+self.train_dataset.__class__.__name__)
             plt.ylabel('fill-in ratio: gnn model/heuristic')
             plt.savefig(
-                './results/supervised01_min_degree_curve_g2m_ratio_gcn_logsoftmax_UFSM_cuda.png')
+                './results/supervised'+str(lr)+'_'+self.heuristic+'_curve_g2m_ratio_gcn_logsoftmax_'+self.train_dataset.__class__.__name__+'_cuda.png')
             plt.clf()
         else:
             plt.clf()
