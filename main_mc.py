@@ -72,7 +72,7 @@ actor = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
                               ) # alpha=args.alpha
 
 if args.cuda:
-    actor.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_erg100_cuda.pth'))
+    actor.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_UFSMDataset_cuda.pth'))
     actor.cuda()
 # else:
 #     actor.load_state_dict(torch.load('./results/models/gcn_memory_policy_min_degree_pre_erg100.pthh'))

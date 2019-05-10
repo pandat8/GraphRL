@@ -380,7 +380,7 @@ class TrainModel_MC:
                 plt.title('RL-MonteCarlo learning curve with pretrain ERG100 (average number of filled edges)')
                 plt.ylabel('number of fill-in')
                 # plt.draw()
-                plt.savefig('./results/acmc'+str(lr_actor)+'_learning_curve_g2m_number_gcn_logsoftmax_pretrainERG100_'+self.train_dataset.__class__.__name__+'_cuda_with_epsilon0_1_return_test.png')
+                plt.savefig('./results/acmc01_learning_curve_g2m_number_gcn_logsoftmax_pretrainUFSM_'+self.train_dataset.__class__.__name__+'_cuda_with_epsilon0_1_return_test.png')
                 plt.clf()
             else:
                 plt.clf()
@@ -418,7 +418,7 @@ class TrainModel_MC:
                        loc='upper right')
             plt.title('RL-MonteCarlo learning curve ratio with pretrain ERG100')
             plt.ylabel('fill-in ratio: gnn model/heuristic')
-            plt.savefig('./results/acmc'+str(lr_actor)+'_learning_curve_g2m_ratio_gcn_logsoftmax_pretrainERG100_'+self.train_dataset.__class__.__name__+'_cuda_with_epsilon0_1_return_test.png')
+            plt.savefig('./results/acmc01_learning_curve_g2m_ratio_gcn_logsoftmax_pretrainUFSM_'+self.train_dataset.__class__.__name__+'_cuda_with_epsilon0_1_return_test.png')
             plt.clf()
         else:
             plt.clf()
