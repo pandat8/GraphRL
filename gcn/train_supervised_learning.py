@@ -215,21 +215,29 @@ class Train_SupervisedLearning:
 
         t = []
 
-        ave_gcn = []
-        min_gcn = []
-        max_gcn = []
+        val_ave_gcn = []
+        train_ave_gcn = []
+        # min_gcn = []
+        # max_gcn = []
 
-        ave_mind = []
-        min_mind = []
-        max_mind = []
+        val_ave_mind = []
+        train_ave_mind = []
+        # min_mind = []
+        # max_mind = []
 
-        ave_ratio_gcn2mind = []
-        min_ratio_gcn2mind = []
-        max_ratio_gcn2mind = []
+        val_ave_ratio_gcn2mind = []
+        train_ave_ratio_gcn2mind = []
+        # min_ratio_gcn2mind = []
+        # max_ratio_gcn2mind = []
+
+
 
         for epoch in range(epochs):
-            gcn_greedy = []
-            mind = []
+            val_gcn_greedy = []
+            train_gcn_greedy = []
+            if epoch==0:
+                val_mind = []
+                train_mind = []
             ratio_gcn2mind = []
 
             av_loss_train = 0 # loss per epochs
@@ -237,18 +245,31 @@ class Train_SupervisedLearning:
                 for x in X:
 
                     n = x.n
-                    x1 = Graph(x.M)
+                    train_rewards_mindegree = 0
+                    train_rewards_gcn_greedy = 0
+
+                    x_mind = Graph(x.M)
+                    x_model = Graph(x.M)
                     total_loss_train_1graph = 0
                     depth = np.min([n - 2, 300])
                     # edges_total = 0
                     i = 0
-                    while (i < depth) and (x1.n > 2):
+                    while (i < depth) and (x_model.n > 2):
 
-                        node_selected, d_min = x1.min_degree(x1.M)
+                        if epoch==0:
+                            if self.heuristic == 'min_degree':
+                                node_chosen, d_min = x_mind.min_degree(x_mind.M)
+                            elif self.heuristic == 'one_step_greedy':
+                                node_chosen, d_min = x_mind.onestep_greedy()
+                            # node_mind, d_min = x_mind.min_degree(x_mind.M)
+                            train_rewards_mindegree += x_mind.eliminate_node(node_chosen, reduce=True)
+
+
+                        node_selected, d_min = x_model.min_degree(x_model.M)
                         if not (d_min == 1 or d_min == 0):
                             i += 1
-                            features = np.ones([x1.n, 1], dtype=np.float32)
-                            m = torch.FloatTensor(x1.M)
+                            features = np.ones([x_model.n, 1], dtype=np.float32)
+                            m = torch.FloatTensor(x_model.M)
                             _t1 = time.clock()
                             m = utils.to_sparse(m)  # convert to coo sparse tensor
                             t1 += time.clock() - _t1
@@ -256,9 +277,9 @@ class Train_SupervisedLearning:
 
                             _t3 = time.clock()
                             if self.heuristic == 'min_degree':
-                                distribution_labels = x1.min_degree_d()
+                                distribution_labels = x_model.min_degree_d()
                             elif self.heuristic == 'one_step_greedy':
-                                distribution_labels = x1.onestep_greedy_d()
+                                distribution_labels = x_model.onestep_greedy_d()
 
                             # distribution_labels = np.log(distribution_labels)
 
@@ -306,11 +327,14 @@ class Train_SupervisedLearning:
                             action_gcn = m.sample()
 
                             _t2 = time.clock()
-                            edges_added = x1.eliminate_node(action_gcn, reduce=True)
-                            # edges_total +=edges_added
+                            edges_added = x_model.eliminate_node(action_gcn, reduce=True)
+                            train_rewards_gcn_greedy +=edges_added
                             t2 += time.clock() - _t2
                         else:
-                            reward = x1.eliminate_node(node_selected, reduce=True)
+                            reward = x_model.eliminate_node(node_selected, reduce=True)
+                    train_gcn_greedy.append(train_rewards_gcn_greedy)
+                    if epoch==0:
+                        train_mind.append(train_rewards_mindegree)
 
                 av_loss_train += total_loss_train_1graph
             print('epochs {}'.format(epoch), 'loss {}'.format(av_loss_train))
@@ -322,8 +346,8 @@ class Train_SupervisedLearning:
                     self.model.eval()
                     # ratio_gcn2mind = []
                     # ratio_gcn2rand = []
-
-                    rewards_mindegree = 0  # number of added edges
+                    val_rewards_mindegree = 0  # number of added edges
+                    val_rewards_gcn_greedy = 0
                     # rewards_random = 0
                     x_mind = Graph(x.M)
                     # x_rand = Graph(x.M)
@@ -332,18 +356,18 @@ class Train_SupervisedLearning:
                     # loop for training while eliminating a graph iteratively
                     i = 1
                     depth = np.min([n - 2, 300])
-                    rewards_gcn_greedy = np.zeros(1)
                     while (i < depth) and (x_model.n > 2):
 
                         # baseline1: compute return of min degree
                         # if i % 100 == 0:
                         #     print('iterations {}'.format(i))
-                        if self.heuristic == 'min_degree':
-                            node_chosen, d_min = x_mind.min_degree(x_mind.M)
-                        elif self.heuristic == 'one_step_greedy':
-                            node_chosen, d_min = x_mind.onestep_greedy()
-                        # node_mind, d_min = x_mind.min_degree(x_mind.M)
-                        rewards_mindegree += x_mind.eliminate_node(node_chosen, reduce=True)
+                        if epoch==0:
+                            if self.heuristic == 'min_degree':
+                                node_chosen, d_min = x_mind.min_degree(x_mind.M)
+                            elif self.heuristic == 'one_step_greedy':
+                                node_chosen, d_min = x_mind.onestep_greedy()
+                            # node_mind, d_min = x_mind.min_degree(x_mind.M)
+                            val_rewards_mindegree += x_mind.eliminate_node(node_chosen, reduce=True)
 
                         # baseline2: compute return of random
                         # rewards_random += x_rand.eliminate_node(np.random.randint(low=0, high=x_rand.n), reduce=True)
@@ -369,7 +393,7 @@ class Train_SupervisedLearning:
                             q_gcn_samples = m.sample()
                             edges_added = x_model.eliminate_node(q_gcn_samples,
                                                                 reduce=True)  # eliminate the node and return the number of edges added
-                            rewards_gcn_greedy += edges_added
+                            val_rewards_gcn_greedy += edges_added
                         else:
                             reward = x_model.eliminate_node(node_selected, reduce=True)
 
@@ -380,122 +404,146 @@ class Train_SupervisedLearning:
                     # print('graph {:04d}'.format(n_graphs_proceed), 'epoch {:04d}'.format(epoch),
                     #       'gcn2rand ratio {}'.format(_ratio_gcn2rand))
 
-                    _ratio_gcn2mind = rewards_gcn_greedy / rewards_mindegree
+                    # _ratio_gcn2mind = rewards_gcn_greedy / rewards_mindegree
                     # _ratio_gcn2rand = rewards_gcn / rewards_random
-                    gcn_greedy.append(rewards_gcn_greedy)
-                    mind.append(rewards_mindegree)
+                    val_gcn_greedy.append(val_rewards_gcn_greedy)
+                    if epoch==0:
+                        val_mind.append(val_rewards_mindegree)
                     # rand.append(rewards_random)
-                    ratio_gcn2mind.append(_ratio_gcn2mind)
+                    # ratio_gcn2mind.append(_ratio_gcn2mind)
                     # ratio_gcn2rand.append(_ratio_gcn2rand)
 
                 # n_graphs_proceed += len(X)
 
-            gcn_greedy = np.array(gcn_greedy).reshape(-1)
-            mind = np.array(mind).reshape(-1)
+            train_gcn_greedy = np.array(train_gcn_greedy).reshape(-1)
+            val_gcn_greedy = np.array(val_gcn_greedy).reshape(-1)
+            if epoch==0:
+                val_mind = np.array(val_mind).reshape(-1)
+                train_mind = np.array(train_mind).reshape(-1)
+                _val_ave_mind = np.sum(val_mind) / len(val_mind)
+                _train_ave_mind = np.sum(train_mind) / len(train_mind)
             # rand = np.array(rand).reshape(-1)
-            ratio_gcn2mind = np.array(ratio_gcn2mind).reshape(-1)
+            # ratio_gcn2mind = np.array(ratio_gcn2mind).reshape(-1)
             # ratio_gcn2rand = np.array(ratio_gcn2rand).reshape(-1)
 
-            _ave_gcn = np.sum(gcn_greedy) / len(gcn_greedy)
-            _min_gcn = np.min(gcn_greedy)
-            _max_gcn = np.max(gcn_greedy)
+            _val_ave_gcn = np.sum(val_gcn_greedy) / len(val_gcn_greedy)
+            _train_ave_gcn = np.sum(train_gcn_greedy) / len(train_gcn_greedy)
+            # _min_gcn = np.min(gcn_greedy)
+            # _max_gcn = np.max(gcn_greedy)
 
-            _ave_mind = np.sum(mind) / len(mind)
-            _min_mind = np.max(mind)
-            _max_mind = np.min(mind)
+
+            # _min_mind = np.max(mind)
+            # _max_mind = np.min(mind)
+
 
             # _ave_rand = np.sum(rand) / len(rand)
             # _min_rand = np.max(rand)
             # _max_rand = np.min(rand)
 
-            _min_ratio_gcn2mind = np.min(ratio_gcn2mind)
-            _max_ratio_gcn2mind = np.max(ratio_gcn2mind)
-            _ave_ratio_gcn2mind = np.sum(ratio_gcn2mind) / len(ratio_gcn2mind)
+            # _min_ratio_gcn2mind = np.min(ratio_gcn2mind)
+            # _max_ratio_gcn2mind = np.max(ratio_gcn2mind)
+            # _ave_ratio_gcn2mind = np.sum(ratio_gcn2mind) / len(ratio_gcn2mind)
 
             # _min_ratio_gcn2rand = np.min(ratio_gcn2rand)
             # _max_ratio_gcn2rand = np.max(ratio_gcn2rand)
-            # _ave_ratio_gcn2rand = np.sum(ratio_gcn2rand) / len(ratio_gcn2rand)
+
 
             t.append(epoch)
-            ave_gcn.append(_ave_gcn)
-            min_gcn.append(_min_gcn)
-            max_gcn.append(_max_gcn)
-            ave_mind.append(_ave_mind)
-            min_mind.append(_min_mind)
-            max_mind.append(_max_mind)
+            val_ave_gcn.append(_val_ave_gcn)
+            train_ave_gcn.append(_train_ave_gcn)
+            # min_gcn.append(_min_gcn)
+            # max_gcn.append(_max_gcn)
+            val_ave_mind.append(_val_ave_mind)
+            train_ave_mind.append(_train_ave_mind)
+            # min_mind.append(_min_mind)
+            # max_mind.append(_max_mind)
             # ave_rand.append(_ave_rand)
             # min_rand.append(_min_rand)
             # max_rand.append(_max_rand)
 
-            ave_ratio_gcn2mind.append(_ave_ratio_gcn2mind)
-            min_ratio_gcn2mind.append(_min_ratio_gcn2mind)
-            max_ratio_gcn2mind.append(_max_ratio_gcn2mind)
+            _val_ave_ratio_gcn2mind = _val_ave_gcn/_val_ave_mind
+            _train_ave_ratio_gcn2mind = _train_ave_gcn / _train_ave_mind
+            val_ave_ratio_gcn2mind.append(_val_ave_ratio_gcn2mind)
+            train_ave_ratio_gcn2mind.append(_train_ave_ratio_gcn2mind)
+            # min_ratio_gcn2mind.append(_min_ratio_gcn2mind)
+            # max_ratio_gcn2mind.append(_max_ratio_gcn2mind)
 
             # print('epochs {}'.format(epoch),'loss {}'.format(av_loss_train) )
             total_loss_train.append(av_loss_train)
 
             t_plot = np.array(t).reshape(-1)
 
-            ave_gcn_plot = np.array(ave_gcn).reshape(-1)
-            ave_mind_plot = np.array(ave_mind).reshape(-1)
+            total_loss_train_np = np.array(total_loss_train).reshape(-1)
 
-            if self.use_cuda:
-                plt.clf()
-                plt.plot(t_plot, ave_gcn_plot, t_plot, ave_mind_plot)
-                plt.legend(('GNN', self.heuristic),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
-                           loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
-                plt.title('Supervised learning curve with pretrain '+self.train_dataset.__class__.__name__+' (average number of filled edges)')
-                plt.ylabel('number of fill-in')
-                # plt.draw()
-                plt.savefig(
-                    './results/supervised'+str(lr)+'_'+self.heuristic+'_curve_g2m_number_gcn_logsoftmax_'+self.train_dataset.__class__.__name__+'_cuda.png')
-                plt.clf()
-            else:
-                plt.clf()
-                plt.plot(t_plot, ave_gcn_plot, t_plot, ave_mind_plot)
-                plt.legend(('GNN-RL', 'GNN-RL-epsilon', 'min-degree'),
-                           loc='upper right')
-                plt.title('RL-MonteCarlo learning curve with pretrain ERG100 (average number of filled edges)')
-                plt.ylabel('number of fill-in')
-                # plt.draw()
-                plt.savefig('./results/acmc001_learning_curve_g2m_number_gcn_non_pretrainERG100_with_epsilon05.png')
-                plt.clf()
+            val_ave_gcn_np = np.array(val_ave_gcn).reshape(-1)
+            train_ave_gcn_np = np.array(train_ave_gcn).reshape(-1)
+            val_ave_mind_np = np.array(val_ave_mind).reshape(-1)
+            train_ave_mind_np = np.array(train_ave_mind).reshape(-1)
+
+
+            plt.clf()
+            plt.plot(t_plot, train_ave_gcn_np, t_plot, train_ave_mind_np)
+            plt.legend(('GNN', self.heuristic),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+                       loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
+            plt.title('Supervised learning curve with pretrain trainDataset '+self.train_dataset.__class__.__name__+' (average number of filled edges)')
+            plt.ylabel('number of fill-in')
+            # plt.draw()
+            plt.savefig(
+                './results/supervised'+str(lr)+'_'+self.heuristic+'_curve_g2m_number_gcn_logsoftmax_train_'+self.train_dataset.__class__.__name__+'_cuda'+str(self.use_cuda)+'.png')
+            plt.clf()
+
+            plt.clf()
+            plt.plot(t_plot, val_ave_gcn_np, t_plot, val_ave_mind_np)
+            plt.legend(('GNN', self.heuristic),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+                       loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
+            plt.title(
+                'Supervised learning curve with pretrain validationDataset' + self.train_dataset.__class__.__name__ + ' (average number of filled edges)')
+            plt.ylabel('number of fill-in')
+            # plt.draw()
+            plt.savefig(
+                './results/supervised' + str(
+                    lr) + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax_val_' + self.train_dataset.__class__.__name__ + '_cuda' + str(
+                    self.use_cuda) + '.png')
+            plt.clf()
+
+
 
             print('epoch {:04d}'.format(epoch), 'gcn2'+self.heuristic,
-                  'min_ratio {}'.format(_min_ratio_gcn2mind),
-                  'max_ratio {}'.format(_max_ratio_gcn2mind),
-                  'av_ratio {}'.format(_ave_ratio_gcn2mind))
+                  # 'min_ratio {}'.format(_min_ratio_gcn2mind),
+                  # 'max_ratio {}'.format(_max_ratio_gcn2mind),
+                  ' train av_ratio {}'.format(_train_ave_ratio_gcn2mind),
+                  ' validation av_ratio {}'.format(_val_ave_ratio_gcn2mind))
             for name, param in self.model.named_parameters():
                 print('parameter name {}'.format(name),
                     'parameter value {}'.format(param.data))
 
 
-        gcn_greedy = np.array(ave_gcn).reshape(-1)
-        ave_ratio_gcn2mind = np.array(ave_ratio_gcn2mind).reshape(-1)
-        # ave_ratio_gcn2rand = np.array(ave_ratio_gcn2rand).reshape(-1)
-
-        t = np.arange(0, epochs, 1)
-        if self.use_cuda:
-            plt.clf()
-            plt.plot(t, ave_ratio_gcn2mind)
-            plt.legend(('GNN-RL/'+self.heuristic),
-                       loc='upper right')
-            plt.title('Supervised learning curve ratio with pretrain '+self.train_dataset.__class__.__name__)
-            plt.ylabel('fill-in ratio: gnn model/heuristic')
-            plt.savefig(
-                './results/supervised'+str(lr)+'_'+self.heuristic+'_curve_g2m_ratio_gcn_logsoftmax_'+self.train_dataset.__class__.__name__+'_cuda.png')
-            plt.clf()
-        else:
-            plt.clf()
-            plt.plot(t, ave_ratio_gcn2mind)
-            plt.legend(('GNN-RL/mindegree'),
-                       loc='upper right')
-            plt.title('RL-MonteCarlo learning curve ratio with pretrain ERG100')
-            plt.ylabel('fill-in ratio: gnn model/heuristic')
-            plt.savefig('./results/acmc001_learning_curve_g2m_ratio_gcn_non_pretrainERG100_with_epsilon05.png')
-            plt.clf()
-
-        total_loss_train = np.array(total_loss_train).reshape(-1)
+        # gcn_greedy = np.array(ave_gcn).reshape(-1)
+        # ave_ratio_gcn2mind = np.array(ave_ratio_gcn2mind).reshape(-1)
+        # # ave_ratio_gcn2rand = np.array(ave_ratio_gcn2rand).reshape(-1)
+        #
+        # t = np.arange(0, epochs, 1)
+        # if self.use_cuda:
+        #     plt.clf()
+        #     plt.plot(t, ave_ratio_gcn2mind)
+        #     plt.legend(('GNN-RL/'+self.heuristic),
+        #                loc='upper right')
+        #     plt.title('Supervised learning curve ratio with pretrain '+self.train_dataset.__class__.__name__)
+        #     plt.ylabel('fill-in ratio: gnn model/heuristic')
+        #     plt.savefig(
+        #         './results/supervised'+str(lr)+'_'+self.heuristic+'_curve_g2m_ratio_gcn_logsoftmax_'+self.train_dataset.__class__.__name__+'_cuda.png')
+        #     plt.clf()
+        # else:
+        #     plt.clf()
+        #     plt.plot(t, ave_ratio_gcn2mind)
+        #     plt.legend(('GNN-RL/mindegree'),
+        #                loc='upper right')
+        #     plt.title('RL-MonteCarlo learning curve ratio with pretrain ERG100')
+        #     plt.ylabel('fill-in ratio: gnn model/heuristic')
+        #     plt.savefig('./results/acmc001_learning_curve_g2m_ratio_gcn_non_pretrainERG100_with_epsilon05.png')
+        #     plt.clf()
+        #
+        # total_loss_train = np.array(total_loss_train).reshape(-1)
 
         t0 = time.clock() - t0
 
