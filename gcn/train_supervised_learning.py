@@ -239,71 +239,78 @@ class Train_SupervisedLearning:
                     n = x.n
                     x1 = Graph(x.M)
                     total_loss_train_1graph = 0
+                    depth = np.min([n - 2, 300])
                     # edges_total = 0
-                    for i in range(n - 2):
+                    i = 0
+                    while (i < depth) and (x1.n > 2):
 
-                        features = np.ones([x1.n, 1], dtype=np.float32)
-                        m = torch.FloatTensor(x1.M)
-                        _t1 = time.clock()
-                        m = utils.to_sparse(m)  # convert to coo sparse tensor
-                        t1 += time.clock() - _t1
-                        features = torch.FloatTensor(features)
+                        node_selected, d_min = x1.min_degree(x1.M)
+                        if not (d_min == 1 or d_min == 0):
+                            i += 1
+                            features = np.ones([x1.n, 1], dtype=np.float32)
+                            m = torch.FloatTensor(x1.M)
+                            _t1 = time.clock()
+                            m = utils.to_sparse(m)  # convert to coo sparse tensor
+                            t1 += time.clock() - _t1
+                            features = torch.FloatTensor(features)
 
-                        _t3 = time.clock()
-                        if self.heuristic == 'min_degree':
-                            distribution_labels = x1.min_degree_d()
-                        elif self.heuristic == 'one_step_greedy':
-                            distribution_labels = x1.onestep_greedy_d()
+                            _t3 = time.clock()
+                            if self.heuristic == 'min_degree':
+                                distribution_labels = x1.min_degree_d()
+                            elif self.heuristic == 'one_step_greedy':
+                                distribution_labels = x1.onestep_greedy_d()
 
-                        # distribution_labels = np.log(distribution_labels)
+                            # distribution_labels = np.log(distribution_labels)
 
-                        t3 += time.clock() - _t3
-                        distribution_labels = torch.FloatTensor(distribution_labels)
+                            t3 += time.clock() - _t3
+                            distribution_labels = torch.FloatTensor(distribution_labels)
 
-                        # node_chosen, z = x1.min_degree(x1.M)  # get the node with minimum degree as label
-                        # node_chosen = torch.from_numpy(np.array(node_chosen))  # one-hot coding
-                        # node_chosen = node_chosen.reshape(1)
-                        _t4 = time.clock()
-                        if self.use_cuda:
-                            m = m.cuda()
-                            features = features.cuda()
-                            distribution_labels = distribution_labels.cuda()
+                            # node_chosen, z = x1.min_degree(x1.M)  # get the node with minimum degree as label
+                            # node_chosen = torch.from_numpy(np.array(node_chosen))  # one-hot coding
+                            # node_chosen = node_chosen.reshape(1)
+                            _t4 = time.clock()
+                            if self.use_cuda:
+                                m = m.cuda()
+                                features = features.cuda()
+                                distribution_labels = distribution_labels.cuda()
 
-                        t4 += time.clock() - _t4
+                            t4 += time.clock() - _t4
 
-                        output = self.model(features, m)
-                        output = output.view(-1)
-
-
-                        # m = Categorical(output)
-                        # node_selected = m.sample()
-                        # node_selected = torch.LongTensor([[node_selected]])
-                        # m.probs.zero_()
-                        # m.probs.scatter_(1, node_selected, 1)
-
-                        loss_train = F.kl_div(output, distribution_labels) # get the negetive likelyhood
-                        total_loss_train_1graph += loss_train.item()
-                        _t5 = time.clock()
-                        opt.zero_grad()
-                        loss_train.backward()
-                        opt.step()
-                        t5 += time.clock() - _t5
+                            output = self.model(features, m)
+                            output = output.view(-1)
 
 
-                        # action_gcn = np.argmax(np.array(output.detach().cpu().numpy()))  # choose the node given by GCN
-                        # output = np.array(output.detach().cpu().numpy())
-                        # output = np.exp(output)
-                        # action_gcn = np.random.choice(a=x1.n, p=output)
+                            # m = Categorical(output)
+                            # node_selected = m.sample()
+                            # node_selected = torch.LongTensor([[node_selected]])
+                            # m.probs.zero_()
+                            # m.probs.scatter_(1, node_selected, 1)
 
-                        # output = torch.log(output)
-                        # output = torch.exp(output)
-                        m = Categorical(logits=output) # logits=probs
-                        action_gcn = m.sample()
+                            loss_train = F.kl_div(output, distribution_labels) # get the negetive likelyhood
+                            total_loss_train_1graph += loss_train.item()
+                            _t5 = time.clock()
+                            opt.zero_grad()
+                            loss_train.backward()
+                            opt.step()
+                            t5 += time.clock() - _t5
 
-                        _t2 = time.clock()
-                        edges_added = x1.eliminate_node(action_gcn, reduce=True)
-                        # edges_total +=edges_added
-                        t2 += time.clock() - _t2
+
+                            # action_gcn = np.argmax(np.array(output.detach().cpu().numpy()))  # choose the node given by GCN
+                            # output = np.array(output.detach().cpu().numpy())
+                            # output = np.exp(output)
+                            # action_gcn = np.random.choice(a=x1.n, p=output)
+
+                            # output = torch.log(output)
+                            # output = torch.exp(output)
+                            m = Categorical(logits=output) # logits=probs
+                            action_gcn = m.sample()
+
+                            _t2 = time.clock()
+                            edges_added = x1.eliminate_node(action_gcn, reduce=True)
+                            # edges_total +=edges_added
+                            t2 += time.clock() - _t2
+                        else:
+                            reward = x1.eliminate_node(node_selected, reduce=True)
 
                 av_loss_train += total_loss_train_1graph
             print('epochs {}'.format(epoch), 'loss {}'.format(av_loss_train))
@@ -326,7 +333,7 @@ class Train_SupervisedLearning:
                     i = 1
                     depth = np.min([n - 2, 300])
                     rewards_gcn_greedy = np.zeros(1)
-                    while i < depth:
+                    while (i < depth) and (x_model.n > 2):
 
                         # baseline1: compute return of min degree
                         # if i % 100 == 0:
