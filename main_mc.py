@@ -26,8 +26,8 @@ parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disab
 parser.add_argument('--novalidation', action= 'store_true', default=False, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
 parser.add_argument('--epochs', type=int, default=5000, help='Training epochs')
-parser.add_argument('--lr_actor', type=float, default= 0.01, help='Learning rate of actor')
-parser.add_argument('--lr_critic', type=float, default= 0.001, help='Learning rate of critic')
+parser.add_argument('--lr_actor', type=float, default= 0.0001, help='Learning rate of actor')
+parser.add_argument('--lr_critic', type=float, default= 0.0001, help='Learning rate of critic')
 parser.add_argument('--wd', type=float, default=5e-4, help='Weight decay')
 parser.add_argument('--dhidden', type=int, default=1, help='Dimension of hidden features')
 parser.add_argument('--dinput', type=int, default=1, help='Dimension of input features')
@@ -128,6 +128,7 @@ epoch = 0
 
 # option of critic
 critic = None
+heuristic = 'min_degree'
 if args.use_critic:
     critic = GCN_Sparse_Value(nin=args.dinput,
                               nhidden=args.dhidden,
@@ -145,11 +146,18 @@ if args.cuda:
 
 # train RL-model
 train_a2c = TrainModel_MC(model_a2c,
-                          train_dataset,
-                          val_dataset,
+                          heuristic=heuristic,
+                          train_dataset=train_dataset,
+                          val_dataset=val_dataset,
                           weight_d = args.wd,
                           use_cuda=args.cuda)
-print('Training started')
+
+print('Supervised Training started')
+print('heuristic: '+heuristic,
+      'actor learning rate: {}'.format(args.lr_actor),
+      'epochs: {}'.format(args.epochs),
+      'DataSet: '+dataset.__name__+'\n')
+
 time_start = time.time()
 train_a2c.train_and_validate(n_epochs=args.epochs,
                              lr_actor=args.lr_actor,
