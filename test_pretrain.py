@@ -21,7 +21,7 @@ parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disab
 parser.add_argument('--novalidation', action= 'store_true', default=True, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
 parser.add_argument('--epochs', type=int, default=15, help='Training epochs')
-parser.add_argument('--lr', type=float, default= 0.01, help='Learning rate')
+parser.add_argument('--lr', type=float, default= 0.001, help='Learning rate')
 parser.add_argument('--wd', type=float, default=5e-4, help='Weight decay')
 parser.add_argument('--dhidden', type=int, default=1, help='Dimension of hidden features')
 parser.add_argument('--dinput', type=int, default=1, help='Dimension of input features')
@@ -380,8 +380,12 @@ train_sl = Train_SupervisedLearning(model=model, heuristic=heuristic, train_data
 
 
 # Train the model
-print('Training started')
-print('DataSet: '+dataset.__name__+'\n')
+print('Supervised Training started')
+print('heuristic: '+heuristic,
+      'learning rate: {}'.format(args.lr),
+      'epochs: {}'.format(args.epochs),
+      'DataSet: '+dataset.__name__+'\n')
+
 time_start = time.time()
 t = time.time()
 av_loss_train,t_model_opt, t_IO , t_heu, t_eli, t_spa, t_all = train_sl.train(epochs=args.epochs, lr=args.lr)

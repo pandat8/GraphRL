@@ -197,7 +197,6 @@ class Train_SupervisedLearning:
         """
 
         opt = optm.Adam(self.model.parameters(), weight_decay=self.weight_d, lr=lr)
-        self.model.train()
 
         if self.use_cuda:
             plt.switch_backend('agg')
@@ -233,8 +232,10 @@ class Train_SupervisedLearning:
 
 
         for epoch in range(epochs):
+
             val_gcn_greedy = []
             train_gcn_greedy = []
+
             if epoch==0:
                 val_mind = []
                 train_mind = []
@@ -244,7 +245,9 @@ class Train_SupervisedLearning:
             for X in self.train_loader:
                 for x in X:
 
+                    self.model.train()
                     n = x.n
+
                     train_rewards_mindegree = 0
                     train_rewards_gcn_greedy = 0
 
@@ -342,8 +345,9 @@ class Train_SupervisedLearning:
             for X in self.val_loader:
                 for x in X:
 
-                    n = x.n
                     self.model.eval()
+                    n = x.n
+
                     # ratio_gcn2mind = []
                     # ratio_gcn2rand = []
                     val_rewards_mindegree = 0  # number of added edges
@@ -422,51 +426,21 @@ class Train_SupervisedLearning:
                 train_mind = np.array(train_mind).reshape(-1)
                 _val_ave_mind = np.sum(val_mind) / len(val_mind)
                 _train_ave_mind = np.sum(train_mind) / len(train_mind)
-            # rand = np.array(rand).reshape(-1)
-            # ratio_gcn2mind = np.array(ratio_gcn2mind).reshape(-1)
-            # ratio_gcn2rand = np.array(ratio_gcn2rand).reshape(-1)
 
             _val_ave_gcn = np.sum(val_gcn_greedy) / len(val_gcn_greedy)
             _train_ave_gcn = np.sum(train_gcn_greedy) / len(train_gcn_greedy)
-            # _min_gcn = np.min(gcn_greedy)
-            # _max_gcn = np.max(gcn_greedy)
-
-
-            # _min_mind = np.max(mind)
-            # _max_mind = np.min(mind)
-
-
-            # _ave_rand = np.sum(rand) / len(rand)
-            # _min_rand = np.max(rand)
-            # _max_rand = np.min(rand)
-
-            # _min_ratio_gcn2mind = np.min(ratio_gcn2mind)
-            # _max_ratio_gcn2mind = np.max(ratio_gcn2mind)
-            # _ave_ratio_gcn2mind = np.sum(ratio_gcn2mind) / len(ratio_gcn2mind)
-
-            # _min_ratio_gcn2rand = np.min(ratio_gcn2rand)
-            # _max_ratio_gcn2rand = np.max(ratio_gcn2rand)
 
 
             t.append(epoch)
             val_ave_gcn.append(_val_ave_gcn)
             train_ave_gcn.append(_train_ave_gcn)
-            # min_gcn.append(_min_gcn)
-            # max_gcn.append(_max_gcn)
+
             val_ave_mind.append(_val_ave_mind)
             train_ave_mind.append(_train_ave_mind)
-            # min_mind.append(_min_mind)
-            # max_mind.append(_max_mind)
-            # ave_rand.append(_ave_rand)
-            # min_rand.append(_min_rand)
-            # max_rand.append(_max_rand)
-
             _val_ave_ratio_gcn2mind = _val_ave_gcn/_val_ave_mind
             _train_ave_ratio_gcn2mind = _train_ave_gcn / _train_ave_mind
             val_ave_ratio_gcn2mind.append(_val_ave_ratio_gcn2mind)
             train_ave_ratio_gcn2mind.append(_train_ave_ratio_gcn2mind)
-            # min_ratio_gcn2mind.append(_min_ratio_gcn2mind)
-            # max_ratio_gcn2mind.append(_max_ratio_gcn2mind)
 
             # print('epochs {}'.format(epoch),'loss {}'.format(av_loss_train) )
             total_loss_train.append(av_loss_train)

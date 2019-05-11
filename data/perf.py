@@ -1,4 +1,4 @@
-from graph import Graph
+from data.graph import Graph
 import time
 
 f = 0.7
