@@ -91,7 +91,7 @@ class Model_A2C_Sparse(nn.Module):
 
     def __init__(self,
                  actor,
-                 epsilon=0.1,
+                 epsilon=0,
                  use_critic=True,
                  use_cuda=False,
                  critic=None):
