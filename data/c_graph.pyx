@@ -45,7 +45,7 @@ def c_onestep_greedy_d(np.ndarray[DTYPE_t, ndim=2] A):
                 if A[i, k] == 0:
                     continue
                 
-                s[i] += A[j,k]
+                s[i] += 1 - A[j,k]
 
     s_min = np.min(s)
     p = (s == s_min)

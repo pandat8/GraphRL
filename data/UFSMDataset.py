@@ -6,7 +6,7 @@ from data.graph import Graph
 
 class UFSMDataset(Dataset):
 
-    def __init__(self, random_seed=34, start=18, end=21):
+    def __init__(self, random_seed=34, start=18, end=22):
         """
         Generate a graph dataset with specific graph instances
         :param n_graphs: number of graphs

@@ -1,9 +1,9 @@
 
  Test result: test_graph_elimination_learn_min_degree
 DataSet: UFSMDataset
-average ratio gcn2heuristic 177.1457 
-max ratio gcn2heuristic 462.6625
-min ratio 37.2636
-average ratio gcn2random 0.9688
-max ratio gcn2random 1.0316
-min ratio gcn2random 0.8697
+average ratio gcn2heuristic 1.5981 
+max ratio gcn2heuristic 2.0419
+min ratio 1.1543
+average ratio gcn2random 0.0229
+max ratio gcn2random 0.0300
+min ratio gcn2random 0.0158

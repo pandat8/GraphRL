@@ -1,7 +1,17 @@
 import itertools
 import torch
 import numpy as np
+import pickle as pkl
 import time
+
+def save_dataset(filename, train, val, test):
+    with open(filename, "wb") as f:
+        pkl.dump([train,val, test], f)
+
+def open_dataset(filename):
+    with open(filename, "rb") as f:
+        train, val, test  = pkl.load(f)
+    return train, val, test
 
 def to_sparse(dense):
 

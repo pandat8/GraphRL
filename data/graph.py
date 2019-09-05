@@ -32,7 +32,7 @@ class Graph:
         self._min_degree = random.choice(indices)
 
     @classmethod
-    def erdosrenyi(cls, n, p=0.7):
+    def erdosrenyi(cls, n, p=0.4):
         """
         Generate a random Erdos-Renyi graph.
 
@@ -177,6 +177,14 @@ class Graph:
         node_chosen = np.random.choice(indices.reshape(-1))
         return node_chosen, d_min
 
+    def onestep(self):
+
+        p = self.onestep_d()
+        node = np.random.choice(self.n, 1, p=p)
+
+        return node[0]
+
+
     def onestep_greedy(self):
         """
         Identify node(s) whose elimination adds fewer edges.
@@ -188,7 +196,7 @@ class Graph:
             Node to eliminate.
         """
         p = self.onestep_greedy_d()
-        node = np.random.choice(self.n, 1, p)
+        node = np.random.choice(self.n, 1, p=p)
 
         return node[0]
 
@@ -260,8 +268,10 @@ class Graph:
                 e += (1-self.M[j, k])
             s[i] = e
 
-        # s_min = np.min(s)
-        # p = (s == s_min)  # identify nodes with minimum score
-        s = (s / np.sum(s))  # normalize to get probability distribution
+        s_min = np.min(s)
+        p = (s == s_min)  # identify nodes with minimum score
+        p = (p / np.sum(p))  # normalize to get probability distribution
 
-        return s
+        # s = (s / np.sum(s))  # normalize to get probability distribution
+
+        return p

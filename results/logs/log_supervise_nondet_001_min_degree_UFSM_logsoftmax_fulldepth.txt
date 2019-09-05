@@ -1,0 +1,39 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Supervised Training started
+heuristic: min_degree learning rate: 0.001 epochs: 3 DataSet: UFSMDataset
+
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 6.1286252203545635
+epoch 0000 gcn2min_degree  train av_ratio 1.9005149925398277  validation av_ratio 0.9863401307444629
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 1.3977]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.8509], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.0091]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-05 *
+       [-7.5715], device='cuda:0')
+epochs 1 loss 3.04912373200478
+epoch 0001 gcn2min_degree  train av_ratio 1.0671656158251914  validation av_ratio 0.9581097342830195
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[-4.9294]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.6448], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.1653]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 1.6650], device='cuda:0')
+epochs 2 loss 2.2133173361826124
+epoch 0002 gcn2min_degree  train av_ratio 1.1389998556095682  validation av_ratio 0.9891046280937977
+parameter name gc1.weight parameter value tensor(1.00000e-04 *
+       [[-7.0304]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.3975], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.2467]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.2029], device='cuda:0')
+Training finished
+Training time: 306.5600
+Elimination time: 13.5000
+Heuristicmin_degree time: 3.6200
+Dense 2 Sparce time: 19.0000
+IO to cuda time: 2.7600
+Model and Opt time: 16.2400

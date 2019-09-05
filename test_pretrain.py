@@ -9,10 +9,11 @@ import time
 
 from torch.utils.data import Dataset, DataLoader
 from data.ergDataset import ErgDataset
+from utils.utils import open_dataset
 from data.SSMCDataset import SSMCDataset
 from data.UFSMDataset import UFSMDataset
 from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GCN_Sparse_Memory_Policy_SelectNode
-from gcn.train_supervised_learning import Train_SupervisedLearning
+from supervised.train_supervised_learning import Train_SupervisedLearning
 from data.graph import Graph
 
 # Training argument setting
@@ -20,17 +21,18 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disable Cuda')
 parser.add_argument('--novalidation', action= 'store_true', default=True, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
-parser.add_argument('--epochs', type=int, default=15, help='Training epochs')
-parser.add_argument('--lr', type=float, default= 0.001, help='Learning rate')
+parser.add_argument('--epochs', type=int, default=41, help='Training epochs')
+parser.add_argument('--lr', type=float, default= 0.0001, help='Learning rate')
 parser.add_argument('--wd', type=float, default=5e-4, help='Weight decay')
 parser.add_argument('--dhidden', type=int, default=1, help='Dimension of hidden features')
 parser.add_argument('--dinput', type=int, default=1, help='Dimension of input features')
 parser.add_argument('--doutput', type=int, default=1, help='Dimension of output features')
 parser.add_argument('--dropout', type=float, default=0.6, help='Dropout Rate')
 parser.add_argument('--alpha', type=float, default=0.2, help='Aplha')
-parser.add_argument('--nnode', type=int, default=100, help='Number of node per graph')
-parser.add_argument('--ngraph', type=int, default=10, help='Number of graph per dataset')
-parser.add_argument('--nnode_test', type=int, default=100, help='Number of node per graph for test')
+parser.add_argument('--nnode', type=int, default=200, help='Number of node per graph')
+parser.add_argument('--ngraph', type=int, default=200, help='Number of graph per dataset')
+parser.add_argument('--p', type=int, default=0.1, help='probiblity of edges')
+parser.add_argument('--nnode_test', type=int, default=300, help='Number of node per graph for test')
 parser.add_argument('--ngraph_test', type=int, default=100, help='Number of graph for test dataset')
 
 args = parser.parse_args()
@@ -356,15 +358,13 @@ def plot_dis(output, labels):
 #  load data and pre-process
 # train_dataset = GraphDataset(args.nnode, args.ngraph)
 
-dataset = UFSMDataset
+dataset = ErgDataset
 if dataset.__name__ == 'UFSMDataset':
-    test_dataset = dataset(start=22, end=26)
-    train_dataset = dataset(start=18, end=22)
-    val_dataset = dataset(start=22, end=26)
+    train_dataset = dataset(start=18, end=19)
+    val_dataset = dataset(start=19, end=20)
+    test_dataset = dataset(start=24, end=26)
 elif dataset.__name__ == 'ErgDataset':
-    train_dataset = dataset(args.nnode, args.ngraph)
-    val_dataset = dataset(args.nnode, args.ngraph)
-    test_dataset = dataset(args.nnode_test, args.ngraph_test)
+    train_dataset, val_dataset, test_dataset = open_dataset('./data/ERGcollection/erg_small.pkl')
 
 # build the GCN model
 model = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
@@ -376,7 +376,7 @@ if args.cuda:
     model.cuda()
 
 heuristic = 'min_degree' # 'one_step_greedy' 'min_degree'
-train_sl = Train_SupervisedLearning(model=model, heuristic=heuristic, train_dataset=train_dataset, val_dataset=val_dataset, test_dataset=test_dataset, use_cuda = args.cuda)
+policy_sl = Train_SupervisedLearning(model=model, heuristic=heuristic, train_dataset=train_dataset, val_dataset=val_dataset, test_dataset=test_dataset, use_cuda = args.cuda)
 
 
 # Train the model
@@ -384,11 +384,11 @@ print('Supervised Training started')
 print('heuristic: '+heuristic,
       'learning rate: {}'.format(args.lr),
       'epochs: {}'.format(args.epochs),
-      'DataSet: '+dataset.__name__+'\n')
+      'DataSet: '+train_dataset.__class__.__name__+'\n')
 
 time_start = time.time()
 t = time.time()
-av_loss_train,t_model_opt, t_IO , t_heu, t_eli, t_spa, t_all = train_sl.train(epochs=args.epochs, lr=args.lr)
+av_loss_train,t_model_opt, t_IO , t_heu, t_eli, t_spa, t_all = policy_sl.train(epochs=args.epochs, lr=args.lr)
     # if not args.novalidation:
     #     av_loss_val = evaluate(model, val_loader, features)
     # print('epoch {:04d}'.format(epoch),
@@ -411,77 +411,83 @@ print('Model and Opt time: {:.4f}'.format(t_model_opt))
 
 
 if args.cuda:
-    torch.save(model.state_dict(), './results/models/gcn_policy_'+heuristic+'_pre_'+dataset.__name__+'_cuda.pth')
+    torch.save(model.state_dict(), './results/models/gcn_policy_'+heuristic+'_pre_'+dataset.__name__+str(args.nnode)+'dense_'+str(args.p)+'_epochs'+str(args.epochs)+'_cuda.pth')
+    # torch.save(model.state_dict(),
+    #            './results/models/gcn_policy_' + heuristic + '_pre_' + dataset.__name__ + '_epochs' + str(
+    #                args.epochs) + '_cuda.pth')
 else:
     torch.save(model.state_dict(), './results/models/gcn_policy_min_degree_pre_erg100.pth')
 
 
-# Test the model
-model_test = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
-                              nhidden= args.dhidden,
-                              nout=args.doutput,
-                              dropout=args.dropout,
-                              ) # alpha=args.alpha
-
-if args.cuda:
-    model_test.load_state_dict(torch.load('./results/models/gcn_policy_'+heuristic+'_pre_'+dataset.__name__+'_cuda.pth'))
-    model_test.cuda()
-else:
-    model_test.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_erg100.pth'))
-epoch = 0
-# features = np.ones([args.nnode_test, args.dinput], dtype=np.float32) # initialize the features for test set
-# av_loss_test = evaluate(model, test_loader, features, validation=False)
-
-# print('Test result:',
-#           'loss of test {:.4f}'.format(av_loss_test),
-#           #'test accuracy {:.4f}'.format(av_acc_test)
-#           )
-
-# test trained policy model
-train_sl.model = model_test
-
-print('test stated')
-time_start = time.time()
-ratio, av_ratio, max_ratio, min_ratio, ratio_g2r, av_ratio_g2r, max_ratio_g2r, min_ratio_g2r = train_sl.test()
-time_end = time.time()
-print('test finished')
-print('Test time: {:.4f}'.format(time_end-time_start))
-if args.cuda:
-    text_file = open("test/results/pretrain_"+heuristic+"_gcn_"+dataset.__name__+"_cuda.txt", "w")
-else:
-    text_file = open("test/results/pretrain_min_degree_gcn_memory_ERG100.txt", "w")
-text_file.write('\n Test result: test_graph_elimination_learn_'+heuristic+'\n')
-text_file.write('DataSet: '+dataset.__name__+'\n')
-text_file.write('average ratio gcn2heuristic {:.4f} \n'.format(av_ratio))
-text_file.write('max ratio gcn2heuristic {:.4f}\n'.format(max_ratio))
-text_file.write('min ratio {:.4f}\n'.format(min_ratio))
-text_file.write('average ratio gcn2random {:.4f}\n'.format(av_ratio_g2r))
-text_file.write('max ratio gcn2random {:.4f}\n'.format(max_ratio_g2r))
-text_file.write('min ratio gcn2random {:.4f}\n'.format(min_ratio_g2r))
-text_file.close()
-
-if args.cuda:
-    plt.switch_backend('agg')
-    plt.hist(ratio, bins=32)
-    plt.title('histogram: gcn2'+heuristic+' ratio of '+ dataset.__name__)
-    plt.savefig('./test/results/histogram_gnn2'+heuristic+'_gcn_logsoftmax_'+dataset.__name__+'_cuda.png')
-    plt.clf()
-    #
-    plt.hist(ratio_g2r, bins=32)
-    plt.title('gcn2random ratio Erdos-Renyi graph')
-    plt.savefig('./test/results/histogram_gnn2random_gcn_logsoftmax_'+heuristic+'_'+dataset.__name__+'_cuda.png')
-    plt.clf()
-else:
-    plt.hist(ratio, bins= 32)
-    plt.title('histogram: gcn2mindegree ratio CrossEntropy of Erdos-Renyi graph')
-    plt.savefig('./test/results/histogram_gnn2mindegree_gcn_memory_erg100.png')
-    plt.clf()
-    #
-    plt.hist(ratio_g2r, bins= 32)
-    plt.title('gcn2random_ratio_CrossEntropy Erdos-Renyi graph')
-    plt.savefig('./test/results/histogram_gnn2random_gcn_memory_erg100.png')
-    plt.clf()
+# # Test the model
+# model_test = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
+#                               nhidden= args.dhidden,
+#                               nout=args.doutput,
+#                               dropout=args.dropout,
+#                               ) # alpha=args.alpha
 #
-# plt.show()
+# if args.cuda:
+#     model_test.load_state_dict(torch.load('./results/models/gcn_policy_' + heuristic + '_pre_' + dataset.__name__ +str(args.nnode)+ 'dense_' + str(
+#                    args.p) + '_epochs' + str(args.epochs) + '_cuda.pth'))
+#
+#     # model_test.load_state_dict(torch.load('./results/models/gcn_policy_'+heuristic+'_pre_'+dataset.__name__+'_epochs'+str(args.epochs)+'_cuda.pth'))
+#     model_test.cuda()
+# else:
+#     model_test.load_state_dict(torch.load('./results/models/gcn_policy_min_degree_pre_erg100.pth'))
+# epoch = 0
+# # features = np.ones([args.nnode_test, args.dinput], dtype=np.float32) # initialize the features for test set
+# # av_loss_test = evaluate(model, test_loader, features, validation=False)
+#
+# # print('Test result:',
+# #           'loss of test {:.4f}'.format(av_loss_test),
+# #           #'test accuracy {:.4f}'.format(av_acc_test)
+# #           )
+#
+# # test trained policy model
+# policy_sl.model = model_test
+#
+# print('test stated')
+# time_start = time.time()
+# ratio, av_ratio, max_ratio, min_ratio, ratio_g2r, av_ratio_g2r, max_ratio_g2r, min_ratio_g2r = policy_sl.test()
+# time_end = time.time()
+# print('test finished')
+# print('Test time: {:.4f}'.format(time_end-time_start))
+# if args.cuda:
+#     text_file = open("test/results/pretrain_"+heuristic+"_gcn_"+dataset.__name__+"_cuda.txt", "w")
+# else:
+#     text_file = open("test/results/pretrain_min_degree_gcn_memory_ERG100.txt", "w")
+# text_file.write('\n Test result: test_graph_elimination_learn_'+heuristic+'\n')
+# text_file.write('DataSet: '+dataset.__name__+'\n')
+# text_file.write('average ratio gcn2heuristic {:.4f} \n'.format(av_ratio))
+# text_file.write('max ratio gcn2heuristic {:.4f}\n'.format(max_ratio))
+# text_file.write('min ratio {:.4f}\n'.format(min_ratio))
+# text_file.write('average ratio gcn2random {:.4f}\n'.format(av_ratio_g2r))
+# text_file.write('max ratio gcn2random {:.4f}\n'.format(max_ratio_g2r))
+# text_file.write('min ratio gcn2random {:.4f}\n'.format(min_ratio_g2r))
+# text_file.close()
+#
+# if args.cuda:
+#     plt.switch_backend('agg')
+#     plt.hist(ratio, bins=32)
+#     plt.title('histogram: gcn2'+heuristic+' ratio of '+ dataset.__name__)
+#     plt.savefig('./test/results/histogram_gnn2'+heuristic+'_gcn_logsoftmax_'+dataset.__name__+str(args.nnode_test)+'_dense_' + str(args.p)+'__cuda.png')
+#     plt.clf()
+#     #
+#     plt.hist(ratio_g2r, bins=32)
+#     plt.title('gcn2random ratio Erdos-Renyi graph')
+#     plt.savefig('./test/results/histogram_gnn2random_gcn_logsoftmax_'+heuristic+'_'+dataset.__name__+str(args.nnode_test)+'_dense_' + str(args.p)+'__cuda.png')
+#     plt.clf()
+# else:
+#     plt.hist(ratio, bins= 32)
+#     plt.title('histogram: gcn2mindegree ratio CrossEntropy of Erdos-Renyi graph')
+#     plt.savefig('./test/results/histogram_gnn2mindegree_gcn_memory_erg100.png')
+#     plt.clf()
+#     #
+#     plt.hist(ratio_g2r, bins= 32)
+#     plt.title('gcn2random_ratio_CrossEntropy Erdos-Renyi graph')
+#     plt.savefig('./test/results/histogram_gnn2random_gcn_memory_erg100.png')
+#     plt.clf()
+# #
+# # plt.show()
 
 
