@@ -32,33 +32,14 @@ for w2 in range(-20,21,1):
 plt.close()
 W1, W2 = np.meshgrid(w1_all, w2_all)
 
-p=p
+p=p/12593.35
 l=np.log(l)
 
 
-# W1 = W1[0:40,16:25]
-# W2 = W2[0:40,16:25]
-# l =  l[0:40,16:25]
-# p =  p[0:40,16:25]
-
-
-plt.clf()
-plt.contourf(W1, W2, l, 5, levels=[ np.log(i/10000) for i in range(1,60,10)], alpha=.75, cmap=plt.cm.hot, extend='both')
-C = plt.contour(W1, W2, l,5,levels=[ np.log(i/10000) for i in range(1,60,10)], colors='black', linewidth=.5, extend='both')
-plt.clabel(C, inline=1, fontsize=9)
-plt.xlabel('W1')
-plt.ylabel('W2')
-plt.show()
-
-plt.clf()
-
-plt.clf()
-plt.contourf(W1, W2, p,  alpha=.75, cmap=plt.cm.hot,  extend='both') # levels=[ i/100 for i in range(100,110,1)],
-C = plt.contour(W1, W2, p, colors='black', linewidth=.5, extend='both')
-plt.clabel(C, inline=1, fontsize=9)
-plt.xlabel('W1')
-plt.ylabel('W2')
-plt.show()
+W1 = W1[0:40,12:29]
+W2 = W2[0:40,12:29]
+l =  l[0:40,12:29]
+p =  p[0:40,12:29]
 
 fig = plt.figure()
 ax = Axes3D(fig)
@@ -95,6 +76,36 @@ plt.xlabel('W1')
 plt.ylabel('W2')
 
 plt.show()
+
+W1 = W1[0:28,4:13]
+W2 = W2[0:28,4:13]
+l =  l[0:28,4:13]
+p =  p[0:28,4:13]
+
+
+
+plt.clf()
+fig = plt.figure()
+Cf = plt.contourf(W1, W2, l, 5, levels=[ np.log(i/10000) for i in range(1,50,10)], alpha=.75, cmap=plt.cm.hot, extend='both')
+C = plt.contour(W1, W2, l,5,levels=[ np.log(i/10000) for i in range(1,50,10)], colors='black', linewidth=.5, extend='both')
+plt.clabel(C, inline=1, fontsize=9)
+fig.colorbar(Cf, shrink=0.5, aspect=8)
+plt.xlabel('W1')
+plt.ylabel('W2')
+plt.show()
+
+plt.clf()
+
+plt.clf()
+fig = plt.figure()
+Cf = plt.contourf(W1, W2, p,7, levels=[ 1.00001,1.001,1.05,1.1,1.2,1.3], alpha=.75, cmap=plt.cm.hot,  extend='both') # levels=[ i/100 for i in range(100,110,1)],
+C = plt.contour(W1, W2, p,7, levels=[1.00001,1.001,1.05,1.1,1.2,1.3], colors='black', linewidth=.5, extend='both')
+fig.colorbar(Cf, shrink=0.5, aspect=8)
+plt.clabel(C, inline=1, fontsize=9)
+plt.xlabel('W1')
+plt.ylabel('W2')
+plt.show()
+
 
 
 
