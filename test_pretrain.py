@@ -1,16 +1,14 @@
 import numpy as np
 import argparse
 import torch
-from torch.distributions import Categorical
-import torch.nn.functional as F
-import torch.optim as optim
-import matplotlib.pyplot as plt
-import time
 
-from torch.utils.data import Dataset, DataLoader
+import matplotlib.pyplot as plt
+import inspect, re
+import pickle as pkl
+
 from data.ergDataset import ErgDataset
-from utils.utils import open_dataset
-from data.SSMCDataset import SSMCDataset
+from utils.utils import open_dataset, varname
+
 from data.UFSMDataset import UFSMDataset
 from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GCN_Sparse_Memory_Policy_SelectNode
 from supervised.train_supervised_learning import Train_SupervisedLearning
@@ -21,8 +19,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disable Cuda')
 parser.add_argument('--novalidation', action= 'store_true', default=True, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
-parser.add_argument('--epochs', type=int, default=41, help='Training epochs')
-parser.add_argument('--lr', type=float, default= 0.0001, help='Learning rate')
+parser.add_argument('--epochs', type=int, default=40, help='Training epochs')
+parser.add_argument('--lr', type=float, default= 0.0005, help='Learning rate')
 parser.add_argument('--wd', type=float, default=5e-4, help='Weight decay')
 parser.add_argument('--dhidden', type=int, default=1, help='Dimension of hidden features')
 parser.add_argument('--dinput', type=int, default=1, help='Dimension of input features')
@@ -45,160 +43,6 @@ args.cuda = not args.nocuda and torch.cuda.is_available()
 if args.cuda:
    torch.cuda.manual_seed(args.seed)
 
-# def train(model, opt, train_loader, features, epoches=args.epochs,  is_cuda = args.cuda):
-#     """
-#     Training function
-#     :param model: neural network model
-#     :param opt: optimizaiton function
-#     :param train_loader: training dataset loader
-#     :param features: features vector
-#     :param is_cuda:
-#     :return: averaged loss per graph
-#     """
-#
-#     model.train()
-#
-#     total_acc_train = 0
-#     n_graphs_proceed = 0
-#     # n_iteration = 0
-#     total_loss_train = 0
-#     for X in train_loader:
-#         for x in X:
-#             for epoch in range(epoches):
-#
-#                 n = x.n
-#                 x1 = Graph(x.M)
-#                 total_loss_train_1graph = 0
-#                 # edges_total = 0
-#                 for i in range(n - 2):
-#
-#                     features = np.ones([x1.n, args.dinput], dtype=np.float32)
-#                     m = torch.FloatTensor(x1.M)
-#                     features = torch.FloatTensor(features)
-#                     node_chosen, z = x1.min_degree(x1.M) # get the node with minimum degree as label
-#                     node_chosen = torch.from_numpy(np.array(node_chosen)) # one-hot coding
-#                     node_chosen = node_chosen.reshape(1)
-#                     if is_cuda:
-#                         m = m.cuda()
-#                         features = features.cuda()
-#                         node_chosen = node_chosen.cuda()
-#
-#                     output = model(features, m)
-#
-#                     output = output.t()
-#
-#                     # m = Categorical(output)
-#                     # node_selected = m.sample()
-#                     # node_selected = torch.LongTensor([[node_selected]])
-#                     # m.probs.zero_()
-#                     # m.probs.scatter_(1, node_selected, 1)
-#
-#                     loss_train = F.cross_entropy(output, node_chosen) # get the negetive likelyhood
-#                     total_loss_train_1graph += loss_train.item()
-#
-#                     opt.zero_grad()
-#                     loss_train.backward()
-#                     opt.step()
-#
-#                     action_gcn = np.argmax(np.array(output.detach().cpu().numpy()))  # choose the node given by GCN
-#                     edges_added = x1.eliminate_node(action_gcn, reduce=True)
-#                     # edges_total +=edges_added
-#
-#                 av_loss_train_1graph = total_loss_train_1graph / (n-2)
-#                 n_graphs_proceed += 1
-#                 total_loss_train += av_loss_train_1graph
-#
-#     av_loss_train = total_loss_train/(n_graphs_proceed)
-#
-#     return av_loss_train
-
-# def evaluate(model, data_loader, features, is_cuda=args.cuda, validation = False):
-#     """
-#     Evaluation function
-#     :param model: network model
-#     :param data_loader: dataset loader depending on validation or test
-#     :param features: initial feature vector of graph
-#     :param is_cuda:
-#     :param validation: True if validation(by default), False if test
-#     :return: averaged loss per graph
-#     """
-#     model.eval()
-#     total_acc_train = 0
-#     n_graphs_proceed = 0
-#     total_loss_train = 0
-#     total_acc = 0
-#     total_loss = 0
-#     n_graphs_proceed = 0
-#     for X in train_loader:
-#         for x in X:
-#             x = Graph(x.M)
-#             total_loss_train_1graph = 0
-#             n = x.n
-#             for i in range(n - 2):
-#
-#                 features = np.ones([x.n, args.dinput], dtype=np.float32)
-#                 m = torch.FloatTensor(x.M)
-#                 features = torch.FloatTensor(features)
-#                 node_chosen, z = x.min_degree(x.M)  # get the node with minimum degree as label
-#                 node_chosen = torch.from_numpy(np.array(node_chosen))  # one-hot coding
-#                 node_chosen = node_chosen.reshape(1)
-#                 if is_cuda:
-#                     m = m.cuda()
-#                     features = features.cuda()
-#                     node_chosen = node_chosen.cuda()
-#
-#                 output = model(features, m)
-#                 output = output.t()
-#                 print('epoch {:04d}'.format(epoch),
-#                       'output {}'.format(output.exp()))
-#                 print('epoch {:04d}'.format(epoch),
-#                       'degree {}'.format(node_chosen))
-#                 loss_train = F.cross_entropy(output, node_chosen)  # get the negetive likelyhood
-#                 total_loss_train_1graph += loss_train.item()
-#                 if not validation:
-#                     plot_dis(output.exp().detach().numpy(), node_chosen.detach().cpu().numpy())
-#
-#                 action_gcn = np.argmax(np.array(output.detach().numpy()))  # choose the node given by GCN
-#                 edges_added = x.eliminate_node(action_gcn, reduce=True)
-#
-#             av_loss_train_1graph = total_loss_train_1graph / (n - 2)
-#             n_graphs_proceed += 1
-#             total_loss_train += av_loss_train_1graph
-#
-#     av_loss_train = total_loss_train / (n_graphs_proceed)
-#
-#     return av_loss_train
-#
-#     # for X in data_loader:
-#     #     for x in X:
-#     #         m = torch.FloatTensor(x.M)
-#     #         features = torch.FloatTensor(features)
-#     #         node_chosen, z = x.onestep_greedy()  # get the min-degree distribution of graph as label
-#     #         node_chosen = torch.from_numpy(np.array(node_chosen))  # one-hot coding
-#     #         node_chosen = node_chosen.reshape(1)
-#     #         if is_cuda:
-#     #             m = m.cuda()
-#     #             features = features.cuda()
-#     #             node_chosen = node_chosen.cuda()
-#     #         output = model(features, m)
-#     #         output = output.t()
-#     #         print('epoch {:04d}'.format(epoch),
-#     #               'output {}'.format(output.exp()))
-#     #         print('epoch {:04d}'.format(epoch),
-#     #               'degree {}'.format(node_chosen))
-#     #         loss = F.cross_entropy(output, node_chosen)  # get the negetive likelyhood
-#     #         total_loss += loss.item()
-#     #
-#     #         if not validation:
-#     #             plot_dis(output.exp().detach().numpy(), node_chosen.detach().numpy())
-#     #         # acc = accuracy(output, degree)
-#     #         # total_acc += acc
-#     #     n_graphs_proceed += len(X)
-#     #
-#     # av_loss = total_loss / n_graphs_proceed
-#     # # av_acc = total_acc/n_graphs_proceed
-#     # return av_loss
-
 
 def accuracy(output, labels):
     """
@@ -218,6 +62,40 @@ def plot_dis(output, labels):
     plt.plot(labels,'b--',label='label distri')
     plt.legend()
     plt.show()
+
+def plot_performance_supervised(dataset = 'val',steps=None, t_plot=None, val_ave_gcn_np=None, val_ave_mind_np=None, val_ave_rand_np=None):
+
+    plt.clf()
+    plt.plot(t_plot, val_ave_gcn_np, t_plot, val_ave_mind_np, t_plot, val_ave_rand_np)
+    plt.legend(('GNN', heuristic, 'random'),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+               loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
+    plt.title(
+        'Performance on ' + dataset + ' '+ val_dataset.__class__.__name__ + ' (average number of filled edges)')
+    plt.ylabel('number of fill-in')
+    # plt.draw()
+    plt.savefig(
+        './results/supervised/final_'+dataset+'_performance_per_'+steps+'_lr' + str(
+            args.lr) + '_' + heuristic +'_prune_'+str(prune)+  '_number_gcn_logsoftmax_'+ '_' + val_dataset.__class__.__name__ + '_cuda' + str(
+            args.cuda) + '.png')
+    plt.clf()
+
+def plot_loss_supervised(dataset='val', steps=None, t_plot = None, total_loss_val_np=None):
+
+    plt.clf()
+    plt.plot(t_plot, total_loss_val_np)
+    # plt.legend(('loss'),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+    #            loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
+    plt.title(
+        'Supervised loss curve ' + dataset + ' '+ val_dataset.__class__.__name__)
+    plt.ylabel('loss')
+    # plt.draw()
+    plt.savefig(
+        './results/supervised/final_'+dataset+'_loss_per_'+steps+'_lr' + str(
+            args.lr) + '_' + heuristic + '_prune_' + str(prune) + '_g2m_gcn_logsoftmax_'+
+             '_' + val_dataset.__class__.__name__ + '_cuda' + str(
+            args.cuda) + '.png')
+    plt.clf()
+
 
 # def test(model, features, data_loader, is_cuda=args.cuda, validation = True):
 #     """
@@ -363,6 +241,7 @@ if dataset.__name__ == 'UFSMDataset':
     train_dataset = dataset(start=18, end=19)
     val_dataset = dataset(start=19, end=20)
     test_dataset = dataset(start=24, end=26)
+
 elif dataset.__name__ == 'ErgDataset':
     train_dataset, val_dataset, test_dataset = open_dataset('./data/ERGcollection/erg_small.pkl')
 
@@ -376,47 +255,75 @@ if args.cuda:
     model.cuda()
 
 heuristic = 'min_degree' # 'one_step_greedy' 'min_degree'
-policy_sl = Train_SupervisedLearning(model=model, heuristic=heuristic, train_dataset=train_dataset, val_dataset=val_dataset, test_dataset=test_dataset, use_cuda = args.cuda)
+prune = False
+policy_sl = Train_SupervisedLearning(model=model, heuristic=heuristic,lr=args.lr, prune=prune, train_dataset=train_dataset, val_dataset=val_dataset, test_dataset=test_dataset, use_cuda = args.cuda)
+
 
 
 # Train the model
-print('Supervised Training started')
-print('heuristic: '+heuristic,
-      'learning rate: {}'.format(args.lr),
-      'epochs: {}'.format(args.epochs),
-      'DataSet: '+train_dataset.__class__.__name__+'\n')
-
-time_start = time.time()
-t = time.time()
-av_loss_train,t_model_opt, t_IO , t_heu, t_eli, t_spa, t_all = policy_sl.train(epochs=args.epochs, lr=args.lr)
-    # if not args.novalidation:
-    #     av_loss_val = evaluate(model, val_loader, features)
-    # print('epoch {:04d}'.format(epoch),
-    #       'loss of train {:4f}'.format(av_loss_train),
-    #       #'train accuracy {:.4f}'.format(av_acc_train),
-    #       'loss of val {:.4f}'.format(av_loss_val),
-    #       #'val accuracy {:.4f}'.format(av_acc_val),
-    #       'time {:.4f}'.format(time.time()-t)
-    #     )
-time_end = time.time()
-print('Training finished')
-#print('Training time: {:.4f}'.format(time_end-time_start))
-print('Training time: {:.4f}'.format(t_all))
-print('Elimination time: {:.4f}'.format(t_eli))
-print('Heuristic'+heuristic+' time: {:.4f}'.format(t_heu))
-print('Dense 2 Sparce time: {:.4f}'.format(t_spa))
-print('IO to cuda time: {:.4f}'.format(t_IO))
-print('Model and Opt time: {:.4f}'.format(t_model_opt))
 
 
+total_loss_train = policy_sl.train(epochs=args.epochs, lr=args.lr)
 
-if args.cuda:
-    torch.save(model.state_dict(), './results/models/gcn_policy_'+heuristic+'_pre_'+dataset.__name__+str(args.nnode)+'dense_'+str(args.p)+'_epochs'+str(args.epochs)+'_cuda.pth')
-    # torch.save(model.state_dict(),
-    #            './results/models/gcn_policy_' + heuristic + '_pre_' + dataset.__name__ + '_epochs' + str(
-    #                args.epochs) + '_cuda.pth')
-else:
-    torch.save(model.state_dict(), './results/models/gcn_policy_min_degree_pre_erg100.pth')
+# val_dataset = val_dataset
+# t_plot, total_loss_val_np, val_ave_gcn_np, val_ave_mind_np, val_ave_rand_np = policy_sl.validation(epochs=args.epochs, lr=args.lr, val_dataset=train_dataset)
+#
+# plot_performance_supervised(dataset='train',
+#                             steps = 'epoch',
+#                             t_plot=t_plot,
+#                             val_ave_gcn_np=val_ave_gcn_np,
+#                             val_ave_mind_np=val_ave_mind_np,
+#                             val_ave_rand_np=val_ave_rand_np)
+# plot_loss_supervised(dataset='train', steps='epoch', t_plot = t_plot, total_loss_val_np=total_loss_val_np)
+#
+
+
+# t_plot, total_loss_val_np,val_ave_gcn_np, val_ave_mind_np, val_ave_rand_np = policy_sl.validation_steps(epochs=args.epochs, lr=args.lr, val_dataset=train_dataset, steps_max=164800)
+#
+# plot_performance_supervised(dataset='val',
+#                             steps = '1000steps',
+#                             t_plot=t_plot,
+#                             val_ave_gcn_np=val_ave_gcn_np,
+#                             val_ave_mind_np=val_ave_mind_np,
+#                             val_ave_rand_np=val_ave_rand_np)
+# plot_loss_supervised(dataset='val', steps='1000steps', t_plot = t_plot, total_loss_val_np=total_loss_val_np)
+
+# plt.clf()
+# plt.plot(t_plot, val_ave_gcn_np, t_plot, val_ave_mind_np, t_plot, val_ave_rand_np)
+# plt.legend(('GNN', heuristic, 'random'),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+#            loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
+# plt.title(
+#     'Performance on ' + val_dataset.__class__.__name__ + ' (average number of filled edges)')
+# plt.ylabel('number of fill-in')
+# # plt.draw()
+# plt.savefig(
+#     './results/supervised/validation_final_per_1000steps_lr' + str(
+#         args.lr) + '_' + heuristic +'_prune_'+str(prune)+  '_perform_curve_g2m_number_gcn_logsoftmax_'+ varname(val_dataset) +'_' + val_dataset.__class__.__name__ + '_cuda' + str(
+#         args.cuda) + '.png')
+# plt.clf()
+#
+# plt.clf()
+# plt.plot(t_plot, total_loss_val_np)
+# # plt.legend(('loss'),  # 'GNN-RL', 'GNN-RL-epsilon', 'min-degree'
+# #            loc='upper right')  # 'GNN-initial', 'GNN-RL', 'min-degree'
+# plt.title(
+#     'Supervised loss curve ' + val_dataset.__class__.__name__ )
+# plt.ylabel('loss')
+# # plt.draw()
+# plt.savefig(
+#     './results/supervised/validation_final_per_1000steps_lr' + str(
+#         args.lr) + '_' + heuristic + '_prune_'+str(prune)+ '_loss_curve_logsoftmax_' + varname(val_dataset) +'_' + val_dataset.__class__.__name__ + '_cuda' + str(
+#         args.cuda) + '.png')
+# plt.clf()
+
+
+# if args.cuda:
+#     torch.save(model.state_dict(), './results/models/gcn_policy_'+heuristic+'_pre_'+dataset.__name__+str(args.nnode)+'dense_'+str(args.p)+'_epochs'+str(args.epochs)+'_cuda.pth')
+#     # torch.save(model.state_dict(),
+#     #            './results/models/gcn_policy_' + heuristic + '_pre_' + dataset.__name__ + '_epochs' + str(
+#     #                args.epochs) + '_cuda.pth')
+# else:
+#     torch.save(model.state_dict(), './results/models/gcn_policy_min_degree_pre_erg100.pth')
 
 
 # # Test the model

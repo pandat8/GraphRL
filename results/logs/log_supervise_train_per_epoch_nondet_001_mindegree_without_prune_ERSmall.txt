@@ -1,0 +1,26 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Supervised Training started
+heuristic: min_degree learning rate: 0.001 epochs: 11 DataSet: ErgDataset
+
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 0.0017683025932204988 min_degreeperformance 12520.165 gcn_performance 12643.11
+epochs 1 loss 0.0007432887020403048 min_degreeperformance 12520.165 gcn_performance 12611.12
+epochs 2 loss 0.0006817672851976028 min_degreeperformance 12520.165 gcn_performance 12614.865
+epochs 3 loss 0.0006684226361022127 min_degreeperformance 12520.165 gcn_performance 12609.79
+epochs 4 loss 0.0006875160260279425 min_degreeperformance 12520.165 gcn_performance 12615.94
+epochs 5 loss 0.0006568834527968008 min_degreeperformance 12520.165 gcn_performance 12599.955
+epochs 6 loss 0.0006642287434584235 min_degreeperformance 12520.165 gcn_performance 12599.195
+epochs 7 loss 0.0006706568222588062 min_degreeperformance 12520.165 gcn_performance 12602.5
+epochs 8 loss 0.0006626050747841155 min_degreeperformance 12520.165 gcn_performance 12604.91
+epochs 9 loss 0.0006585927553953957 min_degreeperformance 12520.165 gcn_performance 12618.075
+epochs 10 loss 0.0006582799583682347 min_degreeperformance 12520.165 gcn_performance 12599.47
+Finished
+Training time: 6693.9700
+Elimination time: 681.2200
+Heuristicmin_degree time: 21.3800
+Dense 2 Sparce time: 287.4300
+IO to cuda time: 460.9800
+Model and Opt time: 1320.8700

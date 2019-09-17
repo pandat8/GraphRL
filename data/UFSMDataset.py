@@ -3,10 +3,12 @@ import scipy.io as spio
 import numpy as np
 from torch.utils.data import Dataset
 from data.graph import Graph
+from utils.utils import is_symmetric
+import os
 
 class UFSMDataset(Dataset):
 
-    def __init__(self, random_seed=34, start=18, end=22):
+    def __init__(self, random_seed=34, input_dir=''):
         """
         Generate a graph dataset with specific graph instances
         :param n_graphs: number of graphs
@@ -18,16 +20,19 @@ class UFSMDataset(Dataset):
 
         self.dataset = []
 
-        for i in range(start, end):
-            folder = 'data/UFSMcollection/c-'+str(i)+'.mtx'
-            adj_matrix = spio.mmread(folder)
-            adj_matrix.data[:] = 1
-            # print(adj_matrix)
-            adj_matrix = adj_matrix.todense()
-            np.fill_diagonal(adj_matrix, 0)
-            adj_matrix = adj_matrix.astype(np.uint8)
-            g = Graph(adj_matrix)
-            self.dataset.append(g)
+        for path, directories, files in os.walk(input_dir):
+            for f in files:
+                folder = os.path.join(path, f)
+                adj_matrix = spio.mmread(folder)
+                adj_matrix.data[:] = 1
+                # print(adj_matrix)
+                adj_matrix = adj_matrix.todense()
+                np.fill_diagonal(adj_matrix, 0)
+                if not is_symmetric(adj_matrix):
+                    adj_matrix = np.maximum(adj_matrix, adj_matrix.T)
+                adj_matrix = adj_matrix.astype(np.uint8)
+                g = Graph(adj_matrix)
+                self.dataset.append(g)
 
         self.size = len(self.dataset)
 

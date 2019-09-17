@@ -14,11 +14,13 @@
 # b = torch.sparse.LongTensor(i2, v2, torch.Size([2, 3]))
 #
 # print(a)
-import numpy
+import numpy as np
 import torch
 
-for i in range(18,22):
-    print(i)
+l, p = np.loadtxt('./results/logs/log_supervise_gridsearch_mindegree__ER_small_20graphs_train.txt', delimiter=' ', usecols=(7, 9), unpack=True)
+print(l)
+# with open('./results/logs/log_supervise_gridsearch_mindegree__ER_small_20graphs_train.txt', 'r') as f:
+#     d = dict(line.strip().split(' ') for line in f)
 # from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GCN_Sparse_Memory_Policy_SelectNode
 # actor = GCN_Sparse_Policy_SelectNode(nin=1,
 #                               nhidden= 1,

@@ -1,0 +1,13 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Supervised Validation started
+heuristic: min_degree learning rate: 0.0001 epochs: 21 DataSet: UFSMDataset
+
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 0.005779437742303503 min_degree_performance 61404.52881355932 gcn_performance 458331.0440677966 random_performance 468306.37627118645
+epochs 1 loss 0.005108173067103552 min_degree_performance 61404.52881355932 gcn_performance 66085.47118644067 random_performance 468306.37627118645
+epochs 2 loss 0.005251590358466819 min_degree_performance 61404.52881355932 gcn_performance 65912.5186440678 random_performance 468306.37627118645
+epochs 3 loss 0.0050291152398684895 min_degree_performance 61404.52881355932 gcn_performance 65889.26440677966 random_performance 468306.37627118645
+epochs 4 loss 0.0050298089258387045 min_degree_performance 61404.52881355932 gcn_performance 65826.16271186441 random_performance 468306.37627118645

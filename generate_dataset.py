@@ -8,9 +8,9 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--nnode_lowerb', type=int, default=1000, help='Number of node per graph')
-parser.add_argument('--nnode_upperb', type=int, default=2000, help='Number of graph per dataset')
-parser.add_argument('--ngraph', type=int, default=200, help='Number of graph per dataset')
+parser.add_argument('--nnode_lowerb', type=int, default=100, help='Number of node per graph')
+parser.add_argument('--nnode_upperb', type=int, default=300, help='Number of graph per dataset')
+parser.add_argument('--ngraph', type=int, default=20, help='Number of graph per dataset')
 parser.add_argument('--p_lowerb', type=int, default=0.1, help='probiblity of edges')
 parser.add_argument('--p_upperb', type=int, default=0.3, help='probiblity of edges')
 
@@ -25,7 +25,8 @@ val_dataset =dataset(n_nodes_lowerb=args.nnode_lowerb, n_nodes_upperb=args.nnode
 test_dataset = dataset(n_nodes_lowerb=args.nnode_lowerb, n_nodes_upperb=args.nnode_upperb, p_lowerb=args.p_lowerb,
                       p_upperb=args.p_upperb, n_graphs=args.ngraph, random_seed=34)
 
-save_dataset('./data/ERGcollection/erg_large.pkl', train_dataset, val_dataset, test_dataset)
+# (Each has 200 graphs) ER small: 100-300; ER mid:300:500; ER large:500-700
+save_dataset('./data/ERGcollection/erg_small_20graphs.pkl', train_dataset, val_dataset, test_dataset)
 
 # def save(filename, train, val, test):
 #     with open(filename, "wb") as f:

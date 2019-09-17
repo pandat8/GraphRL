@@ -1,8 +1,21 @@
 import itertools
 import torch
 import numpy as np
+from torch.utils import data
 import pickle as pkl
 import time
+import inspect, re
+import matplotlib.pyplot as plt
+
+def varname(p):
+    "Print name of variable"
+    for line in inspect.getframeinfo(inspect.currentframe().f_back)[3]:
+        m = re.search(r'\bvarname\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)', line)
+        if m:
+            return m.group(1)
+
+def is_symmetric(a, tol=1e-8):
+    return np.all(np.abs(a-a.T) < tol)
 
 def save_dataset(filename, train, val, test):
     with open(filename, "wb") as f:
@@ -12,6 +25,28 @@ def open_dataset(filename):
     with open(filename, "rb") as f:
         train, val, test  = pkl.load(f)
     return train, val, test
+
+def dataset_split(dataset, train_frac):
+    '''
+    param dataset:    Dataset object to be split
+    param train_frac: Ratio of train set to whole dataset
+
+    Randomly split dataset into a dictionary with keys, based on these ratios:
+        'train': train_frac
+        'valid': (1-train_frac) / 2
+        'test': (1-train_frac) / 2
+    '''
+    assert train_frac >= 0 and train_frac <= 1, "Invalid training set fraction"
+
+    length = len(dataset)
+
+    # Use int to get the floor to favour allocation to the smaller valid and test sets
+    train_length = int(length * train_frac)
+    valid_length = int((length - train_length) / 2)
+    test_length  = length - train_length - valid_length
+
+    dataset = data.random_split(dataset, (train_length, valid_length, test_length))
+    return dataset
 
 def to_sparse(dense):
 

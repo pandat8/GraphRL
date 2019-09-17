@@ -1,0 +1,29 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Supervised Validation started
+heuristic: min_degree learning rate: 0.001 DataSet: ErgDataset
+
+steps 0
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+steps 0 loss 0.004601038345015027 min_degree_performance 12505.05 gcn_performance 15994.465 random_performance 15986.275
+steps 5000
+steps 5000 loss 0.00446265193444344 min_degree_performance 12505.05 gcn_performance 15961.66 random_performance 15986.275
+steps 10000
+steps 10000 loss 0.004631562109130109 min_degree_performance 12505.05 gcn_performance 15961.285 random_performance 15986.275
+steps 15000
+steps 15000 loss 0.0008274303648142356 min_degree_performance 12505.05 gcn_performance 12646.65 random_performance 15986.275
+steps 20000
+steps 20000 loss 0.0009392986565731399 min_degree_performance 12505.05 gcn_performance 12635.875 random_performance 15986.275
+steps 25000
+steps 25000 loss 0.0009809576453583867 min_degree_performance 12505.05 gcn_performance 12616.36 random_performance 15986.275
+steps 30000
+steps 30000 loss 0.0008069989057078055 min_degree_performance 12505.05 gcn_performance 12625.295 random_performance 15986.275
+steps 35000
+steps 35000 loss 0.0008139029254170189 min_degree_performance 12505.05 gcn_performance 12663.655 random_performance 15986.275
+steps 40000
+steps 40000 loss 0.0008141139029290752 min_degree_performance 12505.05 gcn_performance 12649.775 random_performance 15986.275
+steps 45000
+steps 45000 loss 0.000942956243304406 min_degree_performance 12505.05 gcn_performance 12622.795 random_performance 15986.275
+steps 50000

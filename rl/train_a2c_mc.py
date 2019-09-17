@@ -128,7 +128,7 @@ class TrainModel_MC:
                                 train_rewards_mindegree += x_mind.eliminate_node(node_chosen, reduce=True)
 
                             node_selected, d_min = x_model.min_degree(x_model.M)
-                            if not (d_min == 1 or d_min == 0):
+                            if not (d_min == 0):
                                 i += 1
                                 action, log_prob, reward, value_current, value_next, x_model = self.model(
                                     x_model)  # forward propagation,action: node selected, reward: nb edges added
