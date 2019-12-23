@@ -1,2 +1,0 @@
-nohup: ignoring input
-tensor([ 1.], device='cuda:0')
