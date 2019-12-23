@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disable Cuda')
 parser.add_argument('--novalidation', action= 'store_true', default=False, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
-parser.add_argument('--epochs', type=int, default=500, help='Training epochs')
+parser.add_argument('--epochs', type=int, default=300, help='Training epochs')
 parser.add_argument('--pretrain_epochs', type=int, default=3, help='Training epochs')
 parser.add_argument('--lr_actor', type=float, default= 0.001, help='Learning rate of actor')
 parser.add_argument('--lr_critic', type=float, default= 0.001, help='Learning rate of critic')
@@ -155,7 +155,7 @@ eps = [0, 0.001, 0.01 ,0.02, 0.05, 0.1, 0.2, 0.5 ]
 # lr = [0.00001, 0.0001, 0.001, 0.01, 0.1]
 
 # lr = [0.00001, 0.0001, 0.001, ]
-lr = [0.01]
+lr = [0.01, 0.1, 0.001]
 # lr = [0.00001, 0.0001, 0.001,0.1]
 time_start = time.time()
 

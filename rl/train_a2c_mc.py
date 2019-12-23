@@ -163,9 +163,9 @@ class TrainModel_MC:
                         returns = -returns
 
                         # returns = (returns - self.model.epsilon / 530000) / (1 - self.model.epsilon)
-                        # returns = returns / (returns.std() + self.eps)
+                        returns = returns / (returns.std() + self.eps)
 
-                        returns = (returns - returns.mean()) / (returns.std() + self.eps)
+                        # returns = (returns - returns.mean()) / (returns.std() + self.eps)
                         saved_actions = self.model.saved_actions
                         # compute cummulated loss of actor and critic of one graph
                         gamma_t = 1
@@ -395,9 +395,9 @@ class TrainModel_MC:
                         returns = -returns
 
                         # returns = (returns - self.model.epsilon/ 530000) / (1 - self.model.epsilon)
-                        # returns = returns / (returns.std() + self.eps)
+                        returns = returns / (returns.std() + self.eps)
 
-                        returns = (returns - returns.mean()) / (returns.std() + self.eps)
+                        # returns = (returns - returns.mean()) / (returns.std() + self.eps)
                         saved_actions = self.model.saved_actions
                         # compute cummulated loss of actor and critic of one graph
                         gamma_t = 1
