@@ -163,6 +163,7 @@ class GAN(nn.Module):
         features = features.t()
         return features
 
+
 class GAN_Value(nn.Module):
     """
     GCN model for value function, the negative number of edges added
@@ -192,4 +193,23 @@ class GAN_Value(nn.Module):
         # features = F.relu(features)
         features = features
 
+        return features
+
+
+class GNN_GAN(nn.Module):
+    def __init__(self, nin, nhidden, nout, dropout, alpha):
+        super(GNN_GAN, self).__init__()
+
+        self.gc1 = GraphConvolutionLayer_Sparse(nin, nhidden) # first graph conv layer
+        self.gc2 = GraphAttentionConvLayer(nhidden, nout, dropout, alpha)
+        self.dropout = dropout
+
+    def forward(self, features, adj_matrix):
+        # features = F.dropout(features, self.dropout, training=self.training)
+        features = self.gc1(features, adj_matrix)
+        features = F.relu(features)
+        # features = F.dropout(features, self.dropout, training=self.training)
+        features = self.gc2(features, adj_matrix)
+        features = F.log_softmax(features.t())
+        features = features.t()
         return features

@@ -18,7 +18,7 @@ from data.graph import Graph
 parser = argparse.ArgumentParser()
 parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disable Cuda')
 parser.add_argument('--novalidation', action= 'store_true', default=True, help='Disable validation')
-parser.add_argument('--seed', type=int, default=50, help='Radom seed')
+parser.add_argument('--seed', type=int, default=63, help='Radom seed') #50
 parser.add_argument('--epochs', type=int, default=21, help='Training epochs')
 parser.add_argument('--lr', type=float, default= 0.0001, help='Learning rate')
 parser.add_argument('--wd', type=float, default=5e-4, help='Weight decay')
@@ -97,145 +97,6 @@ def plot_loss_supervised(dataset_type='val', steps=None, t_plot = None, total_lo
     plt.clf()
 
 
-# def test(model, features, data_loader, is_cuda=args.cuda, validation = True):
-#     """
-#     Evaluation function
-#     :param model: network model
-#     :param data_loader: dataset loader depending on validation or test
-#     :param features: initial feature vector of graph
-#     :param is_cuda:
-#     :param validation: True if validation(by default), False if test
-#     :return: averaged loss per graph
-#     """
-#     model.eval()
-#
-#     n_graphs_proceed = 0
-#     ratio = []
-#     ratio_g2r = []
-#     for X in data_loader:
-#         _ratio = 0
-#         for x in X:
-#             n_e_mindegree = 0 # number of added edges
-#             n_e_random = 0
-#             # n_e_onestep = 0
-#
-#             q_mindegree = np.zeros(x.n - 1, dtype=int) # index of ordering
-#             q2_mindegree = np.zeros(x.n - 1, dtype=int) # degree value of ordering
-#             q3_mindegree = np.zeros(x.n - 1, dtype=int) # number of edges added each step
-#
-#             q_random = np.zeros(x.n - 1, dtype=int) # index of ordering
-#             q3_random = np.zeros(x.n - 1, dtype=int) # number of edges added each step
-#
-#
-#             # q_onestep = np.zeros(x.n - 1, dtype=int)  # index of ordering
-#             # q2_onestep = np.zeros(x.n - 1, dtype=int) # number of edges to make neighbour-clique of ordering
-#
-#             x1 = Graph(x.M)
-#             x4 = Graph(x.M)
-#
-#             # x2 = Graph(x.M)
-#
-#             for i in range(x.n-2):
-#                 # choose the node with minimum degree
-#                 node_chosen, d_min = x1.min_degree(x1.M)
-#                 q_mindegree[i] = node_chosen
-#                 q2_mindegree[i] = d_min
-#
-#                 # random eliminate a node
-#                 q_random[i] = np.random.randint(low=0, high=x4.n)
-#                 q3_random[i] = x4.eliminate_node(q_random[i], reduce=True)
-#                 n_e_random += q3_random[i]
-#
-#                 # # choose the node with one step greedy
-#                 # q_onestep[i], q2_onestep = x2.onestep_greedy()
-#                 # eliminate the node chosen
-#                 q3_mindegree[i] = x1.eliminate_node(q_mindegree[i], reduce=True)
-#                 n_e_mindegree += q3_mindegree[i]
-#
-#             n_e_baseline = n_e_mindegree
-#             # samles multi solutions by GCN and pick the lowest cost one
-#             samle_gcn = 10
-#
-#             edges_total_samples = np.zeros(samle_gcn)
-#             q_gcn_samples = np.zeros([samle_gcn, x.n - 1], dtype=int) # index of ordering given by GCN
-#             edges_added = np.zeros([samle_gcn, x.n - 1], dtype=int) # number of edges added each step
-#             for j in range(samle_gcn):
-#                 x3 = Graph(x.M)
-#                 for i in range(x.n-2):
-#
-#                     # choose the node with GCN
-#                     features = np.ones([x3.n,args.dinput], dtype=np.float32)
-#                     M_gcn = torch.FloatTensor(x3.M)
-#                     features = torch.FloatTensor(features)
-#                     if is_cuda:
-#                         M_gcn = M_gcn.cuda()
-#                         features = features.cuda()
-#                     output = model(features, M_gcn)
-#                     output = output.view(-1)
-#                     m = Categorical(output)
-#                     node_selected = m.sample()
-#                     q_gcn_samples[j,i] = node_selected # choose the node given by GCN
-#
-#                     edges_added[j,i] = x3.eliminate_node(q_gcn_samples[j,i], reduce=True) # eliminate the node and return the number of edges added
-#                     edges_total_samples[j] += edges_added[j,i]
-#             k = np.argmin(edges_total_samples)
-#             n_e_gcn = edges_total_samples[k]
-#
-#             q_gcn = q_gcn_samples[k,:]
-#             q3_gcn = edges_added[k,:]
-#
-#             _ratio = n_e_gcn/n_e_baseline
-#             _ratio_g2r = n_e_gcn/n_e_random
-#             ratio.append(_ratio)
-#             ratio_g2r.append(_ratio_g2r)
-#             #print('GCN number of edges {}'.format(np.sum(q3_gcn)))
-#             #print('Ran number of edges {}'.format(n_e_random))
-#
-#                 # n_e_onestep += x2.eliminate_node(q_onestep[i], reduce=True)
-#
-#             # num_e = torch.IntTensor(x.num_e)
-#
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'min_degree number of edges {}'.format(n_e_mindegree))
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'mindegree elimination ordering {}'.format(q_mindegree))
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'mindegree elimination edge add {}'.format(q3_mindegree))
-#             #
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'GCN number of edges {}'.format(n_e_gcn))
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'GCN elimination ordering {}'.format(q_gcn))
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'GCN elimination edge add {}'.format(q3_gcn))
-#
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'one_step_greedy number of edges {}'.format(n_e_onestep))
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'one_step_greedy elimination ordering {}'.format(q_onestep))
-#             # print('epoch {:04d}'.format(epoch),
-#             # 'one_step_greedy {}'.format(q2_onestep))
-#         n_graphs_proceed += len(X)
-#     ratio = np.array(ratio).reshape(-1)
-#     ratio_g2r = np.array(ratio_g2r).reshape(-1)
-#
-#     total_ratio = np.sum(ratio)
-#     total_ratio_g2r = np.sum(ratio_g2r)
-#
-#     min_ratio = np.min(ratio)
-#     max_ratio = np.max(ratio)
-#     av_ratio = total_ratio/n_graphs_proceed
-#
-#     min_ratio_g2r = np.min(ratio_g2r)
-#     max_ratio_g2r = np.max(ratio_g2r)
-#     av_ratio_g2r = total_ratio_g2r / n_graphs_proceed
-#
-#     return ratio, av_ratio, max_ratio, min_ratio, ratio_g2r, av_ratio_g2r, max_ratio_g2r, min_ratio_g2r
-
-
-#  load data and pre-process
-# train_dataset = GraphDataset(args.nnode, args.ngraph)
-
 dataset = UFSMDataset
 if dataset.__name__ == 'UFSMDataset':
     with open('./data/UFSM/ss_small/ss_small.pkl', "rb") as f:
@@ -261,7 +122,7 @@ if args.cuda:
 heuristic = 'min_degree' # 'one_step_greedy' 'min_degree'
 prune = True
 
-policy_sl = Train_SupervisedLearning(model=model, heuristic=heuristic,lr=args.lr, prune=prune, train_dataset=train_ER_small, val_dataset=val_ER_small, test_dataset=test_ER_small, use_cuda = args.cuda)
+policy_sl = Train_SupervisedLearning(model=model, model2=model, heuristic=heuristic,lr=args.lr, prune=prune, train_dataset=train_ER_small, val_dataset=val_ER_small, test_dataset=test_ER_small, use_cuda = args.cuda)
 
 
 
@@ -270,12 +131,12 @@ policy_sl = Train_SupervisedLearning(model=model, heuristic=heuristic,lr=args.lr
 
 # total_loss_train = policy_sl.train(epochs=args.epochs, lr=args.lr)
 
-val_dataset = val_ss_small
+val_dataset = val_ss_large
 
-dataset_type = varname(val_ss_small)
+dataset_type = varname(val_ss_large)
 
 
-# t_plot, total_loss_val_np, val_ave_gcn_np, val_ave_mind_np, val_ave_rand_np = policy_sl.validation_epochs(epochs=args.epochs, lr=args.lr, val_dataset=val_dataset, dataset_type=dataset_type)
+t_plot, total_loss_val_np, val_ave_gcn_np, val_ave_mind_np, val_ave_rand_np = policy_sl.validation_epochs(epochs=args.epochs, lr=args.lr, val_dataset=val_dataset, dataset_type=dataset_type)
 #
 # plot_performance_supervised(dataset_type=dataset_type,
 #                             steps = 'epoch',
@@ -286,11 +147,11 @@ dataset_type = varname(val_ss_small)
 # plot_loss_supervised(dataset_type=dataset_type, steps='epoch', t_plot = t_plot, total_loss_val_np=total_loss_val_np)
 
 
-steps_size=1000
-steps_min=0
-steps_max=41000 #1000000
-
-t_plot, total_loss_val_np,val_ave_gcn_np, val_ave_mind_np, val_ave_rand_np = policy_sl.validation_steps(epochs=args.epochs, lr=args.lr, val_dataset=val_dataset, steps_min=steps_min, steps_max=steps_max, steps_size=steps_size, dataset_type=dataset_type)
+# steps_size=1000
+# steps_min=0
+# steps_max=41000 #1000000
+#
+# t_plot, total_loss_val_np,val_ave_gcn_np, val_ave_mind_np, val_ave_rand_np = policy_sl.validation_steps(epochs=args.epochs, lr=args.lr, val_dataset=val_dataset, steps_min=steps_min, steps_max=steps_max, steps_size=steps_size, dataset_type=dataset_type)
 
 # plot_performance_supervised(dataset_type=dataset_type,
 #                             steps = str(steps_size)+'steps50000',

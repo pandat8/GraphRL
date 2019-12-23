@@ -2,6 +2,7 @@ from torch.utils.data import Dataset, DataLoader
 from data.ergDataset import ErgDataset
 from data.SSMCDataset import SSMCDataset
 from data.UFSMDataset import UFSMDataset
+from data.UFSMDataset_Demo import UFSMDataset_Demo
 from data.graph import Graph
 
 from rl.model_a2c import Model_A2C_Sparse
@@ -138,7 +139,9 @@ if args.use_critic:
 heuristic = 'min_degree' # 'min_degree' 'one_step_greedy'
 
 # load data and pre-process
-dataset = UFSMDataset
+dataset = UFSMDataset_Demo
+dataset_name = dataset.__name__[0:11]
+
 
 # train RL-model
 
@@ -148,26 +151,27 @@ print('heuristic: '+heuristic,
       'epochs: {}'.format(args.epochs),
       'DataSet: '+dataset.__name__+'\n')
 eps = [0, 0.001, 0.01 ,0.02, 0.05, 0.1, 0.2, 0.5 ]
+
 lr = [0.00001, 0.0001, 0.001, 0.01, 0.1]
 time_start = time.time()
 
 for i in range(len(lr)):
 
-    if dataset.__name__ == 'UFSMDataset':
+    if dataset_name == 'UFSMDataset':
         test_dataset = dataset(start=24, end=26)
         train_dataset = dataset(start=18, end=19)
         # val_dataset = dataset(args.nnode_test, args.ngraph_test, args.p)
         val_dataset = dataset(start=19, end=19)
-    elif dataset.__name__ == 'ErgDataset':
+    elif dataset_name == 'ErgDataset':
         train_dataset = dataset(args.nnode, args.ngraph, args.p)
         val_dataset = dataset(args.nnode, args.ngraph, args.p)
         test_dataset = dataset(args.nnode_test, args.ngraph_test, args.p)
 
     if args.cuda:
-        actor.load_state_dict(
-            torch.load('./results/models/gcn_policy_' + heuristic + '_pre_' + dataset.__name__ + str(
-                args.nnode) + 'dense_' + str(
-                args.p) + '_epochs' + str(args.pretrain_epochs) + '_cuda.pth'))
+        # actor.load_state_dict(
+        #     torch.load('./results/models/gcn_policy_' + heuristic + '_pre_' + dataset.__name__ + str(
+        #         args.nnode) + 'dense_' + str(
+        #         args.p) + '_epochs' + str(args.pretrain_epochs) + '_cuda.pth'))
         # actor.load_state_dict(torch.load('./results/models/gcn_policy_one_step_greedy_pre_UFSMDataset_epochs30_cuda.pth'))
         actor.cuda()
     model_a2c = Model_A2C_Sparse(actor=actor,

@@ -11,7 +11,7 @@ from data.ergDataset import ErgDataset
 from utils.utils import open_dataset, varname
 
 # from data.UFSMDataset import UFSMDataset
-from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GCN_Sparse_Memory_Policy_SelectNode
+from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GCN_Sparse_Memory_Policy_SelectNode, GAN
 from supervised.train_supervised_learning import Train_SupervisedLearning
 from data.graph import Graph
 

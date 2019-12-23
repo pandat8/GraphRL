@@ -18,14 +18,21 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator, FormatStrFormatter
 
+# for dagger:
+#   1. change to the dagger folder
+#   2. before training each epoch, load gcn model2 by the last epoch's model to be the behavior policy
+#   3. in training loop: change the behavior policy to model2
+#
+
 
 SavedAction = namedtuple('SavedAction', ['log_prob', 'value_current'])
 
 # Mont Carlo methods
 class Train_SupervisedLearning:
 
-    def __init__(self, model, heuristic = 'min_degree', prune=False,lr=0.0001,  train_dataset=None, val_dataset=None, test_dataset=None, weight_d=5e-4, max_grad_norm=2, use_cuda=False):
+    def __init__(self, model, model2, heuristic = 'min_degree', prune=False,lr=0.0001,  train_dataset=None, val_dataset=None, test_dataset=None, weight_d=5e-4, max_grad_norm=2, use_cuda=False):
         self.model = model
+        self.model2 = model2
         self.heuristic = heuristic
         self.prune = prune
         self.train_dataset = train_dataset
@@ -311,6 +318,13 @@ class Train_SupervisedLearning:
             graph_no = 0
             steps_epoch = 0
 
+            # if dagger
+            if self.use_cuda:
+                self.model2.load_state_dict(
+                    torch.load('./supervised/models_dagger/'+self.heuristic+'/SmallErgTraining/lr'+str(self.lr)+'/per_epochs/gcn_policy_' + self.heuristic + '_pre_' + self.train_dataset.__class__.__name__
+                           + '_epochs_' + str(epoch) + '_cuda.pth'))
+            self.model2.eval()
+
 
             for X in self.train_loader:
                 for x in X:
@@ -412,16 +426,31 @@ class Train_SupervisedLearning:
                             # output = torch.log(output)
                             # output = torch.exp(output)
 
+                            # # n-step on-policy IL
                             m = Categorical(logits=output) # logits=probs
                             action_gcn = m.sample()
+                            edges_added = x_model.eliminate_node(action_gcn, reduce=True)
+
 
                             # output = np.array(output.detach().cpu().numpy())
                             # output = np.exp(output)
                             # action_gcn = np.argmax(output)
 
 
+                            # # by supervised learning per step
+                            # node_chosen, d_min = x_mind.min_degree(x_model.M)
+                            # edges_added = x_model.eliminate_node(node_chosen, reduce=True)
+
+                            # # dagger
+                            # output = self.model2(features, m)
+                            # output = output.view(-1)
+                            # policy = Categorical(logits=output)  # logits=probs
+                            # action_gcn = policy.sample()
+                            # edges_added = x_model.eliminate_node(action_gcn, reduce=True)
+
                             _t2 = time.clock()
-                            edges_added = x_model.eliminate_node(action_gcn, reduce=True)
+
+
                             train_rewards_gcn_greedy += edges_added
                             t_eli += time.clock() - _t2
 
@@ -604,7 +633,7 @@ class Train_SupervisedLearning:
             plt.ylabel('number of fill-in')
             # plt.draw()
             plt.savefig(
-                './results/supervised/'+self.heuristic+'/lr'+str(self.lr)+'/train_lr' + str(
+                './results/supervised/'+self.heuristic+'/lr'+str(self.lr)+'/pure_supervised_train_lr' + str(
                     self.lr) + '_' + self.heuristic +'_prune_'+str(self.prune)+ '_performance_curve_g2m_number_gcn_logsoftmax_val'  +'_' + self.val_dataset.__class__.__name__ + 'fulldepth_cuda' + str(
                     self.use_cuda) + '.png')
             plt.clf()
@@ -618,7 +647,7 @@ class Train_SupervisedLearning:
             plt.ylabel('loss')
             # plt.draw()
             plt.savefig(
-                './results/supervised/'+self.heuristic+'/lr'+str(self.lr)+'/train_lr' + str(
+                './results/supervised/'+self.heuristic+'/lr'+str(self.lr)+'/pure_supervised_train_lr' + str(
                     self.lr) + '_' + self.heuristic +'_prune_'+str(self.prune)+ '_loss_curve_logsoftmax_train'  +'_' + self.train_dataset.__class__.__name__ + 'fulldepth_cuda' + str(
                     self.use_cuda) + '.png')
             plt.clf()
@@ -1063,7 +1092,7 @@ class Train_SupervisedLearning:
 
         return t_plot, total_loss_val_np, val_ave_gcn_np, val_ave_mind_np, val_ave_rand_np
 
-    def validation_steps(self, lr =0.001, epochs=0, val_dataset=None, steps_min=0, steps_max=0, steps_size=1000, dataset_type='val'):
+    def validation_steps(self, lr =0.0001, epochs=0, val_dataset=None, steps_min=0, steps_max=0, steps_size=1000, dataset_type='val'):
         """
         Training function
         :param model: neural network model
@@ -1328,10 +1357,11 @@ class Train_SupervisedLearning:
             val_ave_rand_np = np.array(val_ave_rand).reshape(-1)
 
             print('steps {}'.format(steps),
-                  'loss {}'.format(av_loss_val),
+                  'loss {}'.format(_av_loss_val),
                   self.heuristic+'_performance {}'.format(_val_ave_mind),
                   'gcn_performance {}'.format(_val_ave_gcn),
-                  'random_performance {}'.format(_val_ave_rand)
+                  'random_performance {}'.format(_val_ave_rand),
+                  'steps {}'.format(steps_epoch)
                   )
 
             self.plot_performance_supervised(dataset_type=dataset_type,
@@ -1438,6 +1468,7 @@ class Train_SupervisedLearning:
         iteration = 0
 
         if self.use_cuda:
+
             new_state_dict = OrderedDict({'gc1.bias': torch.cuda.FloatTensor([1]), 'gc2.bias': torch.cuda.FloatTensor([0], )})
         else:
             new_state_dict = OrderedDict({'gc1.bias': torch.Tensor([1]), 'gc2.bias': torch.Tensor([0], )})
@@ -1541,6 +1572,134 @@ class Train_SupervisedLearning:
         print('IO to cuda time: {:.4f}'.format(t_IO))
         print('Model and Opt time: {:.4f}'.format(t_model_opt))
 
+    def validation_gridsearch_gnngan(self, val_dataset = None, a_min=-20, a_max=21, steps_size=1, dataset_type='val'):
+
+        print('Grid Search Started')
+        print('heuristic: ' + self.heuristic,
+              'DataSet: ' + dataset_type + '\n')
+        if val_dataset:
+            self.val_dataset = val_dataset
+            self.val_loader = DataLoader(self.val_dataset, shuffle=True, batch_size=1, collate_fn=lambda x: x)
+
+        if self.use_cuda:
+            plt.switch_backend('agg')
+
+        t_all = 0
+        t_spa = 0
+        t_eli = 0
+        t_heu = 0
+        t_IO = 0
+        t_model_opt = 0
+
+        total_loss_val = []
+        val_ave_gcn = []
+
+        iteration = 0
+
+        if self.use_cuda:
+            new_state_dict = OrderedDict({'gc1.bias': torch.cuda.FloatTensor([1]), 'gc2.bias': torch.cuda.FloatTensor([0]), 'gc1.weight': torch.cuda.FloatTensor([[5]]), 'gc2.weight': torch.cuda.FloatTensor([[-5]])})
+
+        else:
+            new_state_dict = OrderedDict({'gc1.bias': torch.Tensor([1]), 'gc2.bias': torch.Tensor([0]), 'gc1.weight': torch.Tensor([[5]]), 'gc2.weight': torch.Tensor([[-5]])})
+        self.model.load_state_dict(new_state_dict, strict=False)
+
+
+        for a2 in range(a_min, a_max, steps_size):
+
+            a2 /= 4
+
+            for a1 in range(a_min, a_max, steps_size):
+
+                a1 /= 4
+
+                # _av_loss_val=0
+                # _val_ave_gcn=0
+                # _val_ave_mind=0
+                # _val_ave_rand=0
+                # _t_all=0
+                # _t_spa=0
+                # _t_eli=0
+                # _t_heu=0
+                # _t_IO=0
+
+
+                if self.use_cuda:
+                    new_state_dict = OrderedDict({'gc2.a': torch.cuda.FloatTensor([[a1], [a2]])})
+
+                else:
+                    new_state_dict = OrderedDict(
+                        {'gc2.a': torch.Tensor([[a1], [a2]])})
+                self.model.load_state_dict(new_state_dict, strict=False)
+
+
+                _av_loss_val, _val_ave_gcn, _val_ave_mind, _val_ave_rand, _t_all, _t_spa, _t_eli, _t_heu, _t_IO =self.validation(iteration=iteration, iteration_min=0)
+
+                if iteration==0:
+                    val_ave_mind = _val_ave_mind
+                    val_ave_rand =_val_ave_rand
+
+
+                val_ave_gcn.append(_val_ave_gcn)
+                total_loss_val.append(_av_loss_val)
+                t_all += _t_all
+                t_spa += _t_spa
+                t_eli += _t_eli
+                t_heu += _t_heu
+                t_IO  += _t_IO
+
+                print('iteration {}'.format(iteration),
+                      'a1 {}'.format(a1),
+                      'a2 {}'.format(a2),
+                      'loss {}'.format(_av_loss_val),
+                      'gcn_performance {}'.format(_val_ave_gcn),
+                      self.heuristic + '_performance {}'.format(val_ave_mind),
+                      'random_performance {}'.format(val_ave_rand)
+                      )
+                iteration += 1
+
+
+
+        # total_a1_np = np.linspace(a_min / 4, -a_min / 4, a_max - a_min)
+        # total_a2_np = np.linspace(a_min / 4, -a_min / 4, a_max - a_min)
+        # total_loss_val_np = np.array(total_loss_val).reshape(a_max - a_min, a_max - a_min)
+        # val_ave_gcn_np = np.array(val_ave_gcn).reshape(a_max - a_min, a_max - a_min)
+        #
+        # W1, W2 = np.meshgrid(total_a1_np, total_a2_np)
+        #
+        # total_loss_val_np = np.log(total_loss_val_np)
+        #
+        # plt.clf()
+        # plt.contourf(W1, W2, total_loss_val_np, alpha=.75, cmap=plt.cm.hot)
+        # C = plt.contour(W1, W2, total_loss_val_np, colors='black', linewidth=.5)
+        # plt.clabel(C, inline=1, fontsize=10)
+        #
+        # plt.savefig(
+        #     './results/supervised/' + self.heuristic + '/gridsearch/' + dataset_type + '_contour_loss_weight_-+' + str(a_min / 4) +
+        #         '_' + self.heuristic + '_prune_' + str(self.prune) + '_g2m_gcn_logsoftmax_' +
+        #     self.val_dataset.__class__.__name__ + '_cuda' + str(
+        #         self.use_cuda) + '.png')
+        # plt.clf()
+        #
+        # plt.contourf(W1, W2, val_ave_gcn_np, alpha=.75, cmap=plt.cm.hot)
+        # C = plt.contour(W1, W2, val_ave_gcn_np, colors='black', linewidth=.5)
+        # plt.clabel(C, inline=1, fontsize=10)
+        #
+        # plt.savefig(
+        #     './results/supervised/' + self.heuristic + '/gridsearch/' + dataset_type + '_contour_performance_weight_-+' + str(
+        #         a_min / 4) +
+        #     '_' + self.heuristic + '_prune_' + str(self.prune) + '_g2m_gcn_logsoftmax_' +
+        #     self.val_dataset.__class__.__name__ + '_cuda' + str(
+        #         self.use_cuda) + '.png')
+        # plt.clf()
+
+        print('Validation Finished')
+        # print('Training time: {:.4f}'.format(time_end-time_start))
+        print('Validation time: {:.4f}'.format(t_all))
+        print('Elimination time: {:.4f}'.format(t_eli))
+        print('Heuristic' + self.heuristic + ' time: {:.4f}'.format(t_heu))
+        print('Dense 2 Sparce time: {:.4f}'.format(t_spa))
+        print('IO to cuda time: {:.4f}'.format(t_IO))
+        print('Model and Opt time: {:.4f}'.format(t_model_opt))
 
     def validation(self, iteration, iteration_min):
 

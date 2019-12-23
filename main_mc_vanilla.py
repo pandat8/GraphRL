@@ -1,6 +1,7 @@
 from torch.utils.data import Dataset, DataLoader
 from data.ergDataset import ErgDataset
 from data.SSMCDataset import SSMCDataset
+from data.UFSMDataset_Demo import UFSMDataset_Demo
 from data.UFSMDataset import UFSMDataset
 from data.graph import Graph
 
@@ -10,6 +11,7 @@ from rl.train_a2c_mc import TrainModel_MC
 from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GCN_Sparse_Memory_Policy_SelectNode
 from gcn.models_gcn import GCN_Value, GCN_Sparse_Value
 from supervised.train_supervised_learning import Train_SupervisedLearning
+from utils.utils import open_dataset, varname
 
 import sys
 import time
@@ -26,7 +28,7 @@ parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disab
 parser.add_argument('--novalidation', action= 'store_true', default=False, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
 parser.add_argument('--epochs', type=int, default=5000, help='Training epochs')
-parser.add_argument('--pretrain_epochs', type=int, default=3, help='Training epochs')
+parser.add_argument('--pretrain_epochs', type=int, default=5, help='Training epochs') # 3 for UFSM-Demo
 parser.add_argument('--lr_actor', type=float, default= 0.001, help='Learning rate of actor')
 parser.add_argument('--lr_critic', type=float, default= 0.001, help='Learning rate of critic')
 parser.add_argument('--wd', type=float, default=5e-4, help='Weight decay')
@@ -138,26 +140,28 @@ if args.use_critic:
 heuristic = 'min_degree' # 'min_degree' 'one_step_greedy'
 
 # load data and pre-process
-dataset = UFSMDataset
 
+# dataset = UFSMDataset_Demo
+# dataset_name = dataset.__name__[0:11]
+
+dataset = ErgDataset
+dataset_name = dataset.__name__
 # train RL-model
 
 
 time_start = time.time()
 
 
-if dataset.__name__ == 'UFSMDataset':
-    test_dataset = dataset(start=24, end=26)
-    train_dataset = dataset(start=18, end=19)
-    val_dataset = dataset(start=19, end=19)
-elif dataset.__name__ == 'ErgDataset':
-    train_dataset = dataset(args.nnode, args.ngraph, args.p)
-    val_dataset = dataset(args.nnode, args.ngraph, args.p)
-    test_dataset = dataset(args.nnode_test, args.ngraph_test, args.p)
+if dataset_name == 'UFSMDataset':
+    test_dataset = dataset(start=22, end=26)
+    train_dataset = dataset(start=18, end=22)
+    val_dataset = dataset(start=22, end=26)
+elif dataset_name == 'ErgDataset':
+    train_dataset, val_dataset, test_dataset = open_dataset('./data/ERGcollection/erg_small_20graphs.pkl')
 
 if args.cuda:
     actor.load_state_dict(
-        torch.load('./results/models/gcn_policy_' + heuristic + '_pre_' + dataset.__name__ + str(
+        torch.load('./results/models/gcn_policy_' + heuristic + '_pre_' + dataset_name + str(
             args.nnode) + 'dense_' + str(
             args.p) + '_epochs' + str(args.pretrain_epochs) + '_cuda.pth'))
 

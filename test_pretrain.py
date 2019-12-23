@@ -20,7 +20,7 @@ parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disab
 parser.add_argument('--novalidation', action= 'store_true', default=True, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
 parser.add_argument('--epochs', type=int, default=40, help='Training epochs')
-parser.add_argument('--lr', type=float, default= 0.0005, help='Learning rate')
+parser.add_argument('--lr', type=float, default= 0.0001, help='Learning rate')
 parser.add_argument('--wd', type=float, default=5e-4, help='Weight decay')
 parser.add_argument('--dhidden', type=int, default=1, help='Dimension of hidden features')
 parser.add_argument('--dinput', type=int, default=1, help='Dimension of input features')
@@ -251,12 +251,19 @@ model = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
                               nout=args.doutput,
                               dropout=args.dropout,
                               ) # alpha=args.alpha
+
+model2 = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
+                              nhidden= args.dhidden,
+                              nout=args.doutput,
+                              dropout=args.dropout,
+                              ) # alpha=args.alpha
+
 if args.cuda:
     model.cuda()
 
 heuristic = 'min_degree' # 'one_step_greedy' 'min_degree'
 prune = False
-policy_sl = Train_SupervisedLearning(model=model, heuristic=heuristic,lr=args.lr, prune=prune, train_dataset=train_dataset, val_dataset=val_dataset, test_dataset=test_dataset, use_cuda = args.cuda)
+policy_sl = Train_SupervisedLearning(model=model, model2=model2, heuristic=heuristic,lr=args.lr, prune=prune, train_dataset=train_dataset, val_dataset=val_dataset, test_dataset=test_dataset, use_cuda = args.cuda)
 
 
 

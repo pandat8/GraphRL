@@ -37,6 +37,8 @@ class TrainModel_MC:
     def train_and_validate(self, n_epochs, lr_actor, lr_critic, use_critic, gamma=0.99, density=0.1):
         actor_initial = copy.deepcopy(self.model.actor)
 
+        depth_max = 1000000
+
         self.actor_optim = optm.Adam(self.model.actor.parameters(),  weight_decay=self.weight_d, lr=lr_actor)
 
         print('Use Critic:')
@@ -76,7 +78,8 @@ class TrainModel_MC:
 
         for epoch in range(n_epochs):
 
-            if epoch == 0:
+            if epoch == 0: # in epoch o, heuristic will be executed and its result acts as a baseline,
+                           # in following epochs, heuristic won't be executed anymore (for avoiding unnecessary comuptation).
                 val_gcn_greedy = []
                 train_gcn_greedy = []
                 val_mind = []
@@ -103,7 +106,7 @@ class TrainModel_MC:
 
                         # loop for training while eliminating a graph iteratively
                         i = 1
-                        depth = np.min([n - 2, 300])
+                        depth = np.min([n - 2, depth_max])
                         # depth = n-2
                         rewards_gcn_greedy = np.zeros(1)
                         while (i < depth) and (x_model.n > 2):
@@ -128,7 +131,7 @@ class TrainModel_MC:
                                 train_rewards_mindegree += x_mind.eliminate_node(node_chosen, reduce=True)
 
                             node_selected, d_min = x_model.min_degree(x_model.M)
-                            if not (d_min == 0):
+                            if not (d_min==1 or d_min == 0):
                                 i += 1
                                 action, log_prob, reward, value_current, value_next, x_model = self.model(
                                     x_model)  # forward propagation,action: node selected, reward: nb edges added
@@ -155,6 +158,7 @@ class TrainModel_MC:
 
                         returns = returns + 1
                         returns = 1 / returns
+                        # returns = -returns
 
                         # returns = (returns - self.model.epsilon / 530000) / (1 - self.model.epsilon)
                         # returns = returns / (returns.std() + self.eps)
@@ -213,7 +217,6 @@ class TrainModel_MC:
 
                     av_loss_train += total_loss_train_1graph
 
-                print('epochs {}'.format(epoch), 'loss {}'.format(av_loss_train))
 
                 for X in self.val_loader:
                     for x in X:
@@ -232,7 +235,7 @@ class TrainModel_MC:
 
                         # loop for training while eliminating a graph iteratively
                         i = 1
-                        depth = np.min([n - 2, 300])
+                        depth = np.min([n - 2, depth_max])
                         # depth = n-2
                         while (i < depth) and (x_model.n > 2):
 
@@ -332,7 +335,7 @@ class TrainModel_MC:
                         # loop for training while eliminating a graph iteratively
                         i = 1
 
-                        depth = np.min([n - 2, 300])
+                        depth = np.min([n - 2, depth_max])
                         # depth = n-2
                         rewards_gcn_greedy = np.zeros(1)
                         while (i<depth) and (x_model.n > 2):
@@ -381,8 +384,12 @@ class TrainModel_MC:
                             returns.insert(0, R)
                         returns = torch.tensor(returns)
 
+
+
                         returns = returns+1
                         returns = 1/returns
+
+                        # returns = -returns
 
                         # returns = (returns - self.model.epsilon/ 530000) / (1 - self.model.epsilon)
                         # returns = returns / (returns.std() + self.eps)
@@ -441,7 +448,7 @@ class TrainModel_MC:
 
                     av_loss_train += total_loss_train_1graph
 
-                print('epochs {}'.format(epoch+1), 'loss {}'.format(av_loss_train))
+
 
                 for X in self.val_loader:
                     for x in X:
@@ -460,7 +467,7 @@ class TrainModel_MC:
 
                         # loop for training while eliminating a graph iteratively
                         i = 1
-                        depth = np.min([n - 2, 300])
+                        depth = np.min([n - 2, depth_max])
                         # depth = n-2
                         while (i < depth) and (x_model.n > 2):
 
@@ -538,6 +545,15 @@ class TrainModel_MC:
             # print('epochs {}'.format(epoch),'loss {}'.format(av_loss_train) )
             total_loss_train.append(av_loss_train)
 
+            # print('epochs {}'.format(epoch),
+            #       'loss {}'.format(av_loss_train),
+            #       'train '+ self.heuristic + 'performance {}'.format(_train_ave_mind),
+            #       'train gcn performance {}'.format(_train_ave_gcn),
+            #       'val ' + self.heuristic + 'performance {}'.format(_val_ave_mind),
+            #       'val gcn performance {}'.format(_val_ave_gcn),
+            #
+            #       )
+
 
             # _val_ave_ratio_gcn2mind = _val_ave_gcn / _val_ave_mind
             # _train_ave_ratio_gcn2mind = _train_ave_gcn / _train_ave_mind
@@ -563,8 +579,8 @@ class TrainModel_MC:
             plt.ylabel('number of fill-in')
             # plt.draw()
             plt.savefig(
-                './results/rl/hyper_lractor_acmc_' + str(
-                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax__with_pretrain_train_' + self.train_dataset.__class__.__name__ + '_300depth_cuda' + str(
+                './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
+                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_without_epsilon_return_test.png')
             plt.clf()
 
@@ -577,8 +593,8 @@ class TrainModel_MC:
             plt.ylabel('number of fill-in')
             # plt.draw()
             plt.savefig(
-                './results/rl/hyper_lractor_acmc_' + str(
-                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy())  + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_' + self.train_dataset.__class__.__name__ + '_300depth_cuda' + str(
+                './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
+                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy())  + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_return_test.png')
             plt.clf()
 
@@ -591,8 +607,8 @@ class TrainModel_MC:
             plt.ylabel('number of fill-in')
             # plt.draw()
             plt.savefig(
-                './results/rl/hyper_lractor_acmc_' + str(
-                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_loss_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_' + self.train_dataset.__class__.__name__ + '_300depth_cuda' + str(
+                './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
+                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_umlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_return_test.png')
             plt.clf()
 

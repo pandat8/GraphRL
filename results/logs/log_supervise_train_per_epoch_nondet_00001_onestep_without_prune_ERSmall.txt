@@ -31,3 +31,26 @@ epochs 21 loss 0.002460235126976139 one_step_greedyperformance 12444.055 gcn_per
 epochs 22 loss 0.0024433691640610884 one_step_greedyperformance 12444.055 gcn_performance 12846.28
 epochs 23 loss 0.0024616812628182297 one_step_greedyperformance 12444.055 gcn_performance 12898.72
 epochs 24 loss 0.0024105021766124895 one_step_greedyperformance 12444.055 gcn_performance 12875.695
+epochs 25 loss 0.0023757993577475235 one_step_greedyperformance 12444.055 gcn_performance 12828.29
+epochs 26 loss 0.002354879732065855 one_step_greedyperformance 12444.055 gcn_performance 12848.5
+epochs 27 loss 0.0023244415792098606 one_step_greedyperformance 12444.055 gcn_performance 12853.775
+epochs 28 loss 0.002254306531934372 one_step_greedyperformance 12444.055 gcn_performance 12818.01
+epochs 29 loss 0.0021716038870465866 one_step_greedyperformance 12444.055 gcn_performance 12781.78
+epochs 30 loss 0.00214698833320025 one_step_greedyperformance 12444.055 gcn_performance 12761.635
+epochs 31 loss 0.0020486733762282395 one_step_greedyperformance 12444.055 gcn_performance 12758.83
+epochs 32 loss 0.002003538570907649 one_step_greedyperformance 12444.055 gcn_performance 12714.795
+epochs 33 loss 0.0018841793778902832 one_step_greedyperformance 12444.055 gcn_performance 12681.135
+epochs 34 loss 0.0018280023983665997 one_step_greedyperformance 12444.055 gcn_performance 12674.045
+epochs 35 loss 0.0018062572512784784 one_step_greedyperformance 12444.055 gcn_performance 12664.66
+epochs 36 loss 0.0017230801969260324 one_step_greedyperformance 12444.055 gcn_performance 12641.425
+epochs 37 loss 0.0016916452788936433 one_step_greedyperformance 12444.055 gcn_performance 12669.495
+epochs 38 loss 0.001660602899148794 one_step_greedyperformance 12444.055 gcn_performance 12610.765
+epochs 39 loss 0.001694061671079059 one_step_greedyperformance 12444.055 gcn_performance 12612.515
+epochs 40 loss 0.001651291132379535 one_step_greedyperformance 12444.055 gcn_performance 12613.265
+Finished
+Training time: 378347.5500
+Elimination time: 2545.0800
+Heuristicone_step_greedy time: 338442.9400
+Dense 2 Sparce time: 1095.9900
+IO to cuda time: 1948.8700
+Model and Opt time: 5232.3900
