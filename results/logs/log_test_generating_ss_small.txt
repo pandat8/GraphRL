@@ -1,0 +1,9 @@
+nohup: ignoring input
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/data/UFSMDataset.py:33: ComplexWarning: Casting complex values to real discards the imaginary part
+  adj_matrix = adj_matrix.astype(np.uint8)
+Traceback (most recent call last):
+  File "generate_dataset_UFSM.py", line 15, in <module>
+    ufsm_dataset = dataset_split(dataset= ufsm_dataset, train_frac=0.4)
+  File "/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/utils/utils.py", line 48, in dataset_split
+    dataset = data.random_split(dataset, (train_length, valid_length, test_length))
+AttributeError: module 'torch.utils.data' has no attribute 'random_split'

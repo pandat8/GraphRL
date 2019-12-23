@@ -1,0 +1,160 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Supervised Training started
+heuristic: min_degree learning rate: 0.001 epochs: 5 DataSet: ErgDataset
+
+/SCRATCH/liudefen/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 21.53555333651647
+epoch 0000 gcn2min_degree  train av_ratio 1.116013365429526  validation av_ratio 1.0202660378053723
+parameter name gc1.weight parameter value tensor(1.00000e-02 *
+       [[ 5.0068]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 2.2234], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.0132]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.0340], device='cuda:0')
+epochs 1 loss 4.309626898738366
+epoch 0001 gcn2min_degree  train av_ratio 1.0089821434987245  validation av_ratio 0.994951914219389
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 3.9342]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.9869], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.7486]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.4506], device='cuda:0')
+epochs 2 loss 2.8659534691743342
+epoch 0002 gcn2min_degree  train av_ratio 1.0099522149965867  validation av_ratio 0.9987471903902133
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 8.5465]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.8907], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.8651]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.1002], device='cuda:0')
+epochs 3 loss 2.8583081108388892
+epoch 0003 gcn2min_degree  train av_ratio 1.0054970718212193  validation av_ratio 0.9987840377316776
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 9.8158]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.8909], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.8720]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.4672], device='cuda:0')
+epochs 4 loss 2.824001859393179
+epoch 0004 gcn2min_degree  train av_ratio 1.0075090719649336  validation av_ratio 0.9995209845609638
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 9.7759]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.9047], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.8880]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [-2.2827], device='cuda:0')
+Training finished
+Training time: 108.9700
+Elimination time: 6.3100
+Heuristicmin_degree time: 1.5400
+Dense 2 Sparce time: 3.1000
+IO to cuda time: 1.9500
+Model and Opt time: 30.6000
+| Xavier Initialization
+| Xavier Initialization
+test stated
+min_degree  inserted edges1098
+min_degree  inserted edges1247
+min_degree  inserted edges1019
+min_degree  inserted edges1930
+min_degree  inserted edges1414
+min_degree  inserted edges1355
+min_degree  inserted edges1728
+min_degree  inserted edges1469
+min_degree  inserted edges1065
+min_degree  inserted edges1230
+min_degree  inserted edges1397
+min_degree  inserted edges1265
+min_degree  inserted edges1517
+min_degree  inserted edges1246
+min_degree  inserted edges1523
+min_degree  inserted edges1348
+min_degree  inserted edges1634
+min_degree  inserted edges1356
+min_degree  inserted edges1434
+min_degree  inserted edges1520
+min_degree  inserted edges1780
+min_degree  inserted edges1055
+min_degree  inserted edges1042
+min_degree  inserted edges1288
+min_degree  inserted edges1501
+min_degree  inserted edges1469
+min_degree  inserted edges1000
+min_degree  inserted edges1517
+min_degree  inserted edges1741
+min_degree  inserted edges1137
+min_degree  inserted edges1307
+min_degree  inserted edges1366
+min_degree  inserted edges1289
+min_degree  inserted edges1813
+min_degree  inserted edges1538
+min_degree  inserted edges1128
+min_degree  inserted edges1405
+min_degree  inserted edges1402
+min_degree  inserted edges1354
+min_degree  inserted edges1210
+min_degree  inserted edges1553
+min_degree  inserted edges1504
+min_degree  inserted edges1379
+min_degree  inserted edges1370
+min_degree  inserted edges1207
+min_degree  inserted edges1333
+min_degree  inserted edges1150
+min_degree  inserted edges1384
+min_degree  inserted edges1482
+min_degree  inserted edges1219
+min_degree  inserted edges1536
+min_degree  inserted edges1484
+min_degree  inserted edges1267
+min_degree  inserted edges1123
+min_degree  inserted edges1446
+min_degree  inserted edges1450
+min_degree  inserted edges1339
+min_degree  inserted edges1529
+min_degree  inserted edges1602
+min_degree  inserted edges1226
+min_degree  inserted edges902
+min_degree  inserted edges1505
+min_degree  inserted edges1286
+min_degree  inserted edges1417
+min_degree  inserted edges1566
+min_degree  inserted edges1514
+min_degree  inserted edges1259
+min_degree  inserted edges1179
+min_degree  inserted edges1552
+min_degree  inserted edges1474
+min_degree  inserted edges1364
+min_degree  inserted edges1002
+min_degree  inserted edges1561
+min_degree  inserted edges1572
+min_degree  inserted edges978
+min_degree  inserted edges1258
+min_degree  inserted edges1681
+min_degree  inserted edges1527
+min_degree  inserted edges1426
+min_degree  inserted edges1466
+min_degree  inserted edges1235
+min_degree  inserted edges1454
+min_degree  inserted edges1006
+min_degree  inserted edges1425
+min_degree  inserted edges1303
+min_degree  inserted edges1347
+min_degree  inserted edges1139
+min_degree  inserted edges1335
+min_degree  inserted edges1401
+min_degree  inserted edges1454
+min_degree  inserted edges1143
+min_degree  inserted edges1058
+min_degree  inserted edges1488
+min_degree  inserted edges1788
+min_degree  inserted edges1587
+min_degree  inserted edges1350
+min_degree  inserted edges1466
+min_degree  inserted edges1533
+min_degree  inserted edges1334
+min_degree  inserted edges1491
+test finished
+Test time: 49.4861

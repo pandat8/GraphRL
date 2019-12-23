@@ -1,0 +1,16 @@
+nohup: ignoring input
+loading dataset
+Dataset UFSMDataset loaded
+Test starting
+graph 0000 size 2327 min_degree 37268 one_step 27252
+graph 0001 size 3792 min_degree 19567 one_step 17348
+graph 0002 size 2169 min_degree 9254 one_step 7080
+graph 0003 size 3797 min_degree 84642 one_step 66481
+graph 0004 size 3509 min_degree 19959 one_step 14708
+graph 0005 size 3969 min_degree 5608 one_step 5592
+graph 0006 size 2921 min_degree 10976 one_step 10084
+graph 0007 size 4119 min_degree 23396 one_step 16130
+test finished
+size_av 3325.375 min_degree_av 26333.75 one_step_av 20584.375
+Test finished
+Test time: 3814.8031

@@ -1,0 +1,160 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Training started
+/SCRATCH/liudefen/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 2.1593581401243265
+epoch 0000 gcn2mind min_ratio 1.0806697108066972 max_ratio 1.136964980544747 av_ratio 1.107269047350243
+parameters tensor(1.00000e-02 *
+       [[-3.8417]], device='cuda:0')
+parameters tensor(1.00000e-21 *
+       [ 1.7386], device='cuda:0')
+parameters tensor(1.00000e-02 *
+       [[-3.8266]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.6671], device='cuda:0')
+epochs 1 loss 2.1511309892370756
+epoch 0001 gcn2mind min_ratio 1.0818713450292399 max_ratio 1.1357927786499216 av_ratio 1.1047105528132817
+parameters tensor(1.00000e-02 *
+       [[-1.0072]], device='cuda:0')
+parameters tensor(1.00000e-41 *
+       [ 1.3314], device='cuda:0')
+parameters tensor(1.00000e-03 *
+       [[-9.9604]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.3200], device='cuda:0')
+epochs 2 loss 2.485093761278635
+epoch 0002 gcn2mind min_ratio 1.0964581763376036 max_ratio 1.1357927786499216 av_ratio 1.109935370205787
+parameters tensor(1.00000e-04 *
+       [[-9.0625]], device='cuda:0')
+parameters tensor(1.00000e-41 *
+       [-1.6835], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [[-8.8455]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.1347], device='cuda:0')
+epochs 3 loss 2.265668667896038
+epoch 0003 gcn2mind min_ratio 1.0892053973013494 max_ratio 1.1311093871217999 av_ratio 1.1146816317713406
+parameters tensor(1.00000e-05 *
+       [[-1.4762]], device='cuda:0')
+parameters tensor(1.00000e-42 *
+       [ 2.9203], device='cuda:0')
+parameters tensor(1.00000e-05 *
+       [[-1.4083]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.0901], device='cuda:0')
+epochs 4 loss 2.2552018426790292
+epoch 0004 gcn2mind min_ratio 1.090704647676162 max_ratio 1.1289592760180995 av_ratio 1.1150581446562011
+parameters tensor(1.00000e-08 *
+       [[-1.3465]], device='cuda:0')
+parameters tensor(1.00000e-41 *
+       [-1.0934], device='cuda:0')
+parameters tensor(1.00000e-08 *
+       [[-1.2341]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.0325], device='cuda:0')
+epochs 5 loss 2.2057180889382417
+epoch 0005 gcn2mind min_ratio 1.0721884498480243 max_ratio 1.130739299610895 av_ratio 1.1039266418108868
+parameters tensor(1.00000e-14 *
+       [[-7.2189]], device='cuda:0')
+parameters tensor(1.00000e-42 *
+       [ 7.9075], device='cuda:0')
+parameters tensor(1.00000e-14 *
+       [[-6.1399]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.0612], device='cuda:0')
+epochs 6 loss 2.292036358310228
+epoch 0006 gcn2mind min_ratio 1.0895741556534508 max_ratio 1.1221789883268483 av_ratio 1.1095722046488372
+parameters tensor(1.00000e-23 *
+       [[-1.1926]], device='cuda:0')
+parameters tensor(1.00000e-41 *
+       [-2.9703], device='cuda:0')
+parameters tensor(1.00000e-24 *
+       [[-8.5492]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.0122], device='cuda:0')
+epochs 7 loss 2.2728390954866464
+epoch 0007 gcn2mind min_ratio 1.0862068965517242 max_ratio 1.1326530612244898 av_ratio 1.1133172910351072
+parameters tensor(1.00000e-38 *
+       [[ 6.6112]], device='cuda:0')
+parameters tensor(1.00000e-38 *
+       [-1.0773], device='cuda:0')
+parameters tensor(1.00000e-38 *
+       [[ 3.7187]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-1.9959], device='cuda:0')
+epochs 8 loss 2.307332966519838
+epoch 0008 gcn2mind min_ratio 1.0861280487804879 max_ratio 1.1350078492935636 av_ratio 1.1139420876591815
+parameters tensor(1.00000e-29 *
+       [[ 1.3778]], device='cuda:0')
+parameters tensor(1.00000e-30 *
+       [ 2.3952], device='cuda:0')
+parameters tensor(1.00000e-30 *
+       [[ 7.3603]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.0347], device='cuda:0')
+epochs 9 loss 2.6165125482215936
+epoch 0009 gcn2mind min_ratio 1.0608308605341246 max_ratio 1.132295719844358 av_ratio 1.1013534012561825
+parameters tensor(1.00000e-40 *
+       [[-7.7446]], device='cuda:0')
+parameters tensor(1.00000e-41 *
+       [ 7.4818], device='cuda:0')
+parameters tensor(1.00000e-39 *
+       [[-7.8400]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.0172], device='cuda:0')
+epochs 10 loss 2.397039629562145
+epoch 0010 gcn2mind min_ratio 1.074468085106383 max_ratio 1.1389324960753533 av_ratio 1.108420976788262
+parameters tensor(1.00000e-08 *
+       [[-7.0112]], device='cuda:0')
+parameters tensor(1.00000e-09 *
+       [-4.3128], device='cuda:0')
+parameters tensor(1.00000e-08 *
+       [[ 6.5534]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-2.0265], device='cuda:0')
+epochs 11 loss 0.4053588686504681
+epoch 0011 gcn2mind min_ratio 0.989329268292683 max_ratio 1.0076103500761036 av_ratio 0.9993950081746963
+parameters tensor([[ 0.2401]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [ 8.0835], device='cuda:0')
+parameters tensor([[-0.2356]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-1.3781], device='cuda:0')
+epochs 12 loss 0.10237403200993889
+epoch 0012 gcn2mind min_ratio 0.9985358711566618 max_ratio 1.0243328100470959 av_ratio 1.0064899088552834
+parameters tensor([[ 0.2784]], device='cuda:0')
+parameters tensor(1.00000e-05 *
+       [ 6.3081], device='cuda:0')
+parameters tensor([[-0.2825]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [ 2.5724], device='cuda:0')
+epochs 13 loss 0.10806010533470634
+epoch 0013 gcn2mind min_ratio 0.9955817378497791 max_ratio 1.0169491525423728 av_ratio 1.0029248215620115
+parameters tensor([[ 0.2914]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-4.5410], device='cuda:0')
+parameters tensor([[-0.2954]], device='cuda:0')
+parameters tensor(1.00000e-05 *
+       [ 6.9920], device='cuda:0')
+epochs 14 loss 0.09548069538554849
+epoch 0014 gcn2mind min_ratio 0.9926578560939795 max_ratio 1.0251177394034536 av_ratio 1.0058926763472922
+parameters tensor([[ 0.2304]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [-1.6814], device='cuda:0')
+parameters tensor([[-0.2315]], device='cuda:0')
+parameters tensor(1.00000e-04 *
+       [ 2.3873], device='cuda:0')
+Training finished
+Training time: 91.1800
+Elimination time: 8.7300
+Heuristic time: 0.6900
+Dense 2 Sparce time: 3.2900
+IO to cuda time: 1.7200
+Model and Opt time: 21.2400
+| Xavier Initialization
+| Xavier Initialization
+test stated
+test finished
+Test time: 24.8323

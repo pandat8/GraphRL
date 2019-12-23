@@ -1,0 +1,9 @@
+
+ Test result: test_graph_elimination_learn_min_degree
+DataSet: ErgDataset
+average ratio gcn2heuristic 1.0056 
+max ratio gcn2heuristic 1.0782
+min ratio 0.9167
+average ratio gcn2random 0.1659
+max ratio gcn2random 0.2408
+min ratio gcn2random 0.1278

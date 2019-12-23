@@ -1,0 +1,11 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+/SCRATCH/liudefen/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+Training finished
+Training time: 1466.4695
+| Xavier Initialization
+| Xavier Initialization
+test finished
+Test time: 35.7121

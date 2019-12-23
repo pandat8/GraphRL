@@ -1,0 +1,15 @@
+nohup: ignoring input
+loading dataset
+Dataset UFSMDataset loaded
+Test starting
+graph 0000 size_av 2327 min_degree_av 35172.2 one_step_av 27351.4 random_av 1067233.2
+graph 0001 size_av 3792 min_degree_av 19577.2 one_step_av 17348.6 random_av 2160221.6
+graph 0002 size_av 2169 min_degree_av 8949.4 one_step_av 7084.2 random_av 536148.6
+graph 0003 size_av 3797 min_degree_av 83638.4 one_step_av 67181.0 random_av 3195779.8
+graph 0004 size_av 3509 min_degree_av 19818.8 one_step_av 14724.8 random_av 2119082.6
+graph 0005 size_av 3969 min_degree_av 5713.6 one_step_av 5604.0 random_av 2178276.8
+graph 0006 size_av 2921 min_degree_av 10874.4 one_step_av 10117.6 random_av 1417058.6
+graph 0007 size_av 4119 min_degree_av 24552.6 one_step_av 16161.0 random_av 2895159.8
+test finished
+Test finished
+Test time: 25777.8504

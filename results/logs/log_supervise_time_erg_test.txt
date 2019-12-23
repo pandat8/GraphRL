@@ -1,0 +1,13 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+/SCRATCH/liudefen/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:111: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.softmax(features.t())
+Training finished
+Training time: 3.6800
+Elimination time: 0.3400
+Heuristic time: 0.0600
+Dense 2 Sparce time: 0.3300
+IO to cuda time: 0.1400
+Model time: 0.90
+Opt time: 1.5300

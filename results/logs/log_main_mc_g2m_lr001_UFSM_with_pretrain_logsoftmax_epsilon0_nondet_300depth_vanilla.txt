@@ -1,0 +1,52 @@
+nohup: ignoring input
+[[1 2 3]
+ [4 5 6]]
+| Xavier Initialization
+| Xavier Initialization
+Use Critic:
+False
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss -89.39101123809814
+parameter name actor.gc1.weight parameter value tensor(1.00000e-04 *
+       [[-7.0304]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 1.3975], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor([[-1.2467]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.2029], device='cuda:0')
+epochs 2 loss 28.309348106384277
+epochs 3 loss -90.25787925720215
+epochs 4 loss -21.586565017700195
+epochs 5 loss -14.695978164672852
+epochs 6 loss -54.93532752990723
+epochs 7 loss -47.186553955078125
+epochs 8 loss 89.772780418396
+epochs 9 loss -17.46906852722168
+epochs 10 loss -99.73170280456543
+epochs 11 loss -1.1678047180175781
+epochs 12 loss 8.681129932403564
+epochs 13 loss -41.50810241699219
+epochs 14 loss 64.16252374649048
+epochs 15 loss -117.99691581726074
+epochs 16 loss -63.90971755981445
+epochs 17 loss -33.95840644836426
+epochs 18 loss -53.047078132629395
+epochs 19 loss -68.97765922546387
+epochs 20 loss 67.96207046508789
+epochs 21 loss -99.59857749938965
+epochs 22 loss 21.074143648147583
+epochs 23 loss -80.53295850753784
+epochs 24 loss 98.81493759155273
+epochs 25 loss -100.14312171936035
+epochs 26 loss 80.2803144454956
+epochs 27 loss -123.7397050857544
+epochs 28 loss -30.365968227386475
+epochs 29 loss -60.37548065185547
+epochs 30 loss -130.17087745666504
+epochs 31 loss 33.83571815490723
+epochs 32 loss -64.55215835571289
+epochs 33 loss -73.84485626220703
+epochs 34 loss -68.88807201385498
+epochs 35 loss 78.17680168151855
+epochs 36 loss 57.26497983932495
+epochs 37 loss -71.6419448852539

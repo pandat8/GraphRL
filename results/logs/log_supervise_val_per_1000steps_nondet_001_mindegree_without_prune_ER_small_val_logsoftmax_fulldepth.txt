@@ -1,0 +1,215 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Supervised Validation started
+heuristic: min_degree learning rate: 0.001 DataSet: ErgDataset
+
+steps 0
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+steps 0 loss 0.004601038345015027 min_degree_performance 12505.05 gcn_performance 15994.465 random_performance 15986.275
+steps 1000
+steps 1000 loss 0.00446265193444344 min_degree_performance 12505.05 gcn_performance 15961.66 random_performance 15986.275
+steps 2000
+steps 2000 loss 0.004631562109130109 min_degree_performance 12505.05 gcn_performance 15961.285 random_performance 15986.275
+steps 3000
+steps 3000 loss 0.004472343974423183 min_degree_performance 12505.05 gcn_performance 15971.82 random_performance 15986.275
+steps 4000
+steps 4000 loss 0.00445565090604368 min_degree_performance 12505.05 gcn_performance 15981.895 random_performance 15986.275
+steps 5000
+steps 5000 loss 0.004347139563153132 min_degree_performance 12505.05 gcn_performance 15988.77 random_performance 15986.275
+steps 6000
+steps 6000 loss 0.004484912785795485 min_degree_performance 12505.05 gcn_performance 15968.735 random_performance 15986.275
+steps 7000
+steps 7000 loss 0.004403929138721938 min_degree_performance 12505.05 gcn_performance 15964.855 random_performance 15986.275
+steps 8000
+steps 8000 loss 0.004338139118993517 min_degree_performance 12505.05 gcn_performance 15988.17 random_performance 15986.275
+steps 9000
+steps 9000 loss 0.004381898112493339 min_degree_performance 12505.05 gcn_performance 15983.015 random_performance 15986.275
+steps 10000
+steps 10000 loss 0.004393563172172536 min_degree_performance 12505.05 gcn_performance 15996.68 random_performance 15986.275
+steps 11000
+steps 11000 loss 0.004255689646998839 min_degree_performance 12505.05 gcn_performance 15985.6 random_performance 15986.275
+steps 12000
+steps 12000 loss 0.004372944924242454 min_degree_performance 12505.05 gcn_performance 15954.765 random_performance 15986.275
+steps 13000
+steps 13000 loss 0.0009436361651203321 min_degree_performance 12505.05 gcn_performance 12717.675 random_performance 15986.275
+steps 14000
+steps 14000 loss 0.0008868753531087779 min_degree_performance 12505.05 gcn_performance 12639.255 random_performance 15986.275
+steps 15000
+steps 15000 loss 0.0008284692423579699 min_degree_performance 12505.05 gcn_performance 12621.35 random_performance 15986.275
+steps 16000
+steps 16000 loss 0.000812919899021007 min_degree_performance 12505.05 gcn_performance 12641.71 random_performance 15986.275
+steps 17000
+steps 17000 loss 0.0009119086256458631 min_degree_performance 12505.05 gcn_performance 12634.685 random_performance 15986.275
+steps 18000
+steps 18000 loss 0.0008722623523842816 min_degree_performance 12505.05 gcn_performance 12657.34 random_performance 15986.275
+steps 19000
+steps 19000 loss 0.0008819793176058448 min_degree_performance 12505.05 gcn_performance 12663.505 random_performance 15986.275
+steps 20000
+steps 20000 loss 0.0009278794446929262 min_degree_performance 12505.05 gcn_performance 12626.77 random_performance 15986.275
+steps 21000
+steps 21000 loss 0.0008309808592650515 min_degree_performance 12505.05 gcn_performance 12634.04 random_performance 15986.275
+steps 22000
+steps 22000 loss 0.0009694791903785805 min_degree_performance 12505.05 gcn_performance 12633.65 random_performance 15986.275
+steps 23000
+steps 23000 loss 0.0008443191161624265 min_degree_performance 12505.05 gcn_performance 12648.49 random_performance 15986.275
+steps 24000
+steps 24000 loss 0.0008396541860395345 min_degree_performance 12505.05 gcn_performance 12634.655 random_performance 15986.275
+steps 25000
+steps 25000 loss 0.0009881801935675244 min_degree_performance 12505.05 gcn_performance 12621.53 random_performance 15986.275
+steps 26000
+steps 26000 loss 0.0008154343217258483 min_degree_performance 12505.05 gcn_performance 12625.3 random_performance 15986.275
+steps 27000
+steps 27000 loss 0.0008089523534105505 min_degree_performance 12505.05 gcn_performance 12621.245 random_performance 15986.275
+steps 28000
+steps 28000 loss 0.0007921781876149039 min_degree_performance 12505.05 gcn_performance 12630.115 random_performance 15986.275
+steps 29000
+steps 29000 loss 0.0008441465390481485 min_degree_performance 12505.05 gcn_performance 12653.07 random_performance 15986.275
+steps 30000
+steps 30000 loss 0.0008113420205676247 min_degree_performance 12505.05 gcn_performance 12660.265 random_performance 15986.275
+steps 31000
+steps 31000 loss 0.0008093987401652955 min_degree_performance 12505.05 gcn_performance 12653.065 random_performance 15986.275
+steps 32000
+steps 32000 loss 0.0008035732274394105 min_degree_performance 12505.05 gcn_performance 12654.345 random_performance 15986.275
+steps 33000
+steps 33000 loss 0.0008006558039581775 min_degree_performance 12505.05 gcn_performance 12629.135 random_performance 15986.275
+steps 34000
+steps 34000 loss 0.0008288883382635623 min_degree_performance 12505.05 gcn_performance 12649.57 random_performance 15986.275
+steps 35000
+steps 35000 loss 0.0008146444653789292 min_degree_performance 12505.05 gcn_performance 12649.23 random_performance 15986.275
+steps 36000
+steps 36000 loss 0.0008662396404012256 min_degree_performance 12505.05 gcn_performance 12659.405 random_performance 15986.275
+steps 37000
+steps 37000 loss 0.0008124575031245719 min_degree_performance 12505.05 gcn_performance 12655.18 random_performance 15986.275
+steps 38000
+steps 38000 loss 0.0008047328301214772 min_degree_performance 12505.05 gcn_performance 12639.82 random_performance 15986.275
+steps 39000
+steps 39000 loss 0.0008062789134900793 min_degree_performance 12505.05 gcn_performance 12657.61 random_performance 15986.275
+steps 40000
+steps 40000 loss 0.0008256278408799537 min_degree_performance 12505.05 gcn_performance 12637.2 random_performance 15986.275
+steps 41000
+steps 41000 loss 0.0007929651995050405 min_degree_performance 12505.05 gcn_performance 12642.64 random_performance 15986.275
+steps 42000
+steps 42000 loss 0.0008838083976080439 min_degree_performance 12505.05 gcn_performance 12605.055 random_performance 15986.275
+steps 43000
+steps 43000 loss 0.0008071448824572609 min_degree_performance 12505.05 gcn_performance 12670.175 random_performance 15986.275
+steps 44000
+steps 44000 loss 0.0008185765070927299 min_degree_performance 12505.05 gcn_performance 12624.43 random_performance 15986.275
+steps 45000
+steps 45000 loss 0.0009284135221572057 min_degree_performance 12505.05 gcn_performance 12614.685 random_performance 15986.275
+steps 46000
+steps 46000 loss 0.0009438157397213615 min_degree_performance 12505.05 gcn_performance 12615.16 random_performance 15986.275
+steps 47000
+steps 47000 loss 0.0009199315073736883 min_degree_performance 12505.05 gcn_performance 12661.445 random_performance 15986.275
+steps 48000
+steps 48000 loss 0.0009230208536161552 min_degree_performance 12505.05 gcn_performance 12707.515 random_performance 15986.275
+steps 49000
+steps 49000 loss 0.0007795735321207626 min_degree_performance 12505.05 gcn_performance 12629.025 random_performance 15986.275
+steps 50000
+steps 50000 loss 0.0008022174402630844 min_degree_performance 12505.05 gcn_performance 12623.91 random_performance 15986.275
+steps 51000
+steps 51000 loss 0.0007792160855548543 min_degree_performance 12505.05 gcn_performance 12633.07 random_performance 15986.275
+steps 52000
+steps 52000 loss 0.0008542367913464191 min_degree_performance 12505.05 gcn_performance 12662.71 random_performance 15986.275
+steps 53000
+steps 53000 loss 0.0008118168527416558 min_degree_performance 12505.05 gcn_performance 12639.105 random_performance 15986.275
+steps 54000
+steps 54000 loss 0.000797235001409622 min_degree_performance 12505.05 gcn_performance 12630.325 random_performance 15986.275
+steps 55000
+steps 55000 loss 0.0008185781968475547 min_degree_performance 12505.05 gcn_performance 12673.555 random_performance 15986.275
+steps 56000
+steps 56000 loss 0.001003497653094512 min_degree_performance 12505.05 gcn_performance 12617.94 random_performance 15986.275
+steps 57000
+steps 57000 loss 0.0007708178025414034 min_degree_performance 12505.05 gcn_performance 12657.425 random_performance 15986.275
+steps 58000
+steps 58000 loss 0.0007356028854753094 min_degree_performance 12505.05 gcn_performance 12647.175 random_performance 15986.275
+steps 59000
+steps 59000 loss 0.0007485407549756255 min_degree_performance 12505.05 gcn_performance 12639.34 random_performance 15986.275
+steps 60000
+steps 60000 loss 0.0008398872085884616 min_degree_performance 12505.05 gcn_performance 12663.445 random_performance 15986.275
+steps 61000
+steps 61000 loss 0.0007797179394254325 min_degree_performance 12505.05 gcn_performance 12629.575 random_performance 15986.275
+steps 62000
+steps 62000 loss 0.0007764442556413889 min_degree_performance 12505.05 gcn_performance 12617.92 random_performance 15986.275
+steps 63000
+steps 63000 loss 0.0007653178263131023 min_degree_performance 12505.05 gcn_performance 12608.795 random_performance 15986.275
+steps 64000
+steps 64000 loss 0.0008363216712765114 min_degree_performance 12505.05 gcn_performance 12670.29 random_performance 15986.275
+steps 65000
+steps 65000 loss 0.000751447191219982 min_degree_performance 12505.05 gcn_performance 12624.605 random_performance 15986.275
+steps 66000
+steps 66000 loss 0.000707764060342671 min_degree_performance 12505.05 gcn_performance 12618.11 random_performance 15986.275
+steps 67000
+steps 67000 loss 0.0007813370932168119 min_degree_performance 12505.05 gcn_performance 12619.37 random_performance 15986.275
+steps 68000
+steps 68000 loss 0.0007257490972377561 min_degree_performance 12505.05 gcn_performance 12626.8 random_performance 15986.275
+steps 69000
+steps 69000 loss 0.0007069921063113403 min_degree_performance 12505.05 gcn_performance 12634.04 random_performance 15986.275
+steps 70000
+steps 70000 loss 0.0007511515605056591 min_degree_performance 12505.05 gcn_performance 12649.005 random_performance 15986.275
+steps 71000
+steps 71000 loss 0.0008057310598696821 min_degree_performance 12505.05 gcn_performance 12662.24 random_performance 15986.275
+steps 72000
+steps 72000 loss 0.000743811745962855 min_degree_performance 12505.05 gcn_performance 12641.085 random_performance 15986.275
+steps 73000
+steps 73000 loss 0.000960811912344985 min_degree_performance 12505.05 gcn_performance 12703.03 random_performance 15986.275
+steps 74000
+steps 74000 loss 0.0008150135025684587 min_degree_performance 12505.05 gcn_performance 12653.905 random_performance 15986.275
+steps 75000
+steps 75000 loss 0.0007877749828517883 min_degree_performance 12505.05 gcn_performance 12626.4 random_performance 15986.275
+steps 76000
+steps 76000 loss 0.0007644913240683023 min_degree_performance 12505.05 gcn_performance 12624.125 random_performance 15986.275
+steps 77000
+steps 77000 loss 0.000782753777919878 min_degree_performance 12505.05 gcn_performance 12597.005 random_performance 15986.275
+steps 78000
+steps 78000 loss 0.0007578632832109208 min_degree_performance 12505.05 gcn_performance 12626.36 random_performance 15986.275
+steps 79000
+steps 79000 loss 0.0008453094763245709 min_degree_performance 12505.05 gcn_performance 12611.915 random_performance 15986.275
+steps 80000
+steps 80000 loss 0.0007346099254926209 min_degree_performance 12505.05 gcn_performance 12608.41 random_performance 15986.275
+steps 81000
+steps 81000 loss 0.0007817178549097192 min_degree_performance 12505.05 gcn_performance 12614.525 random_performance 15986.275
+steps 82000
+steps 82000 loss 0.0007254742851379084 min_degree_performance 12505.05 gcn_performance 12618.755 random_performance 15986.275
+steps 83000
+steps 83000 loss 0.0008028249266436355 min_degree_performance 12505.05 gcn_performance 12628.18 random_performance 15986.275
+steps 84000
+steps 84000 loss 0.0008234461177954255 min_degree_performance 12505.05 gcn_performance 12656.0 random_performance 15986.275
+steps 85000
+steps 85000 loss 0.0007779728980190047 min_degree_performance 12505.05 gcn_performance 12624.695 random_performance 15986.275
+steps 86000
+steps 86000 loss 0.0007521749797003339 min_degree_performance 12505.05 gcn_performance 12611.045 random_performance 15986.275
+steps 87000
+steps 87000 loss 0.0008783297330863762 min_degree_performance 12505.05 gcn_performance 12641.505 random_performance 15986.275
+steps 88000
+steps 88000 loss 0.0009753048580777226 min_degree_performance 12505.05 gcn_performance 12606.885 random_performance 15986.275
+steps 89000
+steps 89000 loss 0.0007584993003554624 min_degree_performance 12505.05 gcn_performance 12609.075 random_performance 15986.275
+steps 90000
+steps 90000 loss 0.000705525150294033 min_degree_performance 12505.05 gcn_performance 12618.69 random_performance 15986.275
+steps 91000
+steps 91000 loss 0.0008270475513631006 min_degree_performance 12505.05 gcn_performance 12645.64 random_performance 15986.275
+steps 92000
+steps 92000 loss 0.0008135133494193227 min_degree_performance 12505.05 gcn_performance 12619.3 random_performance 15986.275
+steps 93000
+steps 93000 loss 0.000758729526167063 min_degree_performance 12505.05 gcn_performance 12644.24 random_performance 15986.275
+steps 94000
+steps 94000 loss 0.0007386146236456995 min_degree_performance 12505.05 gcn_performance 12628.9 random_performance 15986.275
+steps 95000
+steps 95000 loss 0.0007312383747986136 min_degree_performance 12505.05 gcn_performance 12627.83 random_performance 15986.275
+steps 96000
+steps 96000 loss 0.0007141876464690647 min_degree_performance 12505.05 gcn_performance 12632.695 random_performance 15986.275
+steps 97000
+steps 97000 loss 0.0007307574762286792 min_degree_performance 12505.05 gcn_performance 12617.505 random_performance 15986.275
+steps 98000
+steps 98000 loss 0.000726364151202335 min_degree_performance 12505.05 gcn_performance 12623.505 random_performance 15986.275
+steps 99000
+steps 99000 loss 0.0007148826882777492 min_degree_performance 12505.05 gcn_performance 12629.355 random_performance 15986.275
+Validation Finished
+Validation time: 13258.3000
+Elimination time: 4272.4500
+Heuristicmin_degree time: 171.2400
+Dense 2 Sparce time: 2452.4200
+IO to cuda time: 902.1300
+Model and Opt time: 0.0000
