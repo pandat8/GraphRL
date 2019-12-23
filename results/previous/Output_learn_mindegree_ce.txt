@@ -1,9 +1,0 @@
-
- Test result: test_graph_elimination_learn_mindegree_CrossEntropy
-DataSet: 1UFSMDataset
-average ratio 0.9892 
-max ratio 1.0357
-min ratio 0.8438
-average ratio graph2random 0.6598
-max ratio graph2random 0.9118
-min ratio graph2random 0.4310

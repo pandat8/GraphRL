@@ -1,8 +1,0 @@
-nohup: ignoring input
-| Xavier Initialization
-| Xavier Initialization
-Supervised Training started
-heuristic: one_step_greedy learning rate: 0.001 epochs: 20 DataSet: UFSMDataset
-
-/SCRATCH/liudefen/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
-  features = F.log_softmax(features.t())

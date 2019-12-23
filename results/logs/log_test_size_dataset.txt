@@ -1,4 +1,0 @@
-nohup: ignoring input
-a=2000
-b=1000
-c=295
