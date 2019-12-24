@@ -16,3 +16,13 @@ parameter name actor.gc1.bias parameter value tensor([ 0.], device='cuda:0')
 parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
        [[-1.3048]], device='cuda:0')
 parameter name actor.gc2.bias parameter value tensor([ 0.], device='cuda:0')
+Use Critic:
+False
+parameter name actor.gc1.weight parameter value tensor(1.00000e-02 *
+       [[-5.1137]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor(1.00000e-02 *
+       [-5.3410], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
+       [[-4.8952]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-02 *
+       [-1.7331], device='cuda:0')
