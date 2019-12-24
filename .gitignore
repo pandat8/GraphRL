@@ -1,8 +1,9 @@
 # data
-ERGcollection/
-UFSM/
+**/ERGcollection/
+**/UFSM/
 *.pkl
-
+.idea/
+.cache/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
