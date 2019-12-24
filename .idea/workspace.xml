@@ -15387,7 +15387,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rl/train_a2c_mc.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
@@ -15395,15 +15395,6 @@
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test_git.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="18" selection-start-column="18" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -15845,7 +15836,7 @@
       <workItem from="1577050006358" duration="6022000" />
       <workItem from="1577058984304" duration="4828000" />
       <workItem from="1577128625578" duration="4947000" />
-      <workItem from="1577150741069" duration="35000" />
+      <workItem from="1577150741069" duration="253000" />
     </task>
     <servers />
   </component>
@@ -15861,7 +15852,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="240672000" />
+    <option name="totallyTimeSpent" value="240890000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="952" extended-state="0" />
@@ -15996,16 +15987,6 @@
     <entry file="file://$PROJECT_DIR$/results/rl/rmc/lractor_acmc_0.001_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax__with_pretrain_train_UFSMDataset_Demo_300depth_prune_cudaTrue_without_epsilon_return_test.png" />
     <entry file="file://$PROJECT_DIR$/results/logs/rlpgmc/hypertrain_log_main_mc_log_r_g2m_lr1-00001_UFSM18_no_pretrain_logsoftmax_epsilon0_nondet_unlimit_depth_vanilla.txt" />
     <entry file="file://$PROJECT_DIR$/results/logs/log_main_mc_g2m_01_ERG100_non_pretrained_gcn_logsoftmax_epsilon0_return_test.txt" />
-    <entry file="file://$PROJECT_DIR$/rl/train_a2c_mc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="394" column="24" selection-start-line="394" selection-start-column="24" selection-end-line="394" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main_mc_vanilla.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -16029,6 +16010,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rl/train_a2c_mc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="394" column="24" selection-start-line="394" selection-start-column="24" selection-end-line="394" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

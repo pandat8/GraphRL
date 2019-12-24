@@ -1,0 +1,38 @@
+nohup: ignoring input
+[[1 2 3]
+ [4 5 6]]
+| Xavier Initialization
+| Xavier Initialization
+Use Critic:
+False
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss -17.513620376586914
+parameter name actor.gc1.weight parameter value tensor(1.00000e-02 *
+       [[-1.5938]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
+       [[-1.3048]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor([ 0.], device='cuda:0')
+epochs 2 loss -25.703076362609863
+epochs 3 loss -13.322837829589844
+epochs 4 loss -20.558676719665527
+epochs 5 loss -10.658679008483887
+epochs 6 loss -34.94170379638672
+epochs 7 loss -96.6066198348999
+epochs 8 loss -24.436216831207275
+epochs 9 loss -62.51365661621094
+epochs 10 loss -127.66587257385254
+epochs 11 loss -67.09974479675293
+epochs 12 loss -83.46211004257202
+epochs 13 loss -48.67658042907715
+epochs 14 loss -93.65273761749268
+epochs 15 loss -99.03187274932861
+epochs 16 loss -58.431185722351074
+epochs 17 loss -22.102545261383057
+epochs 18 loss -36.31688070297241
+epochs 19 loss -38.30298852920532
+epochs 20 loss -33.414666175842285
+epochs 21 loss -5.664822101593018
+epochs 22 loss -31.745574951171875
+epochs 23 loss -37.96848964691162

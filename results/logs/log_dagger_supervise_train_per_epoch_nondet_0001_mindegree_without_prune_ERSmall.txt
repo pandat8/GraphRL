@@ -1,0 +1,57 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+| Xavier Initialization
+| Xavier Initialization
+Supervised Training started
+heuristic: min_degree learning rate: 0.0001 epochs: 40 DataSet: ErgDataset
+
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 0.000713682523744582 min_degreeperformance 12515.29 gcn_performance 12695.01
+epochs 1 loss 0.0006877496737975038 min_degreeperformance 12515.29 gcn_performance 12647.56
+epochs 2 loss 0.0008162730780145513 min_degreeperformance 12515.29 gcn_performance 12630.52
+epochs 3 loss 0.0007645128979430981 min_degreeperformance 12515.29 gcn_performance 12645.925
+epochs 4 loss 0.000817854050384098 min_degreeperformance 12515.29 gcn_performance 12627.525
+epochs 5 loss 0.0007726718218763069 min_degreeperformance 12515.29 gcn_performance 12619.86
+epochs 6 loss 0.0007545462851538996 min_degreeperformance 12515.29 gcn_performance 12629.885
+epochs 7 loss 0.0007243707628614442 min_degreeperformance 12515.29 gcn_performance 12618.045
+epochs 8 loss 0.0006384700136791937 min_degreeperformance 12515.29 gcn_performance 12616.3
+epochs 9 loss 0.000614622142572019 min_degreeperformance 12515.29 gcn_performance 12609.425
+epochs 10 loss 0.0005555955150984012 min_degreeperformance 12515.29 gcn_performance 12586.49
+epochs 11 loss 0.0005418708408372319 min_degreeperformance 12515.29 gcn_performance 12597.92
+epochs 12 loss 0.0005275764108127674 min_degreeperformance 12515.29 gcn_performance 12584.625
+epochs 13 loss 0.0005034319724483347 min_degreeperformance 12515.29 gcn_performance 12577.7
+epochs 14 loss 0.0004987772124321048 min_degreeperformance 12515.29 gcn_performance 12608.715
+epochs 15 loss 0.0005239757376268256 min_degreeperformance 12515.29 gcn_performance 12589.66
+epochs 16 loss 0.0005277332126190625 min_degreeperformance 12515.29 gcn_performance 12574.47
+epochs 17 loss 0.0005186941554251957 min_degreeperformance 12515.29 gcn_performance 12593.85
+epochs 18 loss 0.000524339965309533 min_degreeperformance 12515.29 gcn_performance 12590.715
+epochs 19 loss 0.0005190080388364379 min_degreeperformance 12515.29 gcn_performance 12595.025
+epochs 20 loss 0.0005254376379210963 min_degreeperformance 12515.29 gcn_performance 12609.425
+epochs 21 loss 0.0005196527696186935 min_degreeperformance 12515.29 gcn_performance 12585.58
+epochs 22 loss 0.0005443512813879209 min_degreeperformance 12515.29 gcn_performance 12590.385
+epochs 23 loss 0.0005208227264662024 min_degreeperformance 12515.29 gcn_performance 12610.385
+epochs 24 loss 0.0005207397877293335 min_degreeperformance 12515.29 gcn_performance 12586.39
+epochs 25 loss 0.0005198802553310355 min_degreeperformance 12515.29 gcn_performance 12598.91
+epochs 26 loss 0.0005147433167632583 min_degreeperformance 12515.29 gcn_performance 12600.195
+epochs 27 loss 0.0005094898659638344 min_degreeperformance 12515.29 gcn_performance 12584.15
+epochs 28 loss 0.0005041700186975878 min_degreeperformance 12515.29 gcn_performance 12594.175
+epochs 29 loss 0.0005374447024718801 min_degreeperformance 12515.29 gcn_performance 12573.33
+epochs 30 loss 0.0005284711347510747 min_degreeperformance 12515.29 gcn_performance 12587.515
+epochs 31 loss 0.0005258683825687902 min_degreeperformance 12515.29 gcn_performance 12604.375
+epochs 32 loss 0.000515770613559948 min_degreeperformance 12515.29 gcn_performance 12583.11
+epochs 33 loss 0.0005254398736572953 min_degreeperformance 12515.29 gcn_performance 12580.505
+epochs 34 loss 0.0005194234003701174 min_degreeperformance 12515.29 gcn_performance 12579.62
+epochs 35 loss 0.0005200104784900549 min_degreeperformance 12515.29 gcn_performance 12580.17
+epochs 36 loss 0.0005365655995207373 min_degreeperformance 12515.29 gcn_performance 12587.645
+epochs 37 loss 0.0005161803278090824 min_degreeperformance 12515.29 gcn_performance 12587.425
+epochs 38 loss 0.00052078121951895 min_degreeperformance 12515.29 gcn_performance 12579.34
+epochs 39 loss 0.0005134249938641916 min_degreeperformance 12515.29 gcn_performance 12586.615
+Finished
+Training time: 17442.3400
+Elimination time: 3.4700
+Heuristicmin_degree time: 73.2300
+Dense 2 Sparce time: 1027.0800
+IO to cuda time: 636.0400
+Model and Opt time: 2953.0800

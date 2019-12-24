@@ -1,0 +1,13 @@
+nohup: ignoring input
+loading dataset
+Dataset ErgDataset loaded
+Test starting
+graph 0000 size 100 min_degree 1396 one_step 1430
+graph 0001 size 100 min_degree 1462 one_step 1473
+graph 0002 size 100 min_degree 1513 one_step 1474
+graph 0003 size 100 min_degree 1456 one_step 1475
+graph 0004 size 100 min_degree 1494 one_step 1458
+test finished
+size_av 100.0 min_degree_av 1464.2 one_step_av 1462.0
+Test finished
+Test time: 2.3676

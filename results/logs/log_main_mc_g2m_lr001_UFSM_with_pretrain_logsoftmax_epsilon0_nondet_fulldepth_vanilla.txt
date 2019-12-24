@@ -1,0 +1,9 @@
+nohup: ignoring input
+[[1 2 3]
+ [4 5 6]]
+| Xavier Initialization
+| Xavier Initialization
+Traceback (most recent call last):
+  File "main_mc_vanilla.py", line 150, in <module>
+    test_dataset = dataset(start=22, end=26)
+TypeError: __init__() got an unexpected keyword argument 'start'

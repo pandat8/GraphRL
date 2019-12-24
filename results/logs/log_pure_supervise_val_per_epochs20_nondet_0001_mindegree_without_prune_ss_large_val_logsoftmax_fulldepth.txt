@@ -1,0 +1,36 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Supervised Validation started
+heuristic: min_degree learning rate: 0.0001 epochs: 21 DataSet: UFSMDataset
+
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 0.005779437742303503 min_degree_performance 61404.52881355932 gcn_performance 458331.0440677966 random_performance 468306.37627118645
+epochs 1 loss 0.0048396572813938854 min_degree_performance 61404.52881355932 gcn_performance 66520.52881355933 random_performance 468306.37627118645
+epochs 2 loss 0.004872339679139111 min_degree_performance 61404.52881355932 gcn_performance 66277.07457627119 random_performance 468306.37627118645
+epochs 3 loss 0.004845264332759085 min_degree_performance 61404.52881355932 gcn_performance 66212.6372881356 random_performance 468306.37627118645
+epochs 4 loss 0.0047154752136093605 min_degree_performance 61404.52881355932 gcn_performance 66192.3186440678 random_performance 468306.37627118645
+epochs 5 loss 0.004777876881119334 min_degree_performance 61404.52881355932 gcn_performance 65573.93898305084 random_performance 468306.37627118645
+epochs 6 loss 0.004834111831631917 min_degree_performance 61404.52881355932 gcn_performance 65000.04406779661 random_performance 468306.37627118645
+epochs 7 loss 0.004253311100155674 min_degree_performance 61404.52881355932 gcn_performance 64798.98644067797 random_performance 468306.37627118645
+epochs 8 loss 0.0040843745596551235 min_degree_performance 61404.52881355932 gcn_performance 64254.55593220339 random_performance 468306.37627118645
+epochs 9 loss 0.004167041783919456 min_degree_performance 61404.52881355932 gcn_performance 63803.54915254237 random_performance 468306.37627118645
+epochs 10 loss 0.003620557085972645 min_degree_performance 61404.52881355932 gcn_performance 63656.779661016946 random_performance 468306.37627118645
+epochs 11 loss 0.0036502195899802362 min_degree_performance 61404.52881355932 gcn_performance 63346.28813559322 random_performance 468306.37627118645
+epochs 12 loss 0.0037685027145675414 min_degree_performance 61404.52881355932 gcn_performance 63411.82372881356 random_performance 468306.37627118645
+epochs 13 loss 0.0035059254364760576 min_degree_performance 61404.52881355932 gcn_performance 63487.15254237288 random_performance 468306.37627118645
+epochs 14 loss 0.0034912066308612874 min_degree_performance 61404.52881355932 gcn_performance 63476.42711864407 random_performance 468306.37627118645
+epochs 15 loss 0.003887841986313193 min_degree_performance 61404.52881355932 gcn_performance 63305.22711864407 random_performance 468306.37627118645
+epochs 16 loss 0.0036890978334172433 min_degree_performance 61404.52881355932 gcn_performance 63500.06440677966 random_performance 468306.37627118645
+epochs 17 loss 0.0035005910858251174 min_degree_performance 61404.52881355932 gcn_performance 63629.01016949153 random_performance 468306.37627118645
+epochs 18 loss 0.0035678802472296767 min_degree_performance 61404.52881355932 gcn_performance 63649.54915254237 random_performance 468306.37627118645
+epochs 19 loss 0.003670373157381272 min_degree_performance 61404.52881355932 gcn_performance 63685.630508474576 random_performance 468306.37627118645
+epochs 20 loss 0.004000762518300999 min_degree_performance 61404.52881355932 gcn_performance 63780.62372881356 random_performance 468306.37627118645
+Supervised Validation Finished
+Validation time: 157445.7100
+Elimination time: 44261.8500
+Heuristicmin_degree time: 4789.2400
+Dense 2 Sparce time: 36986.0400
+IO to cuda time: 8775.8200
+Model and Opt time: 0.0000

@@ -1,0 +1,38 @@
+nohup: ignoring input
+[[1 2 3]
+ [4 5 6]]
+| Xavier Initialization
+| Xavier Initialization
+Supervised Training started
+heuristic: min_degree actor learning rate: 0.001 epochs: 300 DataSet: UFSMDataset_Demo
+
+Use Critic:
+False
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+parameter name actor.gc1.weight parameter value tensor(1.00000e-02 *
+       [[-1.5938]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
+       [[-1.3048]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor([ 0.], device='cuda:0')
+Traceback (most recent call last):
+  File "main_mc.py", line 200, in <module>
+    density = args.p
+  File "/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/rl/train_a2c_mc.py", line 587, in train_and_validate
+    self.use_cuda) + '_without_epsilon_return_test.png')
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/matplotlib/pyplot.py", line 710, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/matplotlib/figure.py", line 2035, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 2263, in print_figure
+    **kwargs)
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/matplotlib/backends/backend_agg.py", line 526, in print_png
+    with cbook.open_file_cm(filename_or_obj, "wb") as fh:
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 624, in open_file_cm
+    fh, opened = to_filehandle(path_or_file, mode, True, encoding)
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/matplotlib/cbook/__init__.py", line 609, in to_filehandle
+    fh = io.open(fname, flag, encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: './results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_without_epsilon_return_test.png'

@@ -1,0 +1,39 @@
+nohup: ignoring input
+[[1 2 3]
+ [4 5 6]]
+| Xavier Initialization
+| Xavier Initialization
+Use Critic:
+False
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss -833.3892364501953
+epoch 0000 gcn2min_degree  train av_ratio 27.6404251131667  validation av_ratio 76.67153641207814
+parameter name actor.gc1.weight parameter value tensor(1.00000e-02 *
+       [[-1.5938]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor([ 0.], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
+       [[-1.3048]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor([ 0.], device='cuda:0')
+epochs 1 loss -1073.2755126953125
+epochs 2 loss -1035.5069122314453
+epochs 3 loss -1222.4530029296875
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCThrustAllocator.cuh line=21 error=2 : out of memory
+Traceback (most recent call last):
+  File "main_mc_vanilla.py", line 185, in <module>
+    density = args.p
+  File "/local_workspace/liudefen/PycharmProjects/PycharmProjects/PycharmProjects/gnn/GraphRL/rl/train_a2c_mc.py", line 422, in train_and_validate
+    action, log_prob, reward, value_current, value_next, x_model = self.model(x_model) # forward propagation,action: node selected, reward: nb edges added
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/torch/nn/modules/module.py", line 491, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/local_workspace/liudefen/PycharmProjects/PycharmProjects/PycharmProjects/gnn/GraphRL/rl/model_a2c.py", line 150, in forward
+    probs = self.actor(features, adj_M)  # call actor to get a selection distribution
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/torch/nn/modules/module.py", line 491, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/local_workspace/liudefen/PycharmProjects/PycharmProjects/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py", line 80, in forward
+    features = self.gc1(features, adj_matrix)
+  File "/home/x86_64-unknown-linux_ol7-gnu/anaconda-5.2.0/envs/pytorch/lib/python3.6/site-packages/torch/nn/modules/module.py", line 491, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/local_workspace/liudefen/PycharmProjects/PycharmProjects/PycharmProjects/gnn/GraphRL/gcn/layers_gcn.py", line 129, in forward
+    features = torch.spmm(adj_matrix, features) # adjacency matrix * features
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCThrustAllocator.cuh:21

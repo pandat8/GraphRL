@@ -1,0 +1,175 @@
+nohup: ignoring input
+| Xavier Initialization
+| Xavier Initialization
+Supervised Training started
+heuristic: min_degree learning rate: 0.001 epochs: 20 DataSet: UFSMDataset
+
+/SCRATCH/liudefen/PycharmProjects/gnn/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
+epochs 0 loss 6.128627116081041
+epoch 0000 gcn2min_degree  train av_ratio 1.9005149925398277  validation av_ratio 1.021014492753623
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 1.3979]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.8509], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.0091]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [-2.1334], device='cuda:0')
+epochs 1 loss 3.049056253513697
+epoch 0001 gcn2min_degree  train av_ratio 1.0671656158251914  validation av_ratio 0.9866271409749671
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[-4.9194]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.6449], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.1653]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.4877], device='cuda:0')
+epochs 2 loss 2.2282010867727657
+epoch 0002 gcn2min_degree  train av_ratio 1.1096645328969534  validation av_ratio 1.1926548089591569
+parameter name gc1.weight parameter value tensor(1.00000e-02 *
+       [[ 1.5189]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.3083], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.2289]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-05 *
+       [-3.2903], device='cuda:0')
+epochs 3 loss 2.3098108619183315
+epoch 0003 gcn2min_degree  train av_ratio 1.0126822929200558  validation av_ratio 1.068840579710145
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 2.7728]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.4572], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.1620]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 3.1986], device='cuda:0')
+epochs 4 loss 3.821576886269481
+epoch 0004 gcn2min_degree  train av_ratio 1.0858160465899793  validation av_ratio 0.9950922266139658
+parameter name gc1.weight parameter value tensor(1.00000e-04 *
+       [[ 3.2314]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.7702], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.2130]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 3.4318], device='cuda:0')
+epochs 5 loss 1.9057763402894483
+epoch 0005 gcn2min_degree  train av_ratio 1.0726283871588775  validation av_ratio 1.0377470355731224
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 2.4877]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.3185], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.2085]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 1.6325], device='cuda:0')
+epochs 6 loss 2.108284431322934
+epoch 0006 gcn2min_degree  train av_ratio 1.2009192857486644  validation av_ratio 1.0021739130434784
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 2.6286]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.5920], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.5368]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 3.4936], device='cuda:0')
+epochs 7 loss 2.3921337797190203
+epoch 0007 gcn2min_degree  train av_ratio 1.1261972373297395  validation av_ratio 1.1337285902503293
+parameter name gc1.weight parameter value tensor(1.00000e-02 *
+       [[ 1.4323]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.6468], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.4397]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.9670], device='cuda:0')
+epochs 8 loss 2.112032145872778
+epoch 0008 gcn2min_degree  train av_ratio 1.0667565096019638  validation av_ratio 1.1085638998682477
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 7.6823]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.4676], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.1307]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 1.9186], device='cuda:0')
+epochs 9 loss 2.0428742461562592
+epoch 0009 gcn2min_degree  train av_ratio 1.1853732492660154  validation av_ratio 1.083201581027668
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 2.1487]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.2541], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.1707]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.4351], device='cuda:0')
+epochs 10 loss 2.3662438917115134
+epoch 0010 gcn2min_degree  train av_ratio 1.1252586995235117  validation av_ratio 1.107608695652174
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 4.3310]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.5301], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.2208]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 2.8348], device='cuda:0')
+epochs 11 loss 2.2686085187998284
+epoch 0011 gcn2min_degree  train av_ratio 1.0805457958319296  validation av_ratio 1.0504281949934124
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[-2.6584]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.6319], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.4823]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 4.4032], device='cuda:0')
+epochs 12 loss 1.9825562838033592
+epoch 0012 gcn2min_degree  train av_ratio 1.0344371179669827  validation av_ratio 1.0320158102766799
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 1.1639]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.3047], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.1396]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-05 *
+       [ 6.3769], device='cuda:0')
+epochs 13 loss 2.2939360432407483
+epoch 0013 gcn2min_degree  train av_ratio 1.1306492756413342  validation av_ratio 1.2006258234519105
+parameter name gc1.weight parameter value tensor(1.00000e-02 *
+       [[ 1.7984]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.5430], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.1634]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [-2.2477], device='cuda:0')
+epochs 14 loss 2.459858866907423
+epoch 0014 gcn2min_degree  train av_ratio 1.1444385618713  validation av_ratio 1.046376811594203
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[-3.2552]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.6406], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.5197]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 4.2466], device='cuda:0')
+epochs 15 loss 2.9311006888829834
+epoch 0015 gcn2min_degree  train av_ratio 1.1491793810463493  validation av_ratio 1.0486166007905138
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 1.7924]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.6963], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.4120]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-05 *
+       [ 7.7594], device='cuda:0')
+epochs 16 loss 1.946071556108433
+epoch 0016 gcn2min_degree  train av_ratio 1.087765317418299  validation av_ratio 1.0600790513833993
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[ 3.9706]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.2472], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.1665]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-05 *
+       [-6.9192], device='cuda:0')
+epochs 17 loss 2.2355221778916823
+epoch 0017 gcn2min_degree  train av_ratio 1.0815565288540212  validation av_ratio 1.0012845849802372
+parameter name gc1.weight parameter value tensor(1.00000e-03 *
+       [[-1.9001]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.6060], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.5200]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 4.3723], device='cuda:0')
+epochs 18 loss 2.0372768478334793
+epoch 0018 gcn2min_degree  train av_ratio 1.0002406507195456  validation av_ratio 1.019631093544137
+parameter name gc1.weight parameter value tensor(1.00000e-04 *
+       [[ 6.9791]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.5913], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.4971]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-04 *
+       [ 4.4041], device='cuda:0')
+epochs 19 loss 1.9074608307065601
+epoch 0019 gcn2min_degree  train av_ratio 1.0616306492756413  validation av_ratio 1.076449275362319
+parameter name gc1.weight parameter value tensor(1.00000e-04 *
+       [[ 9.9192]], device='cuda:0')
+parameter name gc1.bias parameter value tensor([ 1.2273], device='cuda:0')
+parameter name gc2.weight parameter value tensor([[-1.0941]], device='cuda:0')
+parameter name gc2.bias parameter value tensor(1.00000e-05 *
+       [-8.8182], device='cuda:0')
+Training finished
+Training time: 2279.5800
+Elimination time: 115.2800
+Heuristicmin_degree time: 43.7600
+Dense 2 Sparce time: 143.5300
+IO to cuda time: 17.0600
+Model and Opt time: 110.0400
