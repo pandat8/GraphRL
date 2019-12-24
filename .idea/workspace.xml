@@ -15388,10 +15388,25 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rl/train_a2c_mc.py">
+        <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_without_epsilon_return_test.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/results/logs/rlpgmc/hypertrain_log_main_mc_log_r_g2m_lr1-001_UFSM18_no_pretrain_logsoftmax_epsilon0_nondet_unlimit_depth_vanilla.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/results/logs/rlpgmc/hypertrain_log_main_mc_std_r_g2m_lr1-001_UFSM18_no_pretrain_logsoftmax_epsilon0_nondet_unlimit_depth_vanilla.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="160" column="24" selection-start-line="160" selection-start-column="24" selection-end-line="160" selection-end-column="24" />
+            <state relative-caret-position="90">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -15400,27 +15415,17 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results/rl/lractor_acmc_0.001_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_UFSMDataset_300depth_cudaTrue_return_test.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/results/logs/rlpgmc/hypertrain_log_main_mc_power-1_r_g2m_lr1-001_UFSM18_no_pretrain_logsoftmax_epsilon0_nondet_unlimit_depth_vanilla.txt">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_without_epsilon_return_test.png">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_power-1_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_without_epsilon_return_test.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_return_test.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_umlim_depth_prune_cudaTrue_return_test.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_power-1_r_0.01_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_umlim_depth_prune_cudaTrue_return_test.png">
+        <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_power-1_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_return_test.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
@@ -15527,10 +15532,10 @@
         <option value="$PROJECT_DIR$/results/logs/log_supervise_gnngan_gridsearch_mindegree_ER_small20graphs_train.txt" />
         <option value="$PROJECT_DIR$/data/UFSMDataset_Demo" />
         <option value="$PROJECT_DIR$/main_mc_vanilla.py" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/main_mc.py" />
         <option value="$PROJECT_DIR$/test_git.py" />
         <option value="$PROJECT_DIR$/rl/train_a2c_mc.py" />
+        <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
@@ -15544,41 +15549,36 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="synnn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="synnn" type="462c0819:PsiDirectoryNode" />
+              <item name="GraphRL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GraphRL" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="synnn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="synnn" type="462c0819:PsiDirectoryNode" />
+              <item name="GraphRL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GraphRL" type="462c0819:PsiDirectoryNode" />
               <item name="results" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="synnn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="synnn" type="462c0819:PsiDirectoryNode" />
+              <item name="GraphRL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GraphRL" type="462c0819:PsiDirectoryNode" />
               <item name="results" type="462c0819:PsiDirectoryNode" />
               <item name="rl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="synnn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="synnn" type="462c0819:PsiDirectoryNode" />
+              <item name="GraphRL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GraphRL" type="462c0819:PsiDirectoryNode" />
               <item name="results" type="462c0819:PsiDirectoryNode" />
               <item name="rl" type="462c0819:PsiDirectoryNode" />
               <item name="rmc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="synnn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="synnn" type="462c0819:PsiDirectoryNode" />
-              <item name="rl" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -15885,6 +15885,7 @@
       <workItem from="1577058984304" duration="4828000" />
       <workItem from="1577128625578" duration="4947000" />
       <workItem from="1577150741069" duration="1118000" />
+      <workItem from="1577152901858" duration="63000" />
     </task>
     <servers />
   </component>
@@ -15900,12 +15901,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="241755000" />
+    <option name="totallyTimeSpent" value="241818000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="952" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3901099" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3949939" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -15987,12 +15989,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_0.001_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax__without_pretrain_train_UFSMDatasetfulldepth_cudaTrue_without_epsilon_return_test.png" />
-    <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_0.0001_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_UFSMDataset_300depth_cudaTrue_return_test.png" />
-    <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_0.0001_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_without_pretrain_val_UFSMDatasetfulldepth_cudaTrue_return_test.png" />
-    <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_0.0001_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_UFSMDataset_300depth_cudaTrue_return_test.png" />
-    <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_0.0001_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax__without_pretrain_train_UFSMDatasetfulldepth_cudaTrue_without_epsilon_return_test.png" />
-    <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_1e-05_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_UFSMDataset_300depth_cudaTrue_return_test.png" />
     <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_1e-05_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_UFSMDataset_300depth_cudaTrue_return_test.png" />
     <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_1e-05_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax__with_pretrain_train_UFSMDataset_300depth_cudaTrue_without_epsilon_return_test.png" />
     <entry file="file://$PROJECT_DIR$/results/rl/hyper_lractor_acmc_0.0001_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_without_pretrain_val_UFSMDatasetfulldepth_cudaTrue_return_test.png" />
@@ -16028,6 +16024,32 @@
     <entry file="file://$PROJECT_DIR$/results/rl/rmc/lractor_acmc_0.001_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax__with_pretrain_train_UFSMDataset_Demo_300depth_prune_cudaTrue_without_epsilon_return_test.png" />
     <entry file="file://$PROJECT_DIR$/results/logs/rlpgmc/hypertrain_log_main_mc_log_r_g2m_lr1-00001_UFSM18_no_pretrain_logsoftmax_epsilon0_nondet_unlimit_depth_vanilla.txt" />
     <entry file="file://$PROJECT_DIR$/results/logs/log_main_mc_g2m_01_ERG100_non_pretrained_gcn_logsoftmax_epsilon0_return_test.txt" />
+    <entry file="file://$PROJECT_DIR$/test_git.py" />
+    <entry file="file://$PROJECT_DIR$/rl/train_a2c_mc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2220">
+          <caret line="160" column="24" selection-start-line="160" selection-start-column="24" selection-end-line="160" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/rl/lractor_acmc_0.001_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_UFSMDataset_300depth_cudaTrue_return_test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_return_test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_umlim_depth_prune_cudaTrue_return_test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_power-1_r_0.01_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_umlim_depth_prune_cudaTrue_return_test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/rl/acmc_0.001_min_degree_curve_g2m_number_gcn_logsoftmax__with_pretrain_train_UFSMDatasetfulldepth_cudaTrue_without_epsilon_return_test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/main_mc_vanilla.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -16047,40 +16069,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_git.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/rl/acmc_0.001_min_degree_curve_g2m_number_gcn_logsoftmax__with_pretrain_train_UFSMDatasetfulldepth_cudaTrue_without_epsilon_return_test.png">
+    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_power-1_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_without_epsilon_return_test.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/rl/train_a2c_mc.py">
+    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_power-1_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_return_test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_without_epsilon_return_test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/logs/rlpgmc/hypertrain_log_main_mc_power-1_r_g2m_lr1-001_UFSM18_no_pretrain_logsoftmax_epsilon0_nondet_unlimit_depth_vanilla.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/logs/rlpgmc/hypertrain_log_main_mc_log_r_g2m_lr1-001_UFSM18_no_pretrain_logsoftmax_epsilon0_nondet_unlimit_depth_vanilla.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/logs/rlpgmc/hypertrain_log_main_mc_std_r_g2m_lr1-001_UFSM18_no_pretrain_logsoftmax_epsilon0_nondet_unlimit_depth_vanilla.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="160" column="24" selection-start-line="160" selection-start-column="24" selection-end-line="160" selection-end-column="24" />
+        <state relative-caret-position="90">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/rl/lractor_acmc_0.001_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_with_pretrain_val_UFSMDataset_300depth_cudaTrue_return_test.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_power-1_r_0.01_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_umlim_depth_prune_cudaTrue_return_test.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_return_test.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_UFSMDataset_Demo_umlim_depth_prune_cudaTrue_return_test.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results/rl/rmc/hyper_lractor_acmc_std_r_0.01_epsilon_0.0_min_degree_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_UFSMDataset_Demo_unlim_depth_prune_cudaTrue_without_epsilon_return_test.png">
-      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
 </project>

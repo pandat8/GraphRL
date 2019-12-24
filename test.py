@@ -4,3 +4,4 @@ import torch
 
 for i in range(18, 19):
     print(i)
+    print(i+1)
