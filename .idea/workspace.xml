@@ -15566,13 +15566,6 @@
             <path>
               <item name="synnn" type="b2602c69:ProjectViewProjectNode" />
               <item name="synnn" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
-              <item name="rl" type="462c0819:PsiDirectoryNode" />
-              <item name="rmc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="synnn" type="b2602c69:ProjectViewProjectNode" />
-              <item name="synnn" type="462c0819:PsiDirectoryNode" />
               <item name="rl" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -15884,7 +15877,7 @@
       <workItem from="1577050006358" duration="6022000" />
       <workItem from="1577058984304" duration="4828000" />
       <workItem from="1577128625578" duration="4947000" />
-      <workItem from="1577150741069" duration="1118000" />
+      <workItem from="1577150741069" duration="1350000" />
     </task>
     <servers />
   </component>
@@ -15900,7 +15893,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="241755000" />
+    <option name="totallyTimeSpent" value="241987000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="952" extended-state="0" />
