@@ -10,9 +10,3 @@ Use Critic:
 False
 /local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:85: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
   features = F.log_softmax(features.t())
-parameter name actor.gc1.weight parameter value tensor(1.00000e-02 *
-       [[-1.5938]], device='cuda:0')
-parameter name actor.gc1.bias parameter value tensor([ 0.], device='cuda:0')
-parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
-       [[-1.3048]], device='cuda:0')
-parameter name actor.gc2.bias parameter value tensor([ 0.], device='cuda:0')
