@@ -179,7 +179,7 @@ for i in range(len(lr)):
         # actor.load_state_dict(torch.load('./results/models/gcn_policy_one_step_greedy_pre_UFSMDataset_epochs30_cuda.pth'))
         actor.cuda()
     model_a2c = Model_A2C_Sparse(actor=actor,
-                                 epsilon=0,  # non-pretrain:0.02
+                                 epsilon=0.02,  # non-pretrain:0.02 #pretrain:0.0
                                  use_critic=args.use_critic,
                                  use_cuda=args.cuda,
                                  critic=critic)
