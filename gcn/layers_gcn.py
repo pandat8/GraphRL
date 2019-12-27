@@ -115,7 +115,7 @@ class GraphConvolutionLayer_Sparse(Module):
     def reset_parameters_xavier(self):
         nn.init.xavier_normal_(self.weight.data, gain=0.02) # Implement Xavier Uniform
         if self.bias is not None:
-            nn.init.xavier_normal_(self.bias.data, 0.02)
+            nn.init.xavier_normal_(self.bias.data, gain=0.02)
 
     def reset_parameters_kaiming(self):
         nn.init.kaiming_normal_(self.weight.data, a=0, mode='fan_in')
