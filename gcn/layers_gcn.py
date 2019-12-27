@@ -89,7 +89,7 @@ class GraphConvolutionLayer_Sparse(Module):
 
         #Parameter(torch.Tensor(self.nfeatures_in,self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
         if bias:
-            self.bias = nn.Parameter(nn.init.constant_(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor),0.0))
+            self.bias = nn.Parameter(nn.init.xavier_normal_(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor), gain=np.sqrt(2.0)), requires_grad=True)
             #Parameter(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
         else:
             self.register_parameter('bias',None)
@@ -115,7 +115,7 @@ class GraphConvolutionLayer_Sparse(Module):
     def reset_parameters_xavier(self):
         nn.init.xavier_normal_(self.weight.data, gain=0.02) # Implement Xavier Uniform
         if self.bias is not None:
-            nn.init.constant_(self.bias.data, 0.0)
+            nn.init.xavier_normal_(self.bias.data, 0.02)
 
     def reset_parameters_kaiming(self):
         nn.init.kaiming_normal_(self.weight.data, a=0, mode='fan_in')

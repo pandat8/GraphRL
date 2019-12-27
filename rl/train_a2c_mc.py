@@ -165,7 +165,7 @@ class TrainModel_MC:
                         returns = (returns - self.model.epsilon / 530000) / (1 - self.model.epsilon)
                         # returns = returns / (returns.std() + self.eps)
 
-                        # returns = (returns - returns.mean()) / (returns.std() + self.eps)
+                        returns = (returns - returns.mean()) / (returns.std() + self.eps)
                         saved_actions = self.model.saved_actions
                         # compute cummulated loss of actor and critic of one graph
                         gamma_t = 1
@@ -397,7 +397,7 @@ class TrainModel_MC:
                         returns = (returns - self.model.epsilon/ 530000) / (1 - self.model.epsilon)
                         # returns = returns / (returns.std() + self.eps)
 
-                        # returns = (returns - returns.mean()) / (returns.std() + self.eps)
+                        returns = (returns - returns.mean()) / (returns.std() + self.eps)
 
                         saved_actions = self.model.saved_actions
                         # compute cummulated loss of actor and critic of one graph
@@ -585,7 +585,7 @@ class TrainModel_MC:
             plt.savefig(
                 './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
                     lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
-                    self.use_cuda) + '_without_epsilon_return_-mean-eps02.png')
+                    self.use_cuda) + '_return_-mean.png')
             plt.clf()
 
             plt.clf()
@@ -599,7 +599,7 @@ class TrainModel_MC:
             plt.savefig(
                 './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
                     lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy())  + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
-                    self.use_cuda) + '_return_-mean-eps02.png')
+                    self.use_cuda) + '_return_-mean.png')
             plt.clf()
 
             plt.clf()
@@ -613,7 +613,7 @@ class TrainModel_MC:
             plt.savefig(
                 './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
                     lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_umlim_depth_prune_cuda' + str(
-                    self.use_cuda) + '_return_-mean-eps02.png')
+                    self.use_cuda) + '_return_-mean.png')
             plt.clf()
 
             # plt.clf()

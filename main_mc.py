@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--nocuda', action= 'store_true', default=False, help='Disable Cuda')
 parser.add_argument('--novalidation', action= 'store_true', default=False, help='Disable validation')
 parser.add_argument('--seed', type=int, default=50, help='Radom seed')
-parser.add_argument('--epochs', type=int, default=300, help='Training epochs')
+parser.add_argument('--epochs', type=int, default=400, help='Training epochs')
 parser.add_argument('--pretrain_epochs', type=int, default=3, help='Training epochs')
 parser.add_argument('--lr_actor', type=float, default= 0.001, help='Learning rate of actor')
 parser.add_argument('--lr_critic', type=float, default= 0.001, help='Learning rate of critic')
@@ -59,20 +59,20 @@ if args.cuda:
 # test_loader = DataLoader(test_dataset, batch_size=1, shuffle=True, collate_fn=lambda x: x)
 # test_loader = DataLoader(test_set, batch_size=1, collate_fn=lambda x: x)
 # build the GCN model
-actor = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
-                              nhidden= args.dhidden,
-                              nout=args.doutput,
-                              dropout=args.dropout,
-                              ) # alpha=args.alpha
-
+# actor = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
+#                               nhidden= args.dhidden,
+#                               nout=args.doutput,
+#                               dropout=args.dropout,
+#                               ) # alpha=args.alpha
+#
 # reset nb of epochs of supervised pretraining to load the pre-trained model
-
-if args.cuda:
+#
+# if args.cuda:
     # actor.load_state_dict(
     #     torch.load('./results/models/gcn_policy_' + heuristic + '_pre_' + dataset.__name__ +str(args.nnode)+ 'dense_' + str(
     #                args.p) + '_epochs' + str(args.pretrain_epochs) + '_cuda.pth'))
     # actor.load_state_dict(torch.load('./results/models/gcn_policy_one_step_greedy_pre_UFSMDataset_epochs30_cuda.pth'))
-    actor.cuda()
+    # actor.cuda()
 # else:
 #     actor.load_state_dict(torch.load('./results/models/gcn_memory_policy_min_degree_pre_erg100.pthh'))
 
@@ -155,17 +155,23 @@ eps = [0, 0.001, 0.01 ,0.02, 0.05, 0.1, 0.2, 0.5 ]
 # lr = [0.00001, 0.0001, 0.001, 0.01, 0.1]
 
 # lr = [0.00001, 0.0001, 0.001, ]
-lr = [0.01]
+lr = [0.01, 0.1]
 # lr = [0.00001, 0.0001, 0.001,0.1]
 time_start = time.time()
 
 for i in range(len(lr)):
 
+    actor = GCN_Sparse_Policy_SelectNode(nin=args.dinput,
+                                         nhidden=args.dhidden,
+                                         nout=args.doutput,
+                                         dropout=args.dropout,
+                                         )  # alpha=args.alpha
+
     if dataset_name == 'UFSMDataset':
         test_dataset = dataset(start=24, end=26)
         train_dataset = dataset(start=18, end=19)
         # val_dataset = dataset(args.nnode_test, args.ngraph_test, args.p)
-        val_dataset = dataset(start=19, end=20)
+        val_dataset = dataset(start=19, end=19)
     elif dataset_name == 'ErgDataset':
         train_dataset = dataset(args.nnode, args.ngraph, args.p)
         val_dataset = dataset(args.nnode, args.ngraph, args.p)
