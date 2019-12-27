@@ -155,7 +155,7 @@ eps = [0, 0.001, 0.01 ,0.02, 0.05, 0.1, 0.2, 0.5 ]
 # lr = [0.00001, 0.0001, 0.001, 0.01, 0.1]
 
 # lr = [0.00001, 0.0001, 0.001, ]
-lr = [0.01, 0.1]
+lr = [0.01, 0.1, 1, 0.001]
 # lr = [0.00001, 0.0001, 0.001,0.1]
 time_start = time.time()
 
@@ -185,7 +185,7 @@ for i in range(len(lr)):
         # actor.load_state_dict(torch.load('./results/models/gcn_policy_one_step_greedy_pre_UFSMDataset_epochs30_cuda.pth'))
         actor.cuda()
     model_a2c = Model_A2C_Sparse(actor=actor,
-                                 epsilon=0.02,  # non-pretrain:0.02 #pretrain:0.0
+                                 epsilon=0.0,  # non-pretrain:0.02 #pretrain:0.0
                                  use_critic=args.use_critic,
                                  use_cuda=args.cuda,
                                  critic=critic)
