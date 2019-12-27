@@ -89,7 +89,7 @@ class GraphConvolutionLayer_Sparse(Module):
 
         #Parameter(torch.Tensor(self.nfeatures_in,self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
         if bias:
-            self.bias = nn.Parameter(nn.init.xavier_normal_(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor), gain=np.sqrt(2.0)), requires_grad=True)
+            self.bias = nn.Parameter(nn.init.xavier_normal_(torch.Tensor(1, self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor), gain=np.sqrt(2.0)), requires_grad=True)
             #Parameter(torch.Tensor(self.nfeatures_out).type(torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor))
         else:
             self.register_parameter('bias',None)
