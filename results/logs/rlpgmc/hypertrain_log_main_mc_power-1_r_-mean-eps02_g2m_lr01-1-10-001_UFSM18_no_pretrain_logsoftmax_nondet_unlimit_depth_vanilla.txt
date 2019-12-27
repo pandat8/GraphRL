@@ -22,3 +22,15 @@ parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
   _val_ave_gcn = np.sum(val_gcn_greedy) / len(val_gcn_greedy)
 /local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/rl/train_a2c_mc.py:537: RuntimeWarning: invalid value encountered in double_scalars
   _val_ave_mind = np.sum(val_mind) / len(val_mind)
+| Xavier Initialization
+| Xavier Initialization
+Use Critic:
+False
+parameter name actor.gc1.weight parameter value tensor(1.00000e-02 *
+       [[ 1.3927]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor(1.00000e-03 *
+       [[ 2.0181]], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor(1.00000e-03 *
+       [[ 8.2456]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-02 *
+       [[ 2.2910]], device='cuda:0')
