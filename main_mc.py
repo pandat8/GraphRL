@@ -178,7 +178,7 @@ for i in range(len(lr)):
         test_dataset = dataset(start=24, end=26)
         train_dataset = dataset(start=18, end=19)
         # val_dataset = dataset(args.nnode_test, args.ngraph_test, args.p)
-        val_dataset = dataset(start=19, end=20)
+        val_dataset = dataset(start=19, end=19)
     elif dataset_name == 'ErgDataset':
         train_dataset = dataset(args.nnode, args.ngraph, args.p)
         val_dataset = dataset(args.nnode, args.ngraph, args.p)
