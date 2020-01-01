@@ -22,3 +22,5 @@ parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
   _val_ave_gcn = np.sum(val_gcn_greedy) / len(val_gcn_greedy)
 /local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/rl/train_a2c_mc.py:537: RuntimeWarning: invalid value encountered in double_scalars
   _val_ave_mind = np.sum(val_mind) / len(val_mind)
+Training finished
+Training time: 5438.4950
