@@ -593,7 +593,7 @@ class TrainModel_MC:
             # plt.draw()
             plt.savefig(
                 './results/rl/rmc/hyper_lractor_acmc_std_r_' + str(
-                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_curve_g2m_number_gan_logsoftmax_no_pretrain_train_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
+                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax_no_pretrain_train_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_return_-mean.png')
             plt.clf()
 
@@ -607,7 +607,7 @@ class TrainModel_MC:
             # plt.draw()
             plt.savefig(
                 './results/rl/rmc/hyper_lractor_acmc_std_r_' + str(
-                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy())  + '_' + self.heuristic + '_curve_g2m_number_gan_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
+                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy())  + '_' + self.heuristic + '_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_return_-mean.png')
             plt.clf()
 
@@ -621,7 +621,7 @@ class TrainModel_MC:
             # plt.draw()
             plt.savefig(
                 './results/rl/rmc/hyper_lractor_acmc_std_r_' + str(
-                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_loss_curve_g2m_number_gan_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_umlim_depth_prune_cuda' + str(
+                    lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_loss_curve_g2m_number_gcn_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_umlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_return_-mean.png')
             plt.clf()
 
