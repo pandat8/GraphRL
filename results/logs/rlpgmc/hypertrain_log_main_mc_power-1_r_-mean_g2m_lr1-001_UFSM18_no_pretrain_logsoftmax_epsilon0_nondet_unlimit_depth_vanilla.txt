@@ -18,3 +18,29 @@ parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
        [[-2.5310]], device='cuda:0')
 parameter name actor.gc2.bias parameter value tensor(1.00000e-03 *
        [[ 7.4140]], device='cuda:0')
+| Xavier Initialization
+| Xavier Initialization
+Use Critic:
+False
+parameter name actor.gc1.weight parameter value tensor(1.00000e-02 *
+       [[-1.2163]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor(1.00000e-02 *
+       [[ 3.2956]], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
+       [[ 3.5658]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-02 *
+       [[-1.4053]], device='cuda:0')
+| Xavier Initialization
+| Xavier Initialization
+Use Critic:
+False
+parameter name actor.gc1.weight parameter value tensor(1.00000e-02 *
+       [[-1.2163]], device='cuda:0')
+parameter name actor.gc1.bias parameter value tensor(1.00000e-02 *
+       [[ 3.2956]], device='cuda:0')
+parameter name actor.gc2.weight parameter value tensor(1.00000e-02 *
+       [[ 3.5658]], device='cuda:0')
+parameter name actor.gc2.bias parameter value tensor(1.00000e-02 *
+       [[-1.4053]], device='cuda:0')
+Training finished
+Training time: 249193.9912
