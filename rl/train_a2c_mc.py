@@ -156,11 +156,17 @@ class TrainModel_MC:
                             returns.insert(0, R)
                         returns = torch.tensor(returns)
 
-                        returns = returns + 1
-                        returns = 1 / returns
+                        # power-1 return
+                        # returns = returns + 1
+                        # returns = 1 / returns
+
+                        # log return
+                        # returns = returns + 1
                         # returns = -returns.log()
 
-                        # returns = -returns
+                        # standard return
+                        returns = -returns
+
 
                         returns = (returns - self.model.epsilon / 530000) / (1 - self.model.epsilon)
                         # returns = returns / (returns.std() + self.eps)
@@ -386,13 +392,16 @@ class TrainModel_MC:
                             returns.insert(0, R)
                         returns = torch.tensor(returns)
 
+                        # power-1 return
+                        # returns = returns + 1
+                        # returns = 1 / returns
 
-
-                        returns = returns+1
-                        returns = 1/returns
+                        # log return
+                        # returns = returns + 1
                         # returns = -returns.log()
 
-                        # returns = -returns
+                        # standard return
+                        returns = -returns
 
                         returns = (returns - self.model.epsilon/ 530000) / (1 - self.model.epsilon)
                         # returns = returns / (returns.std() + self.eps)
@@ -583,7 +592,7 @@ class TrainModel_MC:
             plt.ylabel('number of fill-in')
             # plt.draw()
             plt.savefig(
-                './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
+                './results/rl/rmc/hyper_lractor_acmc_std_r_' + str(
                     lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_curve_g2m_number_gan_logsoftmax_no_pretrain_train_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_return_-mean.png')
             plt.clf()
@@ -597,7 +606,7 @@ class TrainModel_MC:
             plt.ylabel('number of fill-in')
             # plt.draw()
             plt.savefig(
-                './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
+                './results/rl/rmc/hyper_lractor_acmc_std_r_' + str(
                     lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy())  + '_' + self.heuristic + '_curve_g2m_number_gan_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_unlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_return_-mean.png')
             plt.clf()
@@ -611,7 +620,7 @@ class TrainModel_MC:
             plt.ylabel('number of fill-in')
             # plt.draw()
             plt.savefig(
-                './results/rl/rmc/hyper_lractor_acmc_power-1_r_' + str(
+                './results/rl/rmc/hyper_lractor_acmc_std_r_' + str(
                     lr_actor) + '_epsilon_' + str(self.model.epsilon.numpy()) + '_' + self.heuristic + '_loss_curve_g2m_number_gan_logsoftmax_no_pretrain_val_' + self.train_dataset.__class__.__name__ + '_umlim_depth_prune_cuda' + str(
                     self.use_cuda) + '_return_-mean.png')
             plt.clf()
