@@ -1,0 +1,12 @@
+nohup: ignoring input
+[[1 2 3]
+ [4 5 6]]
+Supervised Training started
+heuristic: min_degree actor learning rate: 0.001 epochs: 500 DataSet: UFSMDataset_Demo
+
+| Xavier Initialization
+| Xavier Initialization
+Use Critic:
+False
+/local_workspace/liudefen/PycharmProjects/PycharmProjects/GraphRL/gcn/models_gcn.py:162: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  features = F.log_softmax(features.t())
