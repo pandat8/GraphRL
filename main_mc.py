@@ -8,7 +8,7 @@ from data.graph import Graph
 from rl.model_a2c import Model_A2C_Sparse
 from rl.train_a2c_td import TrainModel_TD
 from rl.train_a2c_mc import TrainModel_MC
-from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GCN_Sparse_Memory_Policy_SelectNode, GAN, GNN_GAN
+from gcn.models_gcn import GCN_Policy_SelectNode, GCN_Sparse_Policy_SelectNode, GCN_Sparse_Memory_Policy_SelectNode, GAN, GNN_GAN, GCN_Sparse_Policy_5
 from gcn.models_gcn import GCN_Value, GCN_Sparse_Value
 from supervised.train_supervised_learning import Train_SupervisedLearning
 
@@ -168,12 +168,18 @@ for i in range(len(lr)):
     #                                      dropout=args.dropout,
     #                                      )  # alpha=args.alpha
 
-    actor = GNN_GAN(nin=args.dinput,
-                nhidden=args.dhidden,
-                nout=args.doutput,
-                dropout=args.dropout,
-                alpha=args.alpha
-                )  # alpha=args.alpha
+    actor = GCN_Sparse_Policy_5(nin=args.dinput,
+                                         nhidden=args.dhidden,
+                                         nout=args.doutput,
+                                         dropout=args.dropout,
+                                         )  # alpha=args.alpha
+
+    # actor = GNN_GAN(nin=args.dinput,
+    #             nhidden=args.dhidden,
+    #             nout=args.doutput,
+    #             dropout=args.dropout,
+    #             alpha=args.alpha
+    #             )  # alpha=args.alpha
 
     if dataset_name == 'UFSMDataset':
         test_dataset = dataset(start=24, end=26)

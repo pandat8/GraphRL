@@ -87,6 +87,43 @@ class GCN_Sparse_Policy_SelectNode(nn.Module):
 
         return features
 
+class GCN_Sparse_Policy_5(nn.Module):
+    """
+    GCN model for node selection policy
+    """
+    def __init__(self, nin, nhidden, nout, dropout):
+        super(GCN_Sparse_Policy_5, self).__init__()
+
+        self.gc1 = GraphConvolutionLayer_Sparse(nin, nhidden) # first graph conv layer
+        self.gc2 = GraphConvolutionLayer_Sparse(nin, nhidden)  # first graph conv layer
+        self.gc3 = GraphConvolutionLayer_Sparse(nin, nhidden)  # first graph conv layer
+        self.gc4 = GraphConvolutionLayer_Sparse(nin, nhidden)  # first graph conv layer
+        self.gc5 = GraphConvolutionLayer_Sparse(nhidden, nout) # second graph conv layer
+        self.dropout = dropout
+
+
+    def forward(self, features, adj_matrix):
+        # first layer with relu
+        # features = F.dropout(features, self.dropout, training=self.training)
+        features = self.gc1(features, adj_matrix)
+        features = F.relu(features)
+
+        features = self.gc2(features, adj_matrix)
+        features = F.relu(features)
+
+        features = self.gc3(features, adj_matrix)
+        features = F.relu(features)
+
+        features = self.gc4(features, adj_matrix)
+        features = F.relu(features)
+
+        # second layer with softmax
+        features = self.gc5(features, adj_matrix)
+        features = F.log_softmax(features.t())
+        features = features.t()
+
+        return features
+
 
 class GCN_Sparse_Memory_Policy_SelectNode(nn.Module):
     """
